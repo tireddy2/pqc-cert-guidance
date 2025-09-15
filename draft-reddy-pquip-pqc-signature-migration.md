@@ -1,14 +1,14 @@
 ---
 title: Guidance for Migration to Composite, Dual-Certificate, or PQ-Only Authentication
 abbrev: PQ Signature Migration Guidance
-docname: draft-reddy-pquip-pqc-signature-migration-latest
+docname: draft-reddy-puip-pqc-signature-migration
 category: info
 consensus: true
 submissiontype: IETF
 
 ipr: trust200902
-area: "Security"
-workgroup: "Post-Quantum Use In Protocols"
+area: Security
+workgroup: PQUIP
 keyword: Internet-Draft
 
 stand_alone: yes
@@ -398,20 +398,6 @@ achieved.
   algorithms are well-established, trust anchors have been updated,
   HSMs and devices natively support PQ operations, and traditional
   algorithms are fully retired.
-
-# Security Considerations
-
-Hybrid approaches are intended to mitigate the risk of catastrophic PQ
-algorithm failure. Implementations MUST ensure downgrade protections so
-that adversaries cannot force reliance on only traditional algorithms
-during negotiation.
-
-When planning migration, operators should also consider:
-
-* Resistance to algorithmic failures and the ability to switch algorithms.
-* Risks of increased attack surface when supporting multiple modes.
-* Operational errors from managing parallel certificate paths.
-
 
 # Security Considerations
 
