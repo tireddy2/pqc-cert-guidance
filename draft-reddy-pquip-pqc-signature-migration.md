@@ -1,7 +1,7 @@
 ---
 title: Guidance for Migration to Composite, Dual-Certificate, or PQ-Only Authentication
 abbrev: PQ Signature Migration Guidance
-docname: draft-reddy-puip-pqc-signature-migration
+docname: draft-reddy-pquip-pqc-signature-migration-latest
 category: info
 consensus: true
 submissiontype: IETF
