@@ -7,8 +7,8 @@ consensus: true
 submissiontype: IETF
 
 ipr: trust200902
-area: Security
-workgroup: PQUIP
+area: "Security"
+workgroup: "Post-Quantum Use In Protocols"
 keyword: Internet-Draft
 
 stand_alone: yes
