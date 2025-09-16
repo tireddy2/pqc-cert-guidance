@@ -396,6 +396,47 @@ the traditional algorithm is broken.
   HSMs and devices natively support PQ operations, and traditional
   algorithms are fully retired.
 
+# Use of SLH-DSA in PQ-Only Deployments 
+
+SLH-DSA does not introduce any new hardness assumptions beyond those inherent
+to its underlying hash functions. It builds upon established cryptographic
+foundations, making it a reliable and robust digital signature scheme for a
+post-quantum world. While attacks on lattice-based schemes such as ML-DSA are
+currently hypothetical, if realized they could compromise the security of those
+schemes. SLH-DSA would remain unaffected by such attacks due to its distinct
+mathematical foundations, helping to ensure the ongoing security of systems and
+protocols that rely on it for digital signatures. Unlike ML-DSA, SLH-DSA is not
+defined for use in composite certificates and is intended to be deployed directly
+in PQ-only certificate hierarchies.
+
+SLH-DSA may be used for both end-entity and CA certificates. It provides strong
+post-quantum security but produces larger signatures than ML-DSA or traditional
+algorithms. At security levels 1, 3, and 5, two parameter sets are available:
+
+* "Small" (s) variants minimize signature size, ranging from 7856 bytes
+  (128-bit) to 29792 bytes (256-bit).
+* "Fast" (f) variants optimize key generation and signing speed, with
+  signature sizes from 17088 bytes (128-bit) to 29792 bytes (256-bit),
+  but slower verification performance.
+
+Because of these large signatures, SLH-DSA will increase handshake size in
+protocols such as TLS 1.3 or IKEv2. However, the impact on performance is
+minimal for long-lived connections or large data transfers, where handshake
+overhead is amortized over session duration (e.g., DTLS-in-SCTP in 3GPP N2
+interfaces, or signature authentication in IKEv2 using PQC
+{{!I-D.ietf-ipsecme-ikev2-pqc-auth}}).
+In deployments where minimizing handshake size is critical, operators may
+prefer SLH-DSA for root and intermediate certificates while using smaller-
+signature algorithms (e.g., ML-DSA) in end-entity certificates or in the
+"CertificateVerify" message. 
+
+Mechanisms such as Abridged TLS Certificate Chains {{?I-D.ietf-tls-cert-abridge}} and 
+Suppressing CA Certificates {{?I-D.kampanakis-tls-scas-latest}} reduce handshake size 
+by limiting certificate exchange to only end-entity certificates. In such cases, 
+intermediate certificates are assumed to be known to the peer, allowing the use of 
+larger signature algorithms like SLH-DSA for those certificates without adding 
+overhead to the handshake.
+
 # Security Considerations
 
 Hybrid approaches (composite or dual certificates) are designed to provide
