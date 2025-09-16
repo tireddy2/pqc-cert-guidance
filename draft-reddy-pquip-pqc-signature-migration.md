@@ -396,7 +396,7 @@ the traditional algorithm is broken.
   HSMs and devices natively support PQ operations, and traditional
   algorithms are fully retired.
 
-# Use of SLH-DSA in PQ-Only Deployments 
+# Use of SLH-DSA in PQ-Only Deployments
 
 SLH-DSA does not introduce any new hardness assumptions beyond those inherent
 to its underlying hash functions. It builds upon established cryptographic
@@ -428,13 +428,13 @@ interfaces, or signature authentication in IKEv2 using PQC
 In deployments where minimizing handshake size is critical, operators may
 prefer SLH-DSA for root and intermediate certificates while using smaller-
 signature algorithms (e.g., ML-DSA) in end-entity certificates or in the
-"CertificateVerify" message. 
+"CertificateVerify" message.
 
-Mechanisms such as Abridged TLS Certificate Chains {{?I-D.ietf-tls-cert-abridge}} and 
-Suppressing CA Certificates {{?I-D.kampanakis-tls-scas-latest}} reduce handshake size 
-by limiting certificate exchange to only end-entity certificates. In such cases, 
-intermediate certificates are assumed to be known to the peer, allowing the use of 
-larger signature algorithms like SLH-DSA for those certificates without adding 
+Mechanisms such as Abridged TLS Certificate Chains {{?I-D.ietf-tls-cert-abridge}} and
+Suppressing CA Certificates {{?I-D.kampanakis-tls-scas-latest}} reduce handshake size
+by limiting certificate exchange to only end-entity certificates. In such cases,
+intermediate certificates are assumed to be known to the peer, allowing the use of
+larger signature algorithms like SLH-DSA for those certificates without adding
 overhead to the handshake.
 
 # Security Considerations
