@@ -346,12 +346,12 @@ longer secure against CRQCs, it must be deprecated. For discussion
 of the security impact in security protocols (e.g., TLS, IKEv2)
 versus artifact-signing use cases, see Section {{suf}}.
 
-To complete the transition to a fully quantum-resistant authentication model, 
-operators will need to provision a new root CA certificate that uses only a 
-PQC signature algorithm and public key. This new root CA would issue a hierarchy 
-of intermediate certificates, each also signed using a PQC algorithm, ultimately 
+To complete the transition to a fully quantum-resistant authentication model,
+operators will need to provision a new root CA certificate that uses only a
+PQC signature algorithm and public key. This new root CA would issue a hierarchy
+of intermediate certificates, each also signed using a PQC algorithm, ultimately
 leading to end-entity certificates that contain only PQC public keys and are signed with
-PQC algorithms. 
+PQC algorithms.
 
 Protocol configurations (e.g., TLS, IKEv2) will likewise
 need to be updated to negotiate only PQC-based authentication, ensuring that
@@ -393,8 +393,8 @@ the traditional algorithm is broken.
 
 In protocols such as TLS and IKEv2/IPsec, a composite signature remains
 secure against impersonation as long as at least one component algorithm
-remains unbroken, because verification succeeds only if every 
-component signature validates over the same canonical message defined 
+remains unbroken, because verification succeeds only if every
+component signature validates over the same canonical message defined
 by the authentication procedure. However, in artifact signing
 use cases, the break of a single component does not enable forgery of a
 composite signature but does enable "repudiation": multiple distinct
