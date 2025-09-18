@@ -179,6 +179,19 @@ only a post-quantum algorithm and provide no fallback to traditional algorithms.
 * Deployment is only feasible once PQ algorithms are standardized and
   broadly supported across the ecosystem.
 
+# Negotiation of Authentication Schemes
+
+During the transition, endpoints may support multiple authentication
+schemes (e.g., traditional, composite, dual, or PQ-only). Clients
+advertise their supported schemes using the protocol’s negotiation
+mechanism (for example, the `signature_algorithms` extension in TLS
+{{!RFC8446}}), and servers select from the client’s list or fail the
+authentication if no common option is available. In practice,
+deployments are expected to prefer PQ-only or hybrid (composite or
+dual) schemes over traditional ones, with the choice between PQ-only
+and hybrid influenced by regulatory mandates or by whether
+defense-in-depth is prioritized.
+
 # Operational and Ecosystem Considerations
 
 Migration to post-quantum authentication requires addressing broader
@@ -329,13 +342,18 @@ However, each approach comes with long-term implications.
 
 Composite certificates embed both a traditional and a PQC algorithm into a
 single certificate and signature. However, once a traditional algorithm is no
-longer secure against CRQCs, it must be deprecated. To complete the transition
-to a fully quantum-resistant authentication model, operators will need to
-provision a new root CA certificate that uses only a PQC signature algorithm
-and public key. This new root CA would issue a hierarchy of intermediate
-certificates, each also signed using a PQC algorithm, ultimately leading to
-end-entity certificates that contain only PQC public keys and are signed with
-PQC algorithms. Protocol configurations (e.g., TLS, IKEv2) will likewise
+longer secure against CRQCs, it must be deprecated. For discussion
+of the security impact in security protocols (e.g., TLS, IKEv2)
+versus artifact-signing use cases, see Section {{suf}}.
+
+To complete the transition to a fully quantum-resistant authentication model,
+operators will need to provision a new root CA certificate that uses only a
+PQC signature algorithm and public key. This new root CA would issue a hierarchy
+of intermediate certificates, each also signed using a PQC algorithm, ultimately
+leading to end-entity certificates that contain only PQC public keys and are signed with
+PQC algorithms.
+
+Protocol configurations (e.g., TLS, IKEv2) will likewise
 need to be updated to negotiate only PQC-based authentication, ensuring that
 the entire certification path and protocol handshake are cryptographically
 resistant to quantum attacks and no longer depend on any traditional
@@ -352,7 +370,7 @@ certificates will lose access once the traditional chain is withdrawn.
 Dual-certificate deployments therefore defer, but do not avoid, the need
 to update protocol configurations and move to a PQ-only environment.
 
-## Loss of Strong Unforgeability in Composite and Dual Certificates
+## Loss of Strong Unforgeability in Composite and Dual Certificates {#suf}
 
 A deployment may choose to continue using a composite or dual-certificate
 configuration even after a traditional algorithm has been broken by the
@@ -361,9 +379,9 @@ re-provisioning of trust anchors, it introduces a significant risk:
 security properties degrade once one component of the hybrid is no longer
 secure.
 
-In composite certificates, the signature will no longer achieve Strong
-Unforgeability (SUF) (see Section 10.2 of {{?I-D.ietf-pquip-pqc-engineers}}
-and Section 11.2 of {{!I-D.reddy-tls-composite-mldsa}}). A CRQC can forge the
+In composite certificates, the composite signature will no longer achieve Strong
+Unforgeability (SUF) (see Section 10.1.1 of {{?I-D.ietf-pquip-pqc-engineers}}
+and Section 10.2 of {{!I-D.ietf-lamps-pq-composite-sigs}}). A CRQC can forge the
 broken traditional signature component (s1*) over a message (m). That forged
 component can then be combined with the valid post-quantum component (s2) to
 produce a new composite signature (m, (s1*, s2)) that verifies successfully,
@@ -372,6 +390,18 @@ thereby violating SUF.
 In dual-certificate deployments where the client requires both a
 traditional and a PQ chain, the SUF property is likewise not achieved once
 the traditional algorithm is broken.
+
+In protocols such as TLS and IKEv2/IPsec, a composite signature remains
+secure against impersonation as long as at least one component algorithm
+remains unbroken, because verification succeeds only if every
+component signature validates over the same canonical message defined
+by the authentication procedure. However, in artifact signing
+use cases, the break of a single component does not enable forgery of a
+composite signature but does enable "repudiation": multiple distinct
+composite signatures can exist for the same artifact, undermining the
+“one signature, one artifact” guarantee. This creates ambiguity about
+which composite signature is authentic, complicating long-term
+non-repudiation guarantees.
 
 # Migration Guidance
 
