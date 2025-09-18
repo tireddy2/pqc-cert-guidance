@@ -78,8 +78,8 @@ JOSE/COSE, and PKIX:
 
 * Composite signatures – A single certificate, key, and signature that
   combines traditional and PQ algorithms {{!I-D.ietf-lamps-pq-composite-sigs}}.
-* Dual certificates – Two separate certificates, one classical and one PQ,
-  that are bound together and validated jointly. (e.g., {{!RFC9763}})
+* Dual certificates – Two separate certificates, one traditional and one PQ algorithm,
+  that are bound together and validated jointly ({{!RFC9763}}).
 * PQ-only certificates – A certificate or signature that uses only a PQ
   algorithm ({{!I-D.ietf-lamps-dilithium-certificates}} for ML-DSA and {{!I-D.ietf-lamps-x509-slhdsa}} for SLH-DSA).
 
