@@ -73,19 +73,23 @@ downgrades. These risks highlight the need to transition away from
 traditional signatures and adopt post-quantum algorithms for
 certificate-based authentication.
 
-The IETF has developed several transition models for use in TLS, IKEv2/IPsec,
+The IETF has developed two hybrid transition models for use in TLS, IKEv2/IPsec,
 JOSE/COSE, and PKIX:
 
 * Composite signatures – A single certificate, key, and signature that
   combines traditional and PQ algorithms {{!I-D.ietf-lamps-pq-composite-sigs}}.
-* Dual certificates – Two separate certificates, one classical and one PQ,
-  that are bound together and validated jointly. (e.g., {{!RFC9763}})
+* Dual certificates – Two separate certificates, one traditional and one PQ algorithm,
+  that are bound together and validated jointly ({{!RFC9763}}).
+
+Another approach is using a Post-Quantum certificate,
+
 * PQ-only certificates – A certificate or signature that uses only a PQ
   algorithm ({{!I-D.ietf-lamps-dilithium-certificates}} for ML-DSA and {{!I-D.ietf-lamps-x509-slhdsa}} for SLH-DSA).
 
-This document provides guidance on selecting among these approaches,
-depending on the deployment context, the readiness of the supporting
-ecosystem , and the applicable security requirements.
+This document provides guidance on selecting among the two hybrid
+certificate models and the PQ-only model depending on the deployment
+context, the readiness of the supporting ecosystem, and security
+requirements.
 
 # Conventions and Definitions
 
