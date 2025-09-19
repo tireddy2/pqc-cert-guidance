@@ -44,13 +44,15 @@ informative:
 
 --- abstract
 
-This document provides guidance for the migration from traditional digital
-signature algorithms to post-quantum signature algorithms (PQC). It compares
-three models under discussion within the IETF for authentication based on
-signatures in PKI-based protocols: composite signatures, dual certificates,
-and PQ-only certificates. The goal is to help protocol designers, implementers,
-and operators select an approach that balances interoperability, security, and
-operational efficiency during the transition to post-quantum signatures.
+This document provides guidance for migration from traditional digital
+signature algorithms to post-quantum cryptographic (PQC) signature
+algorithms. It compares three models under discussion in the IETF for
+PKI-based protocols: composite signatures, dual
+certificates, and PQ-only certificates. The goal is to help operators
+and engineers working on cryptographic libraries, network security, and
+PKI/key management infrastructure select an approach that balances interoperability,
+security, and operational efficiency during the transition to
+post-quantum authentication.
 
 --- middle
 
