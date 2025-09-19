@@ -1054,7 +1054,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Reddy</td>
-<td class="center">Expires 22 March 2026</td>
+<td class="center">Expires 23 March 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1067,12 +1067,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-reddy-pquip-pqc-signature-migration-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-09-18" class="published">18 September 2025</time>
+<time datetime="2025-09-19" class="published">19 September 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-03-22">22 March 2026</time></dd>
+<dd class="expires"><time datetime="2026-03-23">23 March 2026</time></dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
 <div class="author">
@@ -1123,7 +1123,7 @@ operational efficiency during the transition to post-quantum signatures.<a href=
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 22 March 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 23 March 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1292,7 +1292,7 @@ suppress PQC certificates and present only traditional ones, enabling
 downgrades. These risks highlight the need to transition away from
 traditional signatures and adopt post-quantum algorithms for
 certificate-based authentication.<a href="#section-1-2" class="pilcrow">¶</a></p>
-<p id="section-1-3">The IETF has developed several transition models for use in TLS, IKEv2/IPsec,
+<p id="section-1-3">The IETF has developed two hybrid transition models for use in TLS, IKEv2/IPsec,
 JOSE/COSE, and PKIX:<a href="#section-1-3" class="pilcrow">¶</a></p>
 <ul class="compact">
 <li class="compact" id="section-1-4.1">
@@ -1300,17 +1300,21 @@ JOSE/COSE, and PKIX:<a href="#section-1-3" class="pilcrow">¶</a></p>
 combines traditional and PQ algorithms <span>[<a href="#I-D.ietf-lamps-pq-composite-sigs" class="cite xref">I-D.ietf-lamps-pq-composite-sigs</a>]</span>.<a href="#section-1-4.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="compact" id="section-1-4.2">
-          <p id="section-1-4.2.1">Dual certificates – Two separate certificates, one classical and one PQ,
-that are bound together and validated jointly. (e.g., <span>[<a href="#RFC9763" class="cite xref">RFC9763</a>]</span>)<a href="#section-1-4.2.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="compact" id="section-1-4.3">
-          <p id="section-1-4.3.1">PQ-only certificates – A certificate or signature that uses only a PQ
-algorithm (<span>[<a href="#I-D.ietf-lamps-dilithium-certificates" class="cite xref">I-D.ietf-lamps-dilithium-certificates</a>]</span> for ML-DSA and <span>[<a href="#I-D.ietf-lamps-x509-slhdsa" class="cite xref">I-D.ietf-lamps-x509-slhdsa</a>]</span> for SLH-DSA).<a href="#section-1-4.3.1" class="pilcrow">¶</a></p>
+          <p id="section-1-4.2.1">Dual certificates – Two separate certificates, one traditional and one PQ algorithm,
+that are bound together and validated jointly (<span>[<a href="#RFC9763" class="cite xref">RFC9763</a>]</span>).<a href="#section-1-4.2.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-1-5">This document provides guidance on selecting among these approaches,
-depending on the deployment context, the readiness of the supporting
-ecosystem , and the applicable security requirements.<a href="#section-1-5" class="pilcrow">¶</a></p>
+<p id="section-1-5">Another approach is using a Post-Quantum certificate,<a href="#section-1-5" class="pilcrow">¶</a></p>
+<ul class="compact">
+<li class="compact" id="section-1-6.1">
+          <p id="section-1-6.1.1">PQ-only certificates – A certificate or signature that uses only a PQ
+algorithm (<span>[<a href="#I-D.ietf-lamps-dilithium-certificates" class="cite xref">I-D.ietf-lamps-dilithium-certificates</a>]</span> for ML-DSA and <span>[<a href="#I-D.ietf-lamps-x509-slhdsa" class="cite xref">I-D.ietf-lamps-x509-slhdsa</a>]</span> for SLH-DSA).<a href="#section-1-6.1.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+<p id="section-1-7">This document provides guidance on selecting among the two hybrid
+certificate models and the PQ-only model depending on the deployment
+context, the readiness of the supporting ecosystem, and security
+requirements.<a href="#section-1-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="conventions-and-definitions">
