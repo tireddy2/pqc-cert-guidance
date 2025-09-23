@@ -252,13 +252,6 @@ signed by a traditional root). However, this is unnecessary for dual-trust
 clients (3), which already trust the PQ root directly, and it results in
 increased message size.
 
-{{!I-D.ietf-tls-trust-anchor-ids}} (TAI) addresses this problem by
-allowing clients to explicitly indicate which trust anchors they recognize.
-This enables servers to select the appropriate chain more efficiently,
-reduce message size, and gain better visibility into clients readiness for
-PQ-only operation. TAI also allows PQ-capable clients to enforce use of PQ
-chains while still advertising broader trust sets to other servers.
-
 {{!I-D.ietf-tls-trust-anchor-ids}} (TAI) addresses this problem by allowing
 clients to indicate, on a per-connection basis, which trust anchors they
 recognize. Servers can use that information to select a compatible certificate
