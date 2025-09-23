@@ -170,6 +170,13 @@ Table of Contents
    capabilities to compromise traditional certificates without alerting
    the wider ecosystem.
 
+   Addressing this risk requires replacing traditional signatures with
+   PQC signatures, which in turn demands ecosystem-wide upgrades
+   involving cryptographic libraries, HSMs, CAs, intermediate CAs, and
+   dependent protocols.  Because these transitions take years of
+   planning, coordination, and investment, preparations must begin well
+   before a CRQC is publicly known.
+
 4.  Composite Signatures
 
    A composite certificate contains both a traditional public key
@@ -209,11 +216,15 @@ Table of Contents
       widely deployed at the time of writing of the specification.
    *  Introduces new certificate formats and verification logic that
       will need updates to PKI infrastructure.
-   *  Expands the migration landscape to three transition paths:
+   *  Expands the migration landscape to multiple transition paths:
       1.  Traditional-only,
       2.  Composite (classical + PQ),
       3.  PQ-only.  In contrast, the dual certificate approach requires
           only two paths (traditional and PQ).
+
+   Note that PQ→PQ migration (changing between PQ algorithms or
+   parameter sets) is required in both composite and dual-certificate
+   approaches.
 
 5.  Dual Certificates
 
@@ -238,6 +249,8 @@ Table of Contents
    *  Requires management of multiple certificates.
    *  Requires major changes to the base protocol to support dual
       certificate binding and validation.
+   *  Complicates debuggability and troubleshooting, since validation
+      failures may arise from either chain.
 
 6.  PQ-Only Certificates
 
@@ -361,11 +374,10 @@ Table of Contents
    Protocols and infrastructures will have to be designed with crypto-
    agility in mind, supporting:
 
-   *  Negotiation of both individual PQC algorithms and hybrid
-      combinations with traditional algorithms.
-   *  Phased migration paths, including initial use of PQ/T mechanisms,
-      eventual transition to PQ-only certificates, and later migration
-      to new PQ algorithms as cryptanalysis or policy guidance evolves.
+   *  Negotiation of standalone PQC algorithms and PQ/T.
+   *  Phased migration paths, including initial use of PQ/T, eventual
+      transition to PQ-only certificates, and later migration to new PQ
+      algorithms as cryptanalysis or security policy guidance evolves.
    *  Protection against downgrade attacks across all transition phases.
 
 8.3.  Support from Hardware Security Modules (HSMs)
@@ -406,6 +418,8 @@ Table of Contents
    *  Frequency and duration of system upgrades
    *  The expected timeline for CRQC availability
    *  Operational flexibility to enable or disable algorithms
+   *  Availability of automated certificate provisioning mechanisms
+      (e.g., ACME [RFC8555])
 
    Deployments with limited flexibility benefit from composite or dual
    certificates.  These approaches mitigate risks associated with delays
@@ -513,7 +527,9 @@ Table of Contents
    *  Long-term: PQ-only certificates are the final goal, once PQ
       algorithms are well-established, trust anchors have been updated,
       HSMs and devices natively support PQ operations, and traditional
-      algorithms are fully retired.
+      algorithms are fully retired.  Work to enable PQC signatures is
+      already underway in JOSE/COSE [I-D.ietf-cose-dilithium], TLS
+      [I-D.ietf-tls-mldsa], and IPsec [I-D.ietf-ipsecme-ikev2-pqc-auth].
 
 11.  Use of SLH-DSA in PQ-Only Deployments
 
@@ -547,6 +563,7 @@ Table of Contents
    transfers, where handshake overhead is amortized over session
    duration (e.g., DTLS-in-SCTP in 3GPP N2 interfaces, or signature
    authentication in IKEv2 using PQC [I-D.ietf-ipsecme-ikev2-pqc-auth]).
+
    In deployments where minimizing handshake size is critical, operators
    may prefer SLH-DSA for root and intermediate certificates while using
    smaller- signature algorithms (e.g., ML-DSA) in end-entity
@@ -613,6 +630,13 @@ Table of Contents
 
 15.1.  Normative References
 
+   [I-D.ietf-cose-dilithium]
+              Prorock, M. and O. Steele, "ML-DSA for JOSE and COSE",
+              Work in Progress, Internet-Draft, draft-ietf-cose-
+              dilithium-09, 12 September 2025,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-cose-
+              dilithium-09>.
+
    [I-D.ietf-ipsecme-ikev2-pqc-auth]
               Reddy.K, T., Smyslov, V., and S. Fluhrer, "Signature
               Authentication in the Internet Key Exchange Version 2
@@ -653,6 +677,13 @@ Table of Contents
               ietf-pquip-pqc-hsm-constrained-01, 4 July 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-pquip-
               pqc-hsm-constrained-01>.
+
+   [I-D.ietf-tls-mldsa]
+              Hollebeek, T., Schmieg, S., and B. Westerbaan, "Use of ML-
+              DSA in TLS 1.3", Work in Progress, Internet-Draft, draft-
+              ietf-tls-mldsa-00, 16 May 2025,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-tls-
+              mldsa-00>.
 
    [I-D.ietf-tls-trust-anchor-ids]
               Beck, B., Benjamin, D., O'Brien, D., and K. Nekritz, "TLS
@@ -744,6 +775,11 @@ Table of Contents
               Draft, draft-yusef-tls-pqt-dual-certs-00, 18 June 2025,
               <https://datatracker.ietf.org/doc/html/draft-yusef-tls-
               pqt-dual-certs-00>.
+
+   [RFC8555]  Barnes, R., Hoffman-Andrews, J., McCarney, D., and J.
+              Kasten, "Automatic Certificate Management Environment
+              (ACME)", RFC 8555, DOI 10.17487/RFC8555, March 2019,
+              <https://www.rfc-editor.org/rfc/rfc8555>.
 
 Author's Address
 
