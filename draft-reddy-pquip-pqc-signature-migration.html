@@ -1056,7 +1056,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Reddy</td>
-<td class="center">Expires 23 March 2026</td>
+<td class="center">Expires 27 March 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1069,12 +1069,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-reddy-pquip-pqc-signature-migration-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-09-19" class="published">19 September 2025</time>
+<time datetime="2025-09-23" class="published">23 September 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-03-23">23 March 2026</time></dd>
+<dd class="expires"><time datetime="2026-03-27">27 March 2026</time></dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
 <div class="author">
@@ -1127,7 +1127,7 @@ post-quantum authentication.<a href="#section-abstract-1" class="pilcrow">¶</a>
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 23 March 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 27 March 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1613,23 +1613,17 @@ PQ chains that include a cross-signed PQ root (i.e., a PQ root certificate
 signed by a traditional root). However, this is unnecessary for dual-trust
 clients (3), which already trust the PQ root directly, and it results in
 increased message size.<a href="#section-8.1-7" class="pilcrow">¶</a></p>
-<p id="section-8.1-8"><span>[<a href="#I-D.ietf-tls-trust-anchor-ids" class="cite xref">I-D.ietf-tls-trust-anchor-ids</a>]</span> (TAI) addresses this problem by
-allowing clients to explicitly indicate which trust anchors they recognize.
-This enables servers to select the appropriate chain more efficiently,
-reduce message size, and gain better visibility into clients readiness for
-PQ-only operation. TAI also allows PQ-capable clients to enforce use of PQ
-chains while still advertising broader trust sets to other servers.<a href="#section-8.1-8" class="pilcrow">¶</a></p>
-<p id="section-8.1-9"><span>[<a href="#I-D.ietf-tls-trust-anchor-ids" class="cite xref">I-D.ietf-tls-trust-anchor-ids</a>]</span> (TAI) addresses this problem by allowing
+<p id="section-8.1-8"><span>[<a href="#I-D.ietf-tls-trust-anchor-ids" class="cite xref">I-D.ietf-tls-trust-anchor-ids</a>]</span> (TAI) addresses this problem by allowing
 clients to indicate, on a per-connection basis, which trust anchors they
 recognize. Servers can use that information to select a compatible certificate
 chain, reducing unnecessary chain elements and providing operators with better
 telemetry on PQC adoption. TAI also enables PQ-capable clients to tell PQ-aware
 servers exactly which PQ trust anchors they recognize, while still supporting
-traditional roots for compatibility with legacy servers.<a href="#section-8.1-9" class="pilcrow">¶</a></p>
-<p id="section-8.1-10">In all cases, the long-term goal is a transition to PQ-only roots and
+traditional roots for compatibility with legacy servers.<a href="#section-8.1-8" class="pilcrow">¶</a></p>
+<p id="section-8.1-9">In all cases, the long-term goal is a transition to PQ-only roots and
 certificate chains. Composite and dual-certificate approaches help bridge
 the gap, but operators will have to plan carefully for the eventual retirement of
-traditional and composite roots once PQ adoption is widespread.<a href="#section-8.1-10" class="pilcrow">¶</a></p>
+traditional and composite roots once PQ adoption is widespread.<a href="#section-8.1-9" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="multiple-transitions-and-crypto-agility">
@@ -1992,7 +1986,7 @@ present, valid, and not replaced by weaker alternatives.<a href="#section-12.3-1
 <dd class="break"></dd>
 <dt id="I-D.ietf-lamps-pq-composite-sigs">[I-D.ietf-lamps-pq-composite-sigs]</dt>
         <dd>
-<span class="refAuthor">Ounsworth, M.</span>, <span class="refAuthor">Gray, J.</span>, <span class="refAuthor">Pala, M.</span>, <span class="refAuthor">Klaußner, J.</span>, and <span class="refAuthor">S. Fluhrer</span>, <span class="refTitle">"Composite ML-DSA for use in X.509 Public Key Infrastructure"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-lamps-pq-composite-sigs-07</span>, <time datetime="2025-07-07" class="refDate">7 July 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-lamps-pq-composite-sigs-07">https://datatracker.ietf.org/doc/html/draft-ietf-lamps-pq-composite-sigs-07</a>&gt;</span>. </dd>
+<span class="refAuthor">Ounsworth, M.</span>, <span class="refAuthor">Gray, J.</span>, <span class="refAuthor">Pala, M.</span>, <span class="refAuthor">Klaußner, J.</span>, and <span class="refAuthor">S. Fluhrer</span>, <span class="refTitle">"Composite ML-DSA for use in X.509 Public Key Infrastructure"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-lamps-pq-composite-sigs-08</span>, <time datetime="2025-09-20" class="refDate">20 September 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-lamps-pq-composite-sigs-08">https://datatracker.ietf.org/doc/html/draft-ietf-lamps-pq-composite-sigs-08</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-lamps-x509-slhdsa">[I-D.ietf-lamps-x509-slhdsa]</dt>
         <dd>
