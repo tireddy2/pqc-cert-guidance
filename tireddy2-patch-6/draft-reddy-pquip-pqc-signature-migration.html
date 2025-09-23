@@ -1296,7 +1296,7 @@ suppress PQC certificates and present only traditional ones, enabling
 downgrades. These risks highlight the need to transition away from
 traditional signatures and adopt post-quantum algorithms for
 certificate-based authentication.<a href="#section-1-2" class="pilcrow">¶</a></p>
-<p id="section-1-3">The IETF has developed several transition models for use in TLS, IKEv2/IPsec,
+<p id="section-1-3">The IETF has developed two hybrid transition models for use in TLS, IKEv2/IPsec,
 JOSE/COSE, and PKIX:<a href="#section-1-3" class="pilcrow">¶</a></p>
 <ul class="compact">
 <li class="compact" id="section-1-4.1">
@@ -1304,17 +1304,21 @@ JOSE/COSE, and PKIX:<a href="#section-1-3" class="pilcrow">¶</a></p>
 combines traditional and PQ algorithms <span>[<a href="#I-D.ietf-lamps-pq-composite-sigs" class="cite xref">I-D.ietf-lamps-pq-composite-sigs</a>]</span>.<a href="#section-1-4.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="compact" id="section-1-4.2">
-          <p id="section-1-4.2.1">Dual certificates – Two separate certificates, one classical and one PQ,
-that are bound together and validated jointly. (e.g., <span>[<a href="#RFC9763" class="cite xref">RFC9763</a>]</span>)<a href="#section-1-4.2.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="compact" id="section-1-4.3">
-          <p id="section-1-4.3.1">PQ-only certificates – A certificate or signature that uses only a PQ
-algorithm (<span>[<a href="#I-D.ietf-lamps-dilithium-certificates" class="cite xref">I-D.ietf-lamps-dilithium-certificates</a>]</span> for ML-DSA and <span>[<a href="#I-D.ietf-lamps-x509-slhdsa" class="cite xref">I-D.ietf-lamps-x509-slhdsa</a>]</span> for SLH-DSA).<a href="#section-1-4.3.1" class="pilcrow">¶</a></p>
+          <p id="section-1-4.2.1">Dual certificates – Two separate certificates, one traditional and one PQ algorithm,
+that are bound together and validated jointly (<span>[<a href="#RFC9763" class="cite xref">RFC9763</a>]</span>).<a href="#section-1-4.2.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-1-5">This document provides guidance on selecting among these approaches,
-depending on the deployment context, the readiness of the supporting
-ecosystem , and the applicable security requirements.<a href="#section-1-5" class="pilcrow">¶</a></p>
+<p id="section-1-5">Another approach is using a Post-Quantum certificate,<a href="#section-1-5" class="pilcrow">¶</a></p>
+<ul class="compact">
+<li class="compact" id="section-1-6.1">
+          <p id="section-1-6.1.1">PQ-only certificates – A certificate or signature that uses only a PQ
+algorithm (<span>[<a href="#I-D.ietf-lamps-dilithium-certificates" class="cite xref">I-D.ietf-lamps-dilithium-certificates</a>]</span> for ML-DSA and <span>[<a href="#I-D.ietf-lamps-x509-slhdsa" class="cite xref">I-D.ietf-lamps-x509-slhdsa</a>]</span> for SLH-DSA).<a href="#section-1-6.1.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+<p id="section-1-7">This document provides guidance on selecting among the two hybrid
+certificate models and the PQ-only model depending on the deployment
+context, the readiness of the supporting ecosystem, and security
+requirements.<a href="#section-1-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="conventions-and-definitions">
@@ -1655,10 +1659,6 @@ to new PQ algorithms as cryptanalysis or policy guidance evolves.<a href="#secti
 </li>
           <li class="compact" id="section-8.2-4.3">
             <p id="section-8.2-4.3.1">Protection against downgrade attacks across all transition phases.<a href="#section-8.2-4.3.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="compact" id="section-8.2-4.4">
-            <p id="section-8.2-4.4.1">Systems should have clear processes for replacing long-term keys,
-updating trust anchors and support automated provisioning of certificates.<a href="#section-8.2-4.4.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
