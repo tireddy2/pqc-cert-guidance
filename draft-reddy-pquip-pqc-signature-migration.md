@@ -111,6 +111,11 @@ Similar to a zero-day vulnerability, an adversary could secretly exploit CRQC
 capabilities to compromise traditional certificates without alerting the wider
 ecosystem.
 
+Addressing this risk requires replacing traditional signatures with PQC signatures, which in turn
+demands ecosystem-wide upgrades involving cryptographic libraries, HSMs, CAs, intermediate CAs,
+and dependent protocols. Because these transitions take years of planning, coordination, and
+investment, preparations must begin well before a CRQC is publicly known.
+
 # Composite Signatures
 
 A composite certificate contains both a traditional public key algorithm (e.g., ECDSA) and a post-quantum algorithm (e.g., ML-DSA) within a single X.509 certificate. This design enables both algorithms to be used in parallel, the traditional component ensures compatibility with existing infrastructure, while the post-quantum component introduces resistance against future quantum attacks.
@@ -135,12 +140,15 @@ Composite certificates are defined in {{!I-D.ietf-lamps-pq-composite-sigs}}. The
   time of writing of the specification.
 * Introduces new certificate formats and verification logic that will need
   updates to PKI infrastructure.
-* Expands the migration landscape to three transition paths:
+* Expands the migration landscape to multiple transition paths:
   1. Traditional-only,
   2. Composite (classical + PQ),
   3. PQ-only.
   In contrast, the dual certificate approach requires only two paths
   (traditional and PQ).
+
+Note that PQ→PQ migration (changing between PQ algorithms or parameter sets) is required
+in both composite and dual-certificate approaches.
 
 # Dual Certificates
 
@@ -164,6 +172,8 @@ requiring new certificate formats.
 * Requires management of multiple certificates.
 * Requires major changes to the base protocol to support dual certificate
   binding and validation.
+* Complicates debuggability and troubleshooting, since validation failures
+  may arise from either chain.
 
 # PQ-Only Certificates
 
@@ -278,11 +288,10 @@ transitions over time, as:
 Protocols and infrastructures will have to be designed with crypto-agility in mind,
 supporting:
 
-* Negotiation of both individual PQC algorithms and hybrid combinations
-  with traditional algorithms.
-* Phased migration paths, including initial use of PQ/T mechanisms,
+* Negotiation of standalone PQC algorithms and PQ/T.
+* Phased migration paths, including initial use of PQ/T,
   eventual transition to PQ-only certificates, and later migration
-  to new PQ algorithms as cryptanalysis or policy guidance evolves.
+  to new PQ algorithms as cryptanalysis or security policy guidance evolves.
 * Protection against downgrade attacks across all transition phases.
 
 ## Support from Hardware Security Modules (HSMs)
@@ -320,6 +329,8 @@ certificates, or dual certificates depends on several factors, including:
 - Frequency and duration of system upgrades
 - The expected timeline for CRQC availability
 - Operational flexibility to enable or disable algorithms
+- Availability of automated certificate provisioning mechanisms
+  (e.g., ACME {{?RFC8555}})
 
 Deployments with limited flexibility benefit from composite or dual
 certificates. These approaches mitigate risks associated with delays in
@@ -423,7 +434,9 @@ non-repudiation guarantees.
 * Long-term: PQ-only certificates are the final goal, once PQ
   algorithms are well-established, trust anchors have been updated,
   HSMs and devices natively support PQ operations, and traditional
-  algorithms are fully retired.
+  algorithms are fully retired. Work to enable PQC signatures is already underway in
+  JOSE/COSE {{!I-D.ietf-cose-dilithium}}, TLS {{!I-D.ietf-tls-mldsa}}, and
+  IPsec {{!I-D.ietf-ipsecme-ikev2-pqc-auth}}.
 
 # Use of SLH-DSA in PQ-Only Deployments
 
@@ -454,6 +467,7 @@ minimal for long-lived connections or large data transfers, where handshake
 overhead is amortized over session duration (e.g., DTLS-in-SCTP in 3GPP N2
 interfaces, or signature authentication in IKEv2 using PQC
 {{!I-D.ietf-ipsecme-ikev2-pqc-auth}}).
+
 In deployments where minimizing handshake size is critical, operators may
 prefer SLH-DSA for root and intermediate certificates while using smaller-
 signature algorithms (e.g., ML-DSA) in end-entity certificates or in the
