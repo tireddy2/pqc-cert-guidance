@@ -619,9 +619,9 @@ Table of Contents
    Section 10.1.1 of [I-D.ietf-pquip-pqc-engineers]) is still preserved
    by the PQ component, meaning that an adversary who can obtain
    signatures on arbitrary messages still cannot forge a valid PQ
-   signature on any new message that was not previously signed. the loss
-   of SUF means that hybrid mechanisms will have be eventually retired
-   once traditional algorithms are no longer secure.
+   signature on any new message that was not previously signed.  The
+   loss of SUF means that hybrid mechanisms will have be eventually
+   retired once traditional algorithms are no longer secure.
 
 12.3.  Operational Risks
 
@@ -816,4 +816,4 @@ Author's Address
    Bangalore
    Karnataka
    India
-   Email: kondtir@gmail.com
+   Email: k.tirumaleswar_reddy@nokia.com
