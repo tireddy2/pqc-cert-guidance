@@ -50,9 +50,9 @@ algorithms. It compares three models under discussion in the IETF for
 PKI-based protocols: composite signatures, dual
 certificates, and PQ-only certificates. The goal is to help operators
 and engineers working on cryptographic libraries, network security, and
-PKI/key management infrastructure select an approach that balances interoperability,
-security, and operational efficiency during the transition to
-post-quantum authentication.
+PKI/key management infrastructure select an approach that balances
+interoperability, security, and operational efficiency during the
+transition to post-quantum authentication.
 
 --- middle
 
@@ -60,10 +60,10 @@ post-quantum authentication.
 
 The emergence of cryptographically relevant quantum computer (CRQC) poses a
 threat to widely deployed public-key algorithms such as RSA and elliptic-curve
-cryptography (ECC). Post-quantum algorithms are being standardized by NIST and other bodies,
-but migration is not immediate. In the meantime, protocols need to ensure
-that authentication mechanisms remain secure against both classical and
-quantum adversaries.
+cryptography (ECC). Post-quantum algorithms are being standardized by NIST
+and other bodies, but migration is not immediate. In the meantime, protocols
+need to ensure that authentication mechanisms remain secure against both
+classical and quantum adversaries.
 
 For data authentication, the primary concern is the risk of on-path
 attackers equipped with CRQCs. Such adversaries could break
@@ -86,7 +86,8 @@ JOSE/COSE, and PKIX:
 Another approach is using a Post-Quantum certificate,
 
 * PQ-only certificates – A certificate or signature that uses only a PQ
-  algorithm ({{!I-D.ietf-lamps-dilithium-certificates}} for ML-DSA and {{!I-D.ietf-lamps-x509-slhdsa}} for SLH-DSA).
+  algorithm ({{!I-D.ietf-lamps-dilithium-certificates}} for ML-DSA and
+  {{!I-D.ietf-lamps-x509-slhdsa}} for SLH-DSA).
 
 This document provides guidance on selecting among the two hybrid
 certificate models and the PQ-only model depending on the deployment
@@ -98,8 +99,11 @@ requirements.
 {::boilerplate bcp14-tagged}
 
 Composite: A key, certificate, or signature that merges traditional and PQ algorithms into one object.
-Dual certificates: Two independent certificates (traditional and PQ) issued for the same identity, presented and validated together.
+Dual certificates: Two independent certificates (traditional and PQ) issued for the same
+identity, presented and validated together.
 PQ-only: A certificate or signature using only a PQ algorithm.
+
+The terms hybrid signature scheme and hybrid signature are used as defined in {{!I-D.ietf-pquip-hybrid-signature-spectrums}}.
 
 # Motivation for PQC Signatures
 
@@ -114,32 +118,33 @@ ecosystem.
 Addressing this risk requires replacing traditional signatures with PQC signatures, which in turn
 demands ecosystem-wide upgrades involving cryptographic libraries, HSMs, CAs, intermediate CAs,
 and dependent protocols. Because these transitions take years of planning, coordination, and
-investment, preparations must begin well before a CRQC is publicly known.
+investment, preparations will have to begin well before a CRQC is publicly known.
 
 # Composite Signatures
 
 A composite certificate contains both a traditional public key algorithm (e.g., ECDSA) and a post-quantum algorithm (e.g., ML-DSA) within a single X.509 certificate. This design enables both algorithms to be used in parallel, the traditional component ensures compatibility with existing infrastructure, while the post-quantum component introduces resistance against future quantum attacks.
 
-Composite certificates are defined in {{!I-D.ietf-lamps-pq-composite-sigs}}. These combine Post-Quantum algorithms like ML-DSA with traditional algorithms such as RSA-PKCS#1v1.5, RSA-PSS, ECDSA, Ed25519, or Ed448, to provide additional protection against vulnerabilities or implementation bugs in a single algorithm. {{!I-D.reddy-tls-composite-mldsa}} specifies how composite signatures, including ML-DSA, are used for TLS 1.3 authentication. Composite-trust clients validate a single chain anchored in a composite root, without needing parallel chains.
+Composite certificates are defined in {{!I-D.ietf-lamps-pq-composite-sigs}}. These combine Post-Quantum algorithms like ML-DSA with traditional algorithms such as RSA-PKCS#1v1.5, RSA-PSS, ECDSA, Ed25519, or Ed448, to provide additional protection against vulnerabilities or implementation bugs in a single algorithm. {{!I-D.reddy-tls-composite-mldsa}} specifies how composite signatures are used for TLS 1.3 authentication. In this case,
+relying parties validate a single certification path anchored in a multi-algorithm trust anchor, without the need for parallel chains.
 
 ## Advantages
 
-* A single certificate chain is used for both traditional and post-quantum keys,
+* A single certificate chain supports both traditional and PQC algorithms, thereby
   simplifying certificate management.
-* A single composite signature, rooted in one intermediate certificate chain,
-  reduces protocol message size compared to transmitting multiple separate
-  signatures, each of which would require its own certificate chain.
+* A single composite signature, conveyed within one certificate chain, reduces
+  protocol message size compared to transmitting multiple separate signatures,
+  each requiring its own certificate chain.
 * No need to manage or validate multiple parallel certificate chains.
-* No major changes to the base protocol are required to support the composite
-  signature approach.
+* No significant modifications to the base protocol are required to support the
+  composite signature approach.
 
 ## Disadvantages
 
-* Requires endpoints, relying parties, and CAs to support composite public keys
+* Requires clients, servers, and CAs to support composite public keys
   and composite signature verification, which are not widely deployed at the
   time of writing of the specification.
-* Introduces new certificate formats and verification logic that will need
-  updates to PKI infrastructure.
+* Introduces new certificate formats and signature generation and verification
+  mechanisms, requiring updates to PKI infrastructure.
 * Expands the migration landscape to multiple transition paths:
   1. Traditional-only,
   2. Composite (classical + PQ),
@@ -147,8 +152,8 @@ Composite certificates are defined in {{!I-D.ietf-lamps-pq-composite-sigs}}. The
   In contrast, the dual certificate approach requires only two paths
   (traditional and PQ).
 
-Note that PQ→PQ migration (changing between PQ algorithms or parameter sets) is required
-in both composite and dual-certificate approaches.
+Note that PQ-to-PQ migration is still required in composite and dual-certificate
+hybrid signature schemes, underscoring the need for crypto-agility.
 
 # Dual Certificates
 
@@ -162,7 +167,7 @@ requiring new certificate formats.
 
 * Uses standard, single-algorithm X.509 certificates and chains, maximizing
   compatibility with existing PKI infrastructures.
-* Maintains clear separation between traditional and post-quantum keys.
+* Maintains clear separation between traditional and PQC algorithms.
 * Requires no changes to certificate validation logic.
 
 ## Disadvantages
@@ -170,10 +175,13 @@ requiring new certificate formats.
 * Increases protocol message size due to the transmission of multiple
   certificate chains and signatures.
 * Requires management of multiple certificates.
-* Requires major changes to the base protocol to support dual certificate
-  binding and validation.
+* Requires significant protocol changes to support validation of two end-entity
+  certificates and to ensure they are cryptographically bound to the same
+  identity, as protocols typically validate only a single certificate.
 * Complicates debuggability and troubleshooting, since validation failures
   may arise from either chain.
+* Increases operational cost, as operators must obtain and manage two end-entity
+  certificates from CAs, which can be significant in large-scale deployments.
 
 # PQ-Only Certificates
 
@@ -182,7 +190,7 @@ only a post-quantum algorithm and provide no fallback to traditional algorithms.
 
 ## Advantages
 
-* Simpler model without the complexity of hybrid mechanisms.
+* Simpler model without the complexity of hybrid signature scheme.
 * Forward-looking design, avoiding eventual deprecation of traditional
   algorithms.
 * Reduced operational burden compared to managing dual or composite certificates.
@@ -203,10 +211,10 @@ advertise their supported schemes using the protocol’s negotiation
 mechanism (for example, the `signature_algorithms` extension in TLS
 {{!RFC8446}}), and servers select from the client’s list or fail the
 authentication if no common option is available. In practice,
-deployments are expected to prefer PQ-only or hybrid (composite or
-dual) schemes over traditional ones, with the choice between PQ-only
-and hybrid influenced by regulatory mandates or by whether
-defense-in-depth is prioritized.
+deployments are expected to prefer PQ-only or hybrid signature scheme
+over traditional ones, with the choice between PQ-only
+and hybrid signature scheme influenced by regulatory mandates or
+by whether defense-in-depth is prioritized.
 
 # Operational and Ecosystem Considerations
 
@@ -221,7 +229,7 @@ trust anchors are RSA or ECC-based, then new PQ-capable trust anchors will
 need to be distributed. Operators will have to plan for a phased introduction of
 PQ trust anchors, which may involve:
 
-* Rolling out hybrid trust anchors that support both traditional and PQC
+* Rolling out composite trust anchors that support both traditional and PQC
   signatures.
 * Establishing parallel trust anchor hierarchies and phasing out the
   traditional hierarchy once PQ adoption is universal.
@@ -229,12 +237,17 @@ PQ trust anchors, which may involve:
   to clients, especially devices that cannot be easily updated.
 
 Deployments migrating from traditional to post-quantum authentication
-may have to operate with multiple trust anchors for a period of time. A new PQ
-or composite root may be introduced while the existing traditional root
-remains in place, leading to different trust chain models:
+may have to operate with multiple trust anchors for a period of time.
+A new PQ or composite root may be introduced, or alternatively a PQ
+intermediate may be added beneath an existing traditional root,
+leading to different trust chain models:
 
-- Traditional chain: anchored in a Traditional root (e.g., RSA/ECDSA).
+- Traditional chain: anchored in a Traditional root (e.g., RSA/ECDSA),
+  which may issue a PQ intermediate.
 - PQ chain: anchored in a PQ root (e.g., ML-DSA, SLH-DSA).
+- Parallel roots: both a traditional root and a PQ root are distributed as
+  trust anchors, with separate hierarchies operating in parallel until the
+  traditional root can be phased out.
 - Composite chain: anchored in a composite root, with intermediates
   signed using composite algorithms that combine traditional
   and PQ. This forms a distinct new chain, rather than two parallel ones.
@@ -243,8 +256,8 @@ During this coexistence phase, clients generally fall into five categories:
 
 1. Legacy-only: trust only traditional roots and support only
    traditional algorithms.
-2. Mixed: trust only traditional roots but support both classical and
-   PQ algorithms. These clients can validate PQ certificates only if a PQ
+2. Mixed: trust only traditional roots but support both traditional and
+   PQC algorithms. These clients can validate PQ certificates only if a PQ
    intermediate is cross-signed by a traditional root.
 3. Dual-trust: trust both traditional and PQ roots, supporting both
    algorithm families.
@@ -271,7 +284,7 @@ servers exactly which PQ trust anchors they recognize, while still supporting
 traditional roots for compatibility with legacy servers.
 
 In all cases, the long-term goal is a transition to PQ-only roots and
-certificate chains. Composite and dual-certificate approaches help bridge
+certificate chains. Hybrid signature schemes help bridge
 the gap, but operators will have to plan carefully for the eventual retirement of
 traditional and composite roots once PQ adoption is widespread.
 
@@ -288,8 +301,8 @@ transitions over time, as:
 Protocols and infrastructures will have to be designed with crypto-agility in mind,
 supporting:
 
-* Negotiation of standalone PQC algorithms and PQ/T.
-* Phased migration paths, including initial use of PQ/T,
+* Negotiation of standalone PQC algorithms and hybrid signature schemes.
+* Phased migration paths, including initial use of hybrid signature schemes,
   eventual transition to PQ-only certificates, and later migration
   to new PQ algorithms as cryptanalysis or security policy guidance evolves.
 * Protection against downgrade attacks across all transition phases.
@@ -305,10 +318,10 @@ Challenges include:
   sufficient memory and processing capability in HSMs.
 * For dual-certificate deployments, HSMs can manage the underlying
   traditional and PQ private keys independently, and no API changes are
-  required. The application layer is responsible for coordinating how
+  required. The security protocol is responsible for coordinating how
   signatures from both keys are used. By contrast, supporting composite
-  keys and composite signing operations may require HSM and API extensions
-  to represent composite key objects and perform multi-algorithm signing
+  keys and composite signing operations will require HSM and API extensions
+  to represent composite private keys and perform multi-algorithm signing
   atomically.
 
 Without HSM vendor support for PQC, migration may be delayed or require
@@ -317,28 +330,32 @@ software-based fallback solutions, which will weaken security.
 ## Constrained Devices and IoT Environments
 
 Constrained environments, such as IoT devices, present unique challenges
-for PQC deployment. A broad set of challenges and potential mitigations is
+for PQC deployment. A broad set of challenges and potential mitigations are
 described in {{!I-D.ietf-pquip-pqc-hsm-constrained}}, which analyzes PQC
-deployment in resource-constrained devices and hardware security modules.
+deployment in resource-constrained devices including IoT devices and
+lightweight HSMs.
 
 # Transition Considerations
 
-Determining whether and when to adopt PQC-only certificates, hybrid
-certificates, or dual certificates depends on several factors, including:
+A deployment will typically adopt one of three models, PQC-only certificates,
+dual certificates, or certificates containing both composite
+public keys and composite signatures.
+
+The choice depends on several factors, including:
 
 - Frequency and duration of system upgrades
 - The expected timeline for CRQC availability
-- Operational flexibility to enable or disable algorithms
+- Operational flexibility to deploy, enable, and retire PQC algorithms
 - Availability of automated certificate provisioning mechanisms
   (e.g., ACME {{?RFC8555}})
 
-Deployments with limited flexibility benefit from composite or dual
-certificates. These approaches mitigate risks associated with delays in
+Deployments with limited flexibility benefit from hybrid signature schemes.
+These approaches mitigate risks associated with delays in
 transitioning to PQC and provide an immediate safeguard against zero-day
 vulnerabilities. Both approaches improve resilience during migration, but
 they do so in different ways and carry different operational trade-offs.
 
-Composite or dual certificates enhance resilience during the adoption of
+Hybrid signature schemes enhance resilience during the adoption of
 PQC by:
 
 - Providing defense in depth: security is maintained as long as either
@@ -352,16 +369,13 @@ However, each approach comes with long-term implications.
 
 Composite certificates embed both a traditional and a PQC algorithm into a
 single certificate and signature. However, once a traditional algorithm is no
-longer secure against CRQCs, it must be deprecated. For discussion
+longer secure against CRQCs, it will have to be deprecated. For discussion
 of the security impact in security protocols (e.g., TLS, IKEv2)
 versus artifact-signing use cases, see Section {{suf}}.
 
 To complete the transition to a fully quantum-resistant authentication model,
-operators will need to provision a new root CA certificate that uses only a
-PQC signature algorithm and public key. This new root CA would issue a hierarchy
-of intermediate certificates, each also signed using a PQC algorithm, ultimately
-leading to end-entity certificates that contain only PQC public keys and are signed with
-PQC algorithms.
+operators operators will need a PQC root and intermediates, resulting in PQC-only
+end-entity certificates.
 
 Protocol configurations (e.g., TLS, IKEv2) will likewise
 need to be updated to negotiate only PQC-based authentication, ensuring that
@@ -401,7 +415,7 @@ In dual-certificate deployments where the client requires both a
 traditional and a PQ chain, the SUF property is likewise not achieved once
 the traditional algorithm is broken.
 
-In protocols such as TLS and IKEv2/IPsec, a composite signature remains
+In protocols such as TLS and IKEv2, a composite signature remains
 secure against impersonation as long as at least one component algorithm
 remains unbroken, because verification succeeds only if every
 component signature validates over the same canonical message defined
@@ -416,12 +430,11 @@ non-repudiation guarantees.
 # Migration Guidance
 
 * Experimental (individual drafts): Dual certificates have been
-  proposed as a migration mechanism (e.g., {{?I-D.hu-ipsecme-pqt-hybrid-auth}},
-  {{?I-D.yusef-tls-pqt-dual-certs}}, {{?I-D.bonnell-lamps-chameleon-certs}}),
+  proposed as a migration mechanism (e.g., IKEv2 {{?I-D.hu-ipsecme-pqt-hybrid-auth}},
+  TLS {{?I-D.yusef-tls-pqt-dual-certs}}, paired certificates with a
+  single certificate {{?I-D.bonnell-lamps-chameleon-certs}}),
   but at the time of writing none of the relevant IETF working groups
-  have adopted this approach. Dual certificates require significant
-  protocol changes to bind and validate both certificates correctly
-  (e.g., extensions in TLS, multiple CERT payload handling in IKEv2).
+  have adopted this approach at the time of writing this specification.
 
 * Medium-term (standards-track): Composite signatures enable tighter
   integration once ecosystem support (PKIX, IPSec, JOSE/COSE, TLS) is mature.
@@ -433,10 +446,10 @@ non-repudiation guarantees.
 
 * Long-term: PQ-only certificates are the final goal, once PQ
   algorithms are well-established, trust anchors have been updated,
-  HSMs and devices natively support PQ operations, and traditional
-  algorithms are fully retired. Work to enable PQC signatures is already underway in
-  JOSE/COSE {{!I-D.ietf-cose-dilithium}}, TLS {{!I-D.ietf-tls-mldsa}}, and
-  IPsec {{!I-D.ietf-ipsecme-ikev2-pqc-auth}}.
+  HSMs and devices support PQ operations, and traditional
+  algorithms are fully retired. Work to enable PQC signatures is already
+  underway in JOSE/COSE {{!I-D.ietf-cose-dilithium}}, TLS {{!I-D.ietf-tls-mldsa}},
+  and IPsec {{!I-D.ietf-ipsecme-ikev2-pqc-auth}}.
 
 # Use of SLH-DSA in PQ-Only Deployments
 
@@ -482,16 +495,14 @@ overhead to the handshake.
 
 # Security Considerations
 
-Hybrid approaches (composite or dual certificates) are designed to provide
-defense in depth during the migration to PQC. Their goal is to ensure that
-authentication remains secure as long as at least one of the algorithms in
-use remains unbroken. However, several important security considerations
-arise.
+Hybrid signature schemes are designed to provide defense in depth during the migration to PQC.
+Their goal is to ensure that authentication remains secure as long as at least one of the algorithms
+in use remains unbroken. However, several important security considerations arise.
 
 ## Downgrade Attacks
 
 Implementations must ensure downgrade protection so that an adversary cannot
-suppress PQ or hybrid certificates and force reliance solely on traditional
+suppress PQ or hybrid schemes and force reliance solely on traditional
 algorithms. This is especially important in scenarios where a CRQC is
 available but not publicly disclosed. Without downgrade protection, a MitM
 attacker could impersonate servers by presenting only traditional
@@ -499,19 +510,24 @@ certificates even when PQC certificates are supported.
 
 ## Strong Unforgeability versus Existential Unforgeability
 
-In composite and dual-certificate deployments, once one component algorithm
+In hybrid signature schemes, once one component algorithm
 is broken (e.g., the traditional algorithm under a CRQC), the overall scheme
-no longer achieves SUF. While Existential Unforgeability (EUF) is still
-preserved by the PQ component, the loss of SUF means that hybrid mechanisms
-will have be retired once traditional algorithms are no longer secure.
+no longer achieves SUF. While Existential Unforgeability (EUF) (see Section 10.1.1
+of {{?I-D.ietf-pquip-pqc-engineers}}) is still preserved by the PQ component,
+meaning that an adversary who can obtain signatures on arbitrary messages still
+cannot forge a valid PQ signature on any new message that was not previously signed.
+the loss of SUF means that hybrid mechanisms will have be eventually retired
+once traditional algorithms are no longer secure.
 
 ## Operational Risks
 
 Managing multiple certificate paths (composite, dual, and PQ-only) increases
 the risk of misconfiguration and operational errors. For example, a server
-might continue using a hybrid scheme after the traditional algorithm
+might continue using a hybrid signature scheme after the traditional algorithm
 is broken, fail to revoke traditional certificates that are no longer secure,
-or misconfigure chain selection so that clients receive an incompatible path.
+or select the wrong chain for a given client, resulting in clients receiving a
+certificate path they cannot validate.
+
 Clear operational guidance and automated monitoring are essential to minimize
 these risks. Operators need best practices for certificate lifecycle and
 migration planning, along with automated checks to ensure PQC chains remain
