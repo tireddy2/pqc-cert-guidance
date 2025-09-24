@@ -33,7 +33,7 @@ author:
     city: Bangalore
     region: Karnataka
     country: India
-    email: "kondtir@gmail.com"
+    email: "k.tirumaleswar_reddy@nokia.com"
 
 
 normative:
@@ -522,7 +522,7 @@ no longer achieves SUF. While Existential Unforgeability (EUF) (see Section 10.1
 of {{?I-D.ietf-pquip-pqc-engineers}}) is still preserved by the PQ component,
 meaning that an adversary who can obtain signatures on arbitrary messages still
 cannot forge a valid PQ signature on any new message that was not previously signed.
-the loss of SUF means that hybrid mechanisms will have be eventually retired
+The loss of SUF means that hybrid mechanisms will have be eventually retired
 once traditional algorithms are no longer secure.
 
 ## Operational Risks
