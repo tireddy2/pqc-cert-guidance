@@ -1785,7 +1785,7 @@ longer secure against CRQCs, it will have to be deprecated. For discussion
 of the security impact in security protocols (e.g., TLS, IKEv2)
 versus artifact-signing use cases, see Section <a href="#suf" class="auto internal xref">Section 9.3</a>.<a href="#section-9.1-1" class="pilcrow">¶</a></p>
 <p id="section-9.1-2">To complete the transition to a fully quantum-resistant authentication model,
-operators operators will need a PQC root and intermediates, resulting in PQC-only
+operators will need a PQC root and intermediates, resulting in PQC-only
 end-entity certificates.<a href="#section-9.1-2" class="pilcrow">¶</a></p>
 <p id="section-9.1-3">Protocol configurations (e.g., TLS, IKEv2) will likewise
 need to be updated to negotiate only PQC-based authentication, ensuring that
@@ -1841,6 +1841,11 @@ composite signatures can exist for the same artifact, undermining the
 “one signature, one artifact” guarantee. This creates ambiguity about
 which composite signature is authentic, complicating long-term
 non-repudiation guarantees.<a href="#section-9.3-4" class="pilcrow">¶</a></p>
+<p id="section-9.3-5">Planned migration paths should therefore assume that once CRQCs are realized,
+hybrid signature schemes may continue to function for a limited time
+without constituting a zero-day vulnerability, but operators must execute an
+orderly transition to PQC-only certificates in order to restore SUF-CMA
+security guarantees.<a href="#section-9.3-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>

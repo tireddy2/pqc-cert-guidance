@@ -463,7 +463,7 @@ Table of Contents
    Section Section 9.3.
 
    To complete the transition to a fully quantum-resistant
-   authentication model, operators operators will need a PQC root and
+   authentication model, operators will need a PQC root and
    intermediates, resulting in PQC-only end-entity certificates.
 
    Protocol configurations (e.g., TLS, IKEv2) will likewise need to be
@@ -517,6 +517,12 @@ Table of Contents
    artifact, undermining the “one signature, one artifact” guarantee.
    This creates ambiguity about which composite signature is authentic,
    complicating long-term non-repudiation guarantees.
+
+   Planned migration paths should therefore assume that once CRQCs are
+   realized, hybrid signature schemes may continue to function for a
+   limited time without constituting a zero-day vulnerability, but
+   operators must execute an orderly transition to PQC-only certificates
+   in order to restore SUF-CMA security guarantees.
 
 10.  Migration Guidance
 
