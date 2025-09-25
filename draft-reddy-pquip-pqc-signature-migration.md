@@ -404,15 +404,15 @@ security properties degrade once one component of the hybrid is no longer
 secure.
 
 In composite certificates, the composite signature will no longer achieve Strong
-Unforgeability (SUF) (see Section 10.1.1 of {{?I-D.ietf-pquip-pqc-engineers}}
+Unforgeability under chosen message attack (SUF-CMA) (see Section 10.1.1 of {{?I-D.ietf-pquip-pqc-engineers}}
 and Section 10.2 of {{!I-D.ietf-lamps-pq-composite-sigs}}). A CRQC can forge the
 broken traditional signature component (s1*) over a message (m). That forged
 component can then be combined with the valid post-quantum component (s2) to
 produce a new composite signature (m, (s1*, s2)) that verifies successfully,
-thereby violating SUF.
+thereby violating SUF-CMA.
 
 In dual-certificate deployments where the client requires both a
-traditional and a PQC chain, the SUF property is likewise not achieved once
+traditional and a PQC chain, the SUF-CMA property is likewise not achieved once
 the traditional algorithm is broken.
 
 In protocols such as TLS and IKEv2, a composite signature remains
@@ -428,7 +428,7 @@ which composite signature is authentic, complicating long-term
 non-repudiation guarantees.
 
 Hybrid signature schemes should not be used for artifact signing (e.g., software packages),
-since the loss of SUF makes them unsuitable for long-term non-repudiation.
+since the loss of SUF-CMA makes them unsuitable for long-term non-repudiation.
 In security protocols (e.g., TLS, IKEv2), hybrid signature schemes may continue to
 function for a limited time after a CRQC is realized, since they still provide
 impersonation resistance as long as one component algorithm remains secure.
@@ -521,12 +521,12 @@ certificates even when PQC certificates are supported.
 
 In hybrid signature schemes, once one component algorithm
 is broken (e.g., the traditional algorithm under a CRQC), the overall scheme
-no longer achieves SUF. While Existential Unforgeability (EUF) (see Section 10.1.1
-of {{?I-D.ietf-pquip-pqc-engineers}}) is still preserved by the PQC component,
-meaning that an adversary who can obtain signatures on arbitrary messages still
-cannot forge a valid PQC signature on any new message that was not previously signed.
-The loss of SUF means that hybrid mechanisms will have be eventually retired
-once traditional algorithms are no longer secure.
+no longer achieves SUF-CMA. While Existential Unforgeability under chosen message attack
+(EUF-CMA) (see Section 10.1.1 of {{?I-D.ietf-pquip-pqc-engineers}}) is still
+preserved by the PQC component, meaning that an adversary who can obtain signatures on
+arbitrary messages still cannot forge a valid PQC signature on any new message that
+was not previously signed. The loss of SUF-CMA means that hybrid mechanisms will
+have be eventually retired once traditional algorithms are no longer secure.
 
 ## Operational Risks
 
