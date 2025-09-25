@@ -1846,19 +1846,14 @@ composite signatures can exist for the same artifact, undermining the
 “one signature, one artifact” guarantee. This creates ambiguity about
 which composite signature is authentic, complicating long-term
 non-repudiation guarantees.<a href="#section-9.3-4" class="pilcrow">¶</a></p>
-<p id="section-9.3-5">Planned migration paths should therefore assume that once CRQCs are realized,
-hybrid signature schemes may continue to function for a limited time
-without constituting a zero-day vulnerability, but operators must execute an
-orderly transition to PQC-only certificates in order to restore SUF-CMA
-security guarantees.<a href="#section-9.3-5" class="pilcrow">¶</a></p>
-<p id="section-9.3-6">Hybrid signature schemes should not be used for artifact signing (e.g., software packages),
+<p id="section-9.3-5">Hybrid signature schemes should not be used for artifact signing (e.g., software packages),
 since the loss of SUF makes them unsuitable for long-term non-repudiation.
 In security protocols (e.g., TLS, IKEv2), hybrid signature schemes <span class="bcp14">MAY</span> continue to
 function for a limited time after a CRQC is realized, since they still provide
 impersonation resistance as long as one component algorithm remains secure.
 This situation does not constitute a zero-day vulnerability requiring an
-immediate upgrade. However, operators will have to plan a orderly migration
-to PQC-only certificates in order to restore SUF-CMA security guarantees.<a href="#section-9.3-6" class="pilcrow">¶</a></p>
+immediate upgrade. However, operators will have to plan an orderly migration
+to PQC-only certificates in order to restore SUF-CMA security guarantees.<a href="#section-9.3-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
