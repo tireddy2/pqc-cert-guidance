@@ -34,6 +34,12 @@ author:
     region: Karnataka
     country: India
     email: "k.tirumaleswar_reddy@nokia.com"
+  -
+    fullname: Dan Wing
+    organization: Cloud Software Group Holdings, Inc.
+    abbrev: Cloud Software Group
+    country: United States of America
+    email: danwing@gmail.com
 
 
 normative:
@@ -427,11 +433,14 @@ composite signatures can exist for the same artifact, undermining the
 which composite signature is authentic, complicating long-term
 non-repudiation guarantees.
 
-Planned migration paths should therefore assume that once CRQCs are realized,
-hybrid signature schemes may continue to function for a limited time
-without constituting a zero-day vulnerability, but operators must execute an
-orderly transition to PQC-only certificates in order to restore SUF-CMA
-security guarantees.
+Hybrid signature schemes should not be used for artifact signing (e.g., software packages),
+since the loss of SUF makes them unsuitable for long-term non-repudiation.
+In security protocols (e.g., TLS, IKEv2), hybrid signature schemes MAY continue to
+function for a limited time after a CRQC is realized, since they still provide
+impersonation resistance as long as one component algorithm remains secure.
+This situation does not constitute a zero-day vulnerability requiring an
+immediate upgrade. However, operators will have to plan an orderly migration
+to PQC-only certificates in order to restore SUF-CMA security guarantees.
 
 # Migration Guidance
 
@@ -545,5 +554,5 @@ This document has no IANA actions.
 
 # Acknowledgments
 
-TODO
+Thanks to Martin McGrath, and German Peinado for the detailed review.
 
