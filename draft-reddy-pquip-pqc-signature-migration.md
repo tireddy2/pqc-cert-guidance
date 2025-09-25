@@ -435,7 +435,7 @@ non-repudiation guarantees.
 
 Hybrid signature schemes should not be used for artifact signing (e.g., software packages),
 since the loss of SUF makes them unsuitable for long-term non-repudiation.
-In security protocols (e.g., TLS, IKEv2), hybrid signature schemes MAY continue to
+In security protocols (e.g., TLS, IKEv2), hybrid signature schemes may continue to
 function for a limited time after a CRQC is realized, since they still provide
 impersonation resistance as long as one component algorithm remains secure.
 This situation does not constitute a zero-day vulnerability requiring an
