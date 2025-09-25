@@ -4,14 +4,15 @@
 <meta charset="utf-8">
 <meta content="Common,Latin" name="scripts">
 <meta content="initial-scale=1.0" name="viewport">
-<title>Guidance for Migration to Composite, Dual-Certificate, or PQ-Only Authentication</title>
+<title>Guidance for Migration to Composite, Dual-Certificate, or PQC-Only Authentication</title>
 <meta content="Tirumaleswar Reddy" name="author">
+<meta content="Dan Wing" name="author">
 <meta content="
        This document provides guidance for migration from traditional digital
 signature algorithms to post-quantum cryptographic (PQC) signature
 algorithms. It compares three models under discussion in the IETF for
 PKI-based protocols: composite signatures, dual
-certificates, and PQ-only certificates. The goal is to help operators
+certificates, and PQC-only certificates. The goal is to help operators
 and engineers working on cryptographic libraries, network security, and
 PKI/key management infrastructure select an approach that balances
 interoperability, security, and operational efficiency during the
@@ -1051,12 +1052,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <table class="ears">
 <thead><tr>
 <td class="left">Internet-Draft</td>
-<td class="center">PQ Signature Migration Guidance</td>
+<td class="center">PQC Signature Migration Guidance</td>
 <td class="right">September 2025</td>
 </tr></thead>
 <tfoot><tr>
-<td class="left">Reddy</td>
-<td class="center">Expires 28 March 2026</td>
+<td class="left">Reddy &amp; Wing</td>
+<td class="center">Expires 29 March 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1069,29 +1070,33 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-reddy-pquip-pqc-signature-migration-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-09-24" class="published">24 September 2025</time>
+<time datetime="2025-09-25" class="published">25 September 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-03-28">28 March 2026</time></dd>
-<dt class="label-authors">Author:</dt>
+<dd class="expires"><time datetime="2026-03-29">29 March 2026</time></dd>
+<dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
       <div class="author-name">T. Reddy</div>
 <div class="org">Nokia</div>
 </div>
+<div class="author">
+      <div class="author-name">D. Wing</div>
+<div class="org">Cloud Software Group</div>
+</div>
 </dd>
 </dl>
 </div>
-<h1 id="title">Guidance for Migration to Composite, Dual-Certificate, or PQ-Only Authentication</h1>
+<h1 id="title">Guidance for Migration to Composite, Dual-Certificate, or PQC-Only Authentication</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
 <p id="section-abstract-1">This document provides guidance for migration from traditional digital
 signature algorithms to post-quantum cryptographic (PQC) signature
 algorithms. It compares three models under discussion in the IETF for
 PKI-based protocols: composite signatures, dual
-certificates, and PQ-only certificates. The goal is to help operators
+certificates, and PQC-only certificates. The goal is to help operators
 and engineers working on cryptographic libraries, network security, and
 PKI/key management infrastructure select an approach that balances
 interoperability, security, and operational efficiency during the
@@ -1127,7 +1132,7 @@ transition to post-quantum authentication.<a href="#section-abstract-1" class="p
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 28 March 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 29 March 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1188,7 +1193,7 @@ transition to post-quantum authentication.<a href="#section-abstract-1" class="p
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
-            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-pq-only-certificates" class="internal xref">PQ-Only Certificates</a></p>
+            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-pqc-only-certificates" class="internal xref">PQC-Only Certificates</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1">
                 <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="auto internal xref">6.1</a>.  <a href="#name-advantages-3" class="internal xref">Advantages</a></p>
@@ -1222,7 +1227,7 @@ transition to post-quantum authentication.<a href="#section-abstract-1" class="p
             <p id="section-toc.1-1.9.1"><a href="#section-9" class="auto internal xref">9</a>.  <a href="#name-transition-considerations" class="internal xref">Transition Considerations</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.1">
-                <p id="section-toc.1-1.9.2.1.1"><a href="#section-9.1" class="auto internal xref">9.1</a>.  <a href="#name-composite-certificates" class="internal xref">Composite Certificates</a></p>
+                <p id="section-toc.1-1.9.2.1.1"><a href="#section-9.1" class="auto internal xref">9.1</a>.  <a href="#name-composite" class="internal xref">Composite</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.2">
                 <p id="section-toc.1-1.9.2.2.1"><a href="#section-9.2" class="auto internal xref">9.2</a>.  <a href="#name-dual-certificates-2" class="internal xref">Dual Certificates</a></p>
@@ -1236,7 +1241,7 @@ transition to post-quantum authentication.<a href="#section-abstract-1" class="p
             <p id="section-toc.1-1.10.1"><a href="#section-10" class="auto internal xref">10</a>. <a href="#name-migration-guidance" class="internal xref">Migration Guidance</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
-            <p id="section-toc.1-1.11.1"><a href="#section-11" class="auto internal xref">11</a>. <a href="#name-use-of-slh-dsa-in-pq-only-d" class="internal xref">Use of SLH-DSA in PQ-Only Deployments</a></p>
+            <p id="section-toc.1-1.11.1"><a href="#section-11" class="auto internal xref">11</a>. <a href="#name-use-of-slh-dsa-in-pqc-only-" class="internal xref">Use of SLH-DSA in PQC-Only Deployments</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12">
             <p id="section-toc.1-1.12.1"><a href="#section-12" class="auto internal xref">12</a>. <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
@@ -1270,7 +1275,7 @@ transition to post-quantum authentication.<a href="#section-abstract-1" class="p
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.16">
-            <p id="section-toc.1-1.16.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-authors-address" class="internal xref">Author's Address</a></p>
+            <p id="section-toc.1-1.16.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
 </li>
         </ul>
 </nav>
@@ -1290,34 +1295,34 @@ classical and quantum adversaries.<a href="#section-1-1" class="pilcrow">¶</a><
 <p id="section-1-2">For data authentication, the primary concern is the risk of on-path
 attackers equipped with CRQCs. Such adversaries could break
 certificate-based mechanisms that rely on traditional algorithms
-(e.g., RSA, ECDSA), allowing them to impersonate servers and mount
+(e.g., RSA, ECDSA), allowing them to impersonate servers and clients, and mount
 man-in-the-middle (MitM) attacks. In this scenario, attackers could also
 suppress PQC certificates and present only traditional ones, enabling
-downgrades. These risks highlight the need to transition away from
-traditional signatures and adopt post-quantum algorithms for
-certificate-based authentication.<a href="#section-1-2" class="pilcrow">¶</a></p>
+downgrades. These risks highlight the need to transition certificate-based
+authentication toward post-quantum security, using hybrid signature
+schemes as an intermediate step before PQC-only adoption.<a href="#section-1-2" class="pilcrow">¶</a></p>
 <p id="section-1-3">The IETF has developed two hybrid transition models for use in TLS, IKEv2/IPsec,
 JOSE/COSE, and PKIX:<a href="#section-1-3" class="pilcrow">¶</a></p>
 <ul class="compact">
 <li class="compact" id="section-1-4.1">
           <p id="section-1-4.1.1">Composite signatures – A single certificate, key, and signature that
-combines traditional and PQ algorithms <span>[<a href="#I-D.ietf-lamps-pq-composite-sigs" class="cite xref">I-D.ietf-lamps-pq-composite-sigs</a>]</span>.<a href="#section-1-4.1.1" class="pilcrow">¶</a></p>
+combines traditional and PQC algorithms <span>[<a href="#I-D.ietf-lamps-pq-composite-sigs" class="cite xref">I-D.ietf-lamps-pq-composite-sigs</a>]</span>.<a href="#section-1-4.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="compact" id="section-1-4.2">
-          <p id="section-1-4.2.1">Dual certificates – Two separate certificates, one traditional and one PQ algorithm,
+          <p id="section-1-4.2.1">Dual certificates – Two separate certificates, one traditional and one PQC algorithm,
 that are bound together and validated jointly (<span>[<a href="#RFC9763" class="cite xref">RFC9763</a>]</span>).<a href="#section-1-4.2.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="section-1-5">Another approach is using a Post-Quantum certificate,<a href="#section-1-5" class="pilcrow">¶</a></p>
 <ul class="compact">
 <li class="compact" id="section-1-6.1">
-          <p id="section-1-6.1.1">PQ-only certificates – A certificate or signature that uses only a PQ
+          <p id="section-1-6.1.1">PQC-only certificates – A certificate or signature that uses only a PQ
 algorithm (<span>[<a href="#I-D.ietf-lamps-dilithium-certificates" class="cite xref">I-D.ietf-lamps-dilithium-certificates</a>]</span> for ML-DSA and
 <span>[<a href="#I-D.ietf-lamps-x509-slhdsa" class="cite xref">I-D.ietf-lamps-x509-slhdsa</a>]</span> for SLH-DSA).<a href="#section-1-6.1.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="section-1-7">This document provides guidance on selecting among the two hybrid
-certificate models and the PQ-only model depending on the deployment
+certificate models and the PQC-only model depending on the deployment
 context, the readiness of the supporting ecosystem, and security
 requirements.<a href="#section-1-7" class="pilcrow">¶</a></p>
 </section>
@@ -1331,10 +1336,10 @@ requirements.<a href="#section-1-7" class="pilcrow">¶</a></p>
 "<span class="bcp14">MAY</span>", and "<span class="bcp14">OPTIONAL</span>" in this document are to be interpreted as
 described in BCP 14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span> <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span> when, and only when, they
 appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶</a></p>
-<p id="section-2-2">Composite: A key, certificate, or signature that merges traditional and PQ algorithms into one object.
+<p id="section-2-2">Composite: A key, certificate, or signature that merges traditional and PQC algorithms into one object.
 Dual certificates: Two independent certificates (traditional and PQ) issued for the same
 identity, presented and validated together.
-PQ-only: A certificate or signature using only a PQ algorithm.<a href="#section-2-2" class="pilcrow">¶</a></p>
+PQC-only: A certificate or signature using only a PQC algorithm.<a href="#section-2-2" class="pilcrow">¶</a></p>
 <p id="section-2-3">The terms hybrid signature scheme and hybrid signature are used as defined in <span>[<a href="#I-D.ietf-pquip-hybrid-signature-spectrums" class="cite xref">I-D.ietf-pquip-hybrid-signature-spectrums</a>]</span>.<a href="#section-2-3" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1351,7 +1356,7 @@ Similar to a zero-day vulnerability, an adversary could secretly exploit CRQC
 capabilities to compromise traditional certificates without alerting the wider
 ecosystem.<a href="#section-3-1" class="pilcrow">¶</a></p>
 <p id="section-3-2">Addressing this risk requires replacing traditional signatures with PQC signatures, which in turn
-demands ecosystem-wide upgrades involving cryptographic libraries, HSMs, CAs, intermediate CAs,
+demands ecosystem-wide upgrades involving cryptographic libraries, HSMs, TPMs, CAs, intermediate CAs,
 and dependent protocols. Because these transitions take years of planning, coordination, and
 investment, preparations will have to begin well before a CRQC is publicly known.<a href="#section-3-2" class="pilcrow">¶</a></p>
 </section>
@@ -1405,24 +1410,10 @@ time of writing of the specification.<a href="#section-4.2-1.1.1" class="pilcrow
 mechanisms, requiring updates to PKI infrastructure.<a href="#section-4.2-1.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="compact" id="section-4.2-1.3">
-            <p id="section-4.2-1.3.1">Expands the migration landscape to multiple transition paths:<a href="#section-4.2-1.3.1" class="pilcrow">¶</a></p>
-<ol start="1" type="1" class="compact type-1" id="section-4.2-1.3.2">
-<li id="section-4.2-1.3.2.1">
-                <p id="section-4.2-1.3.2.1.1">Traditional-only,<a href="#section-4.2-1.3.2.1.1" class="pilcrow">¶</a></p>
-</li>
-              <li id="section-4.2-1.3.2.2">
-                <p id="section-4.2-1.3.2.2.1">Composite (classical + PQ),<a href="#section-4.2-1.3.2.2.1" class="pilcrow">¶</a></p>
-</li>
-              <li id="section-4.2-1.3.2.3">
-                <p id="section-4.2-1.3.2.3.1">PQ-only.
-In contrast, the dual certificate approach requires only two paths
-(traditional and PQ).<a href="#section-4.2-1.3.2.3.1" class="pilcrow">¶</a></p>
-</li>
-            </ol>
+            <p id="section-4.2-1.3.1">Requires multiple migration steps, with deployments moving from
+Traditional-only to Composite, and later from Composite to PQC-only.<a href="#section-4.2-1.3.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-4.2-2">Note that PQ-to-PQ migration is still required in composite and dual-certificate
-hybrid signature schemes, underscoring the need for crypto-agility.<a href="#section-4.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1487,12 +1478,12 @@ certificates from CAs, which can be significant in large-scale deployments.<a hr
 </div>
 </section>
 </div>
-<div id="pq-only-certificates">
+<div id="pqc-only-certificates">
 <section id="section-6">
-      <h2 id="name-pq-only-certificates">
-<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-pq-only-certificates" class="section-name selfRef">PQ-Only Certificates</a>
+      <h2 id="name-pqc-only-certificates">
+<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-pqc-only-certificates" class="section-name selfRef">PQC-Only Certificates</a>
       </h2>
-<p id="section-6-1">PQ-only certificates represent the final stage of migration. They use
+<p id="section-6-1">PQC-only certificates represent the final stage of migration. They use
 only a post-quantum algorithm and provide no fallback to traditional algorithms.<a href="#section-6-1" class="pilcrow">¶</a></p>
 <div id="advantages-2">
 <section id="section-6.1">
@@ -1520,14 +1511,14 @@ algorithms.<a href="#section-6.1-1.2.1" class="pilcrow">¶</a></p>
         </h3>
 <ul class="compact">
 <li class="compact" id="section-6.2-1.1">
-            <p id="section-6.2-1.1.1">Risk if a deployed PQ algorithm is broken due to a bug.<a href="#section-6.2-1.1.1" class="pilcrow">¶</a></p>
+            <p id="section-6.2-1.1.1">Risk if a deployed PQC algorithm is broken due to a bug.<a href="#section-6.2-1.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="compact" id="section-6.2-1.2">
             <p id="section-6.2-1.2.1">No interoperability with legacy systems that only support traditional
 algorithms.<a href="#section-6.2-1.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="compact" id="section-6.2-1.3">
-            <p id="section-6.2-1.3.1">Deployment is only feasible once PQ algorithms are standardized and
+            <p id="section-6.2-1.3.1">Deployment is only feasible once PQC algorithms are standardized and
 broadly supported across the ecosystem.<a href="#section-6.2-1.3.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
@@ -1541,13 +1532,13 @@ broadly supported across the ecosystem.<a href="#section-6.2-1.3.1" class="pilcr
 <a href="#section-7" class="section-number selfRef">7. </a><a href="#name-negotiation-of-authenticati" class="section-name selfRef">Negotiation of Authentication Schemes</a>
       </h2>
 <p id="section-7-1">During the transition, endpoints may support multiple authentication
-schemes (e.g., traditional, composite, dual, or PQ-only). Clients
+schemes (e.g., traditional, composite, dual, or PQC-only). Clients
 advertise their supported schemes using the protocol’s negotiation
 mechanism (for example, the <code>signature_algorithms</code> extension in TLS
 <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span>), and servers select from the client’s list or fail the
 authentication if no common option is available. In practice,
-deployments are expected to prefer PQ-only or hybrid signature scheme
-over traditional ones, with the choice between PQ-only
+deployments are expected to prefer PQC-only or hybrid signature scheme
+over traditional ones, with the choice between PQC-only
 and hybrid signature scheme influenced by regulatory mandates or
 by whether defense-in-depth is prioritized.<a href="#section-7-1" class="pilcrow">¶</a></p>
 </section>
@@ -1566,9 +1557,9 @@ and constrained devices.<a href="#section-8-1" class="pilcrow">¶</a></p>
 <a href="#section-8.1" class="section-number selfRef">8.1. </a><a href="#name-trust-anchors-and-transitio" class="section-name selfRef">Trust Anchors and Transitions</a>
         </h3>
 <p id="section-8.1-1">Trust anchors represent the ultimate root of trust in a PKI. If existing
-trust anchors are RSA or ECC-based, then new PQ-capable trust anchors will
+trust anchors are RSA or ECC-based, then new PQC-capable trust anchors will
 need to be distributed. Operators will have to plan for a phased introduction of
-PQ trust anchors, which may involve:<a href="#section-8.1-1" class="pilcrow">¶</a></p>
+PQC trust anchors, which may involve:<a href="#section-8.1-1" class="pilcrow">¶</a></p>
 <ul class="compact">
 <li class="compact" id="section-8.1-2.1">
             <p id="section-8.1-2.1.1">Rolling out composite trust anchors that support both traditional and PQC
@@ -1576,7 +1567,7 @@ signatures.<a href="#section-8.1-2.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="compact" id="section-8.1-2.2">
             <p id="section-8.1-2.2.1">Establishing parallel trust anchor hierarchies and phasing out the
-traditional hierarchy once PQ adoption is universal.<a href="#section-8.1-2.2.1" class="pilcrow">¶</a></p>
+traditional hierarchy once PQC adoption is universal.<a href="#section-8.1-2.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="compact" id="section-8.1-2.3">
             <p id="section-8.1-2.3.1">Ensuring secure and authenticated distribution of updated trust anchors
@@ -1585,26 +1576,27 @@ to clients, especially devices that cannot be easily updated.<a href="#section-8
         </ul>
 <p id="section-8.1-3">Deployments migrating from traditional to post-quantum authentication
 may have to operate with multiple trust anchors for a period of time.
-A new PQ or composite root may be introduced, or alternatively a PQ
+A new PQC or composite root may be introduced, or alternatively a PQ
 intermediate may be added beneath an existing traditional root,
 leading to different trust chain models:<a href="#section-8.1-3" class="pilcrow">¶</a></p>
 <ul class="compact">
 <li class="compact" id="section-8.1-4.1">
             <p id="section-8.1-4.1.1">Traditional chain: anchored in a Traditional root (e.g., RSA/ECDSA),
-which may issue a PQ intermediate.<a href="#section-8.1-4.1.1" class="pilcrow">¶</a></p>
+which may issue a PQC intermediate.<a href="#section-8.1-4.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="compact" id="section-8.1-4.2">
-            <p id="section-8.1-4.2.1">PQ chain: anchored in a PQ root (e.g., ML-DSA, SLH-DSA).<a href="#section-8.1-4.2.1" class="pilcrow">¶</a></p>
+            <p id="section-8.1-4.2.1">PQC chain: anchored in a PQC root (e.g., ML-DSA, SLH-DSA).<a href="#section-8.1-4.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="compact" id="section-8.1-4.3">
-            <p id="section-8.1-4.3.1">Parallel roots: both a traditional root and a PQ root are distributed as
+            <p id="section-8.1-4.3.1">Parallel roots: both a traditional root and a PQC root are distributed as
 trust anchors, with separate hierarchies operating in parallel until the
 traditional root can be phased out.<a href="#section-8.1-4.3.1" class="pilcrow">¶</a></p>
 </li>
           <li class="compact" id="section-8.1-4.4">
-            <p id="section-8.1-4.4.1">Composite chain: anchored in a composite root, with intermediates
-signed using composite algorithms that combine traditional
-and PQ. This forms a distinct new chain, rather than two parallel ones.<a href="#section-8.1-4.4.1" class="pilcrow">¶</a></p>
+            <p id="section-8.1-4.4.1">Composite chain: anchored in a composite root and using composite
+algorithms, with a single certificate chain that combines traditional and
+PQC public keys and signatures. This forms a distinct chain, rather
+than two parallel ones.<a href="#section-8.1-4.4.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 <p id="section-8.1-5">During this coexistence phase, clients generally fall into five categories:<a href="#section-8.1-5" class="pilcrow">¶</a></p>
@@ -1615,11 +1607,11 @@ traditional algorithms.<a href="#section-8.1-6.1.1" class="pilcrow">¶</a></p>
 </li>
           <li id="section-8.1-6.2">
             <p id="section-8.1-6.2.1">Mixed: trust only traditional roots but support both traditional and
-PQC algorithms. These clients can validate PQ certificates only if a PQ
+PQC algorithms. These clients can validate PQC certificates only if a PQC
 intermediate is cross-signed by a traditional root.<a href="#section-8.1-6.2.1" class="pilcrow">¶</a></p>
 </li>
           <li id="section-8.1-6.3">
-            <p id="section-8.1-6.3.1">Dual-trust: trust both traditional and PQ roots, supporting both
+            <p id="section-8.1-6.3.1">Dual-trust: trust both traditional and PQC roots, supporting both
 algorithm families.<a href="#section-8.1-6.3.1" class="pilcrow">¶</a></p>
 </li>
           <li id="section-8.1-6.4">
@@ -1628,28 +1620,28 @@ algorithms, validating a single chain that integrates traditional and PQ
 signatures.<a href="#section-8.1-6.4.1" class="pilcrow">¶</a></p>
 </li>
           <li id="section-8.1-6.5">
-            <p id="section-8.1-6.5.1">PQ-only: trust only PQ roots and support only PQ algorithms.<a href="#section-8.1-6.5.1" class="pilcrow">¶</a></p>
+            <p id="section-8.1-6.5.1">PQC-only: trust only PQC roots and support only PQC algorithms.<a href="#section-8.1-6.5.1" class="pilcrow">¶</a></p>
 </li>
         </ol>
 <p id="section-8.1-7">The main challenge is that servers cannot easily distinguish between mixed
-clients (2) and dual-trust clients (3), since both advertise PQ algorithms,
-but only dual-trust clients actually recognize PQ roots. To ensure
+clients (2) and dual-trust clients (3), since both advertise PQC algorithms,
+but only dual-trust clients actually recognize PQC roots. To ensure
 compatibility with mixed clients (2), servers may default to sending longer
-PQ chains that include a cross-signed PQ root (i.e., a PQ root certificate
-signed by a traditional root). However, this is unnecessary for dual-trust
-clients (3), which already trust the PQ root directly, and it results in
-increased message size.<a href="#section-8.1-7" class="pilcrow">¶</a></p>
+PQC chains that include a cross-signed PQC root (i.e., a PQC root certificate
+signed by a traditional root). However, transmitting the PQC root is unnecessary
+for dual-trust clients (3), which already have the PQC root in their
+trust anchors, and including it only increases message size.<a href="#section-8.1-7" class="pilcrow">¶</a></p>
 <p id="section-8.1-8"><span>[<a href="#I-D.ietf-tls-trust-anchor-ids" class="cite xref">I-D.ietf-tls-trust-anchor-ids</a>]</span> (TAI) addresses this problem by allowing
 clients to indicate, on a per-connection basis, which trust anchors they
 recognize. Servers can use that information to select a compatible certificate
 chain, reducing unnecessary chain elements and providing operators with better
-telemetry on PQC adoption. TAI also enables PQ-capable clients to tell PQ-aware
-servers exactly which PQ trust anchors they recognize, while still supporting
+telemetry on PQC adoption. TAI also enables PQC-capable clients to tell PQC-aware
+servers exactly which PQC trust anchors they recognize, while still supporting
 traditional roots for compatibility with legacy servers.<a href="#section-8.1-8" class="pilcrow">¶</a></p>
-<p id="section-8.1-9">In all cases, the long-term goal is a transition to PQ-only roots and
+<p id="section-8.1-9">In all cases, the long-term goal is a transition to PQC-only roots and
 certificate chains. Hybrid signature schemes help bridge
 the gap, but operators will have to plan carefully for the eventual retirement of
-traditional and composite roots once PQ adoption is widespread.<a href="#section-8.1-9" class="pilcrow">¶</a></p>
+traditional and composite roots once PQC adoption is widespread.<a href="#section-8.1-9" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="multiple-transitions-and-crypto-agility">
@@ -1679,8 +1671,8 @@ supporting:<a href="#section-8.2-3" class="pilcrow">¶</a></p>
 </li>
           <li class="compact" id="section-8.2-4.2">
             <p id="section-8.2-4.2.1">Phased migration paths, including initial use of hybrid signature schemes,
-eventual transition to PQ-only certificates, and later migration
-to new PQ algorithms as cryptanalysis or security policy guidance evolves.<a href="#section-8.2-4.2.1" class="pilcrow">¶</a></p>
+eventual transition to PQC-only certificates, and later migration
+to new PQC algorithms as cryptanalysis or security policy guidance evolves.<a href="#section-8.2-4.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="compact" id="section-8.2-4.3">
             <p id="section-8.2-4.3.1">Protection against downgrade attacks across all transition phases.<a href="#section-8.2-4.3.1" class="pilcrow">¶</a></p>
@@ -1697,7 +1689,7 @@ to new PQ algorithms as cryptanalysis or security policy guidance evolves.<a hre
 Challenges include:<a href="#section-8.3-1" class="pilcrow">¶</a></p>
 <ul class="compact">
 <li class="compact" id="section-8.3-2.1">
-            <p id="section-8.3-2.1.1">HSMs must be upgraded to support PQ algorithms and, where relevant,
+            <p id="section-8.3-2.1.1">HSMs must be upgraded to support PQC algorithms and, where relevant,
 composite or dual key management models.<a href="#section-8.3-2.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="compact" id="section-8.3-2.2">
@@ -1706,7 +1698,7 @@ sufficient memory and processing capability in HSMs.<a href="#section-8.3-2.2.1"
 </li>
           <li class="compact" id="section-8.3-2.3">
             <p id="section-8.3-2.3.1">For dual-certificate deployments, HSMs can manage the underlying
-traditional and PQ private keys independently, and no API changes are
+traditional and PQC private keys independently, and no API changes are
 required. The security protocol is responsible for coordinating how
 signatures from both keys are used. By contrast, supporting composite
 keys and composite signing operations will require HSM and API extensions
@@ -1753,7 +1745,7 @@ public keys and composite signatures.<a href="#section-9-1" class="pilcrow">¶</
 </li>
         <li class="compact" id="section-9-3.4">
           <p id="section-9-3.4.1">Availability of automated certificate provisioning mechanisms
-(e.g., ACME <span>[<a href="#RFC8555" class="cite xref">RFC8555</a>]</span>)<a href="#section-9-3.4.1" class="pilcrow">¶</a></p>
+(e.g., ACME <span>[<a href="#RFC8555" class="cite xref">RFC8555</a>]</span>, CMP <span>[<a href="#RFC9810" class="cite xref">RFC9810</a>]</span>)<a href="#section-9-3.4.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="section-9-4">Deployments with limited flexibility benefit from hybrid signature schemes.
@@ -1766,7 +1758,7 @@ PQC by:<a href="#section-9-5" class="pilcrow">¶</a></p>
 <ul class="compact">
 <li class="compact" id="section-9-6.1">
           <p id="section-9-6.1.1">Providing defense in depth: security is maintained as long as either
-the PQ or traditional algorithm remains unbroken.<a href="#section-9-6.1.1" class="pilcrow">¶</a></p>
+the PQC or traditional algorithm remains unbroken.<a href="#section-9-6.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="compact" id="section-9-6.2">
           <p id="section-9-6.2.1">Reducing exposure to unforeseen vulnerabilities: immediate protection
@@ -1774,18 +1766,18 @@ against weaknesses in PQC algorithms.<a href="#section-9-6.2.1" class="pilcrow">
 </li>
       </ul>
 <p id="section-9-7">However, each approach comes with long-term implications.<a href="#section-9-7" class="pilcrow">¶</a></p>
-<div id="composite-certificates">
+<div id="composite">
 <section id="section-9.1">
-        <h3 id="name-composite-certificates">
-<a href="#section-9.1" class="section-number selfRef">9.1. </a><a href="#name-composite-certificates" class="section-name selfRef">Composite Certificates</a>
+        <h3 id="name-composite">
+<a href="#section-9.1" class="section-number selfRef">9.1. </a><a href="#name-composite" class="section-name selfRef">Composite</a>
         </h3>
-<p id="section-9.1-1">Composite certificates embed both a traditional and a PQC algorithm into a
+<p id="section-9.1-1">Composite embeds both a traditional and a PQC algorithm into a
 single certificate and signature. However, once a traditional algorithm is no
 longer secure against CRQCs, it will have to be deprecated. For discussion
 of the security impact in security protocols (e.g., TLS, IKEv2)
 versus artifact-signing use cases, see Section <a href="#suf" class="auto internal xref">Section 9.3</a>.<a href="#section-9.1-1" class="pilcrow">¶</a></p>
 <p id="section-9.1-2">To complete the transition to a fully quantum-resistant authentication model,
-operators will need a PQC root and intermediates, resulting in PQC-only
+operators will need a PQC CA root and CA intermediates, resulting in PQC-only
 end-entity certificates.<a href="#section-9.1-2" class="pilcrow">¶</a></p>
 <p id="section-9.1-3">Protocol configurations (e.g., TLS, IKEv2) will likewise
 need to be updated to negotiate only PQC-based authentication, ensuring that
@@ -1806,7 +1798,7 @@ chain is presented and validated. This requires careful coordination
 during the transition, since legacy clients that cannot process PQC
 certificates will lose access once the traditional chain is withdrawn.
 Dual-certificate deployments therefore defer, but do not avoid, the need
-to update protocol configurations and move to a PQ-only environment.<a href="#section-9.2-1" class="pilcrow">¶</a></p>
+to update protocol configurations and move to a PQC-only environment.<a href="#section-9.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="suf">
@@ -1828,7 +1820,7 @@ component can then be combined with the valid post-quantum component (s2) to
 produce a new composite signature (m, (s1</em>, s2)) that verifies successfully,
 thereby violating SUF.<a href="#section-9.3-2" class="pilcrow">¶</a></p>
 <p id="section-9.3-3">In dual-certificate deployments where the client requires both a
-traditional and a PQ chain, the SUF property is likewise not achieved once
+traditional and a PQC chain, the SUF property is likewise not achieved once
 the traditional algorithm is broken.<a href="#section-9.3-3" class="pilcrow">¶</a></p>
 <p id="section-9.3-4">In protocols such as TLS and IKEv2, a composite signature remains
 secure against impersonation as long as at least one component algorithm
@@ -1841,11 +1833,14 @@ composite signatures can exist for the same artifact, undermining the
 “one signature, one artifact” guarantee. This creates ambiguity about
 which composite signature is authentic, complicating long-term
 non-repudiation guarantees.<a href="#section-9.3-4" class="pilcrow">¶</a></p>
-<p id="section-9.3-5">Planned migration paths should therefore assume that once CRQCs are realized,
-hybrid signature schemes may continue to function for a limited time
-without constituting a zero-day vulnerability, but operators must execute an
-orderly transition to PQC-only certificates in order to restore SUF-CMA
-security guarantees.<a href="#section-9.3-5" class="pilcrow">¶</a></p>
+<p id="section-9.3-5">Hybrid signature schemes should not be used for artifact signing (e.g., software packages),
+since the loss of SUF makes them unsuitable for long-term non-repudiation.
+In security protocols (e.g., TLS, IKEv2), hybrid signature schemes may continue to
+function for a limited time after a CRQC is realized, since they still provide
+impersonation resistance as long as one component algorithm remains secure.
+This situation does not constitute a zero-day vulnerability requiring an
+immediate upgrade. However, operators will have to plan an orderly migration
+to PQC-only certificates in order to restore SUF-CMA security guarantees.<a href="#section-9.3-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1861,8 +1856,8 @@ security guarantees.<a href="#section-9.3-5" class="pilcrow">¶</a></p>
 proposed as a migration mechanism (e.g., IKEv2 <span>[<a href="#I-D.hu-ipsecme-pqt-hybrid-auth" class="cite xref">I-D.hu-ipsecme-pqt-hybrid-auth</a>]</span>,
 TLS <span>[<a href="#I-D.yusef-tls-pqt-dual-certs" class="cite xref">I-D.yusef-tls-pqt-dual-certs</a>]</span>, paired certificates with a
 single certificate <span>[<a href="#I-D.bonnell-lamps-chameleon-certs" class="cite xref">I-D.bonnell-lamps-chameleon-certs</a>]</span>),
-but at the time of writing none of the relevant IETF working groups
-have adopted this approach at the time of writing this specification.<a href="#section-10-1.1.1" class="pilcrow">¶</a></p>
+but none of the relevant IETF working groups have adopted this
+approach at the time of writing this specification.<a href="#section-10-1.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="compact" id="section-10-1.2">
           <p id="section-10-1.2.1">Medium-term (standards-track): Composite signatures enable tighter
@@ -1874,9 +1869,9 @@ Composite signatures are already being standardized in the LAMPS WG
 <span>[<a href="#I-D.prabel-jose-pq-composite-sigs" class="cite xref">I-D.prabel-jose-pq-composite-sigs</a>]</span> for JOSE/COSE.<a href="#section-10-1.2.1" class="pilcrow">¶</a></p>
 </li>
         <li class="compact" id="section-10-1.3">
-          <p id="section-10-1.3.1">Long-term: PQ-only certificates are the final goal, once PQ
+          <p id="section-10-1.3.1">Long-term: PQC-only certificates are the final goal, once PQ
 algorithms are well-established, trust anchors have been updated,
-HSMs and devices support PQ operations, and traditional
+HSMs and devices support PQC operations, and traditional
 algorithms are fully retired. Work to enable PQC signatures is already
 underway in JOSE/COSE <span>[<a href="#I-D.ietf-cose-dilithium" class="cite xref">I-D.ietf-cose-dilithium</a>]</span>, TLS <span>[<a href="#I-D.ietf-tls-mldsa" class="cite xref">I-D.ietf-tls-mldsa</a>]</span>,
 and IPsec <span>[<a href="#I-D.ietf-ipsecme-ikev2-pqc-auth" class="cite xref">I-D.ietf-ipsecme-ikev2-pqc-auth</a>]</span>.<a href="#section-10-1.3.1" class="pilcrow">¶</a></p>
@@ -1884,10 +1879,10 @@ and IPsec <span>[<a href="#I-D.ietf-ipsecme-ikev2-pqc-auth" class="cite xref">I-
       </ul>
 </section>
 </div>
-<div id="use-of-slh-dsa-in-pq-only-deployments">
+<div id="use-of-slh-dsa-in-pqc-only-deployments">
 <section id="section-11">
-      <h2 id="name-use-of-slh-dsa-in-pq-only-d">
-<a href="#section-11" class="section-number selfRef">11. </a><a href="#name-use-of-slh-dsa-in-pq-only-d" class="section-name selfRef">Use of SLH-DSA in PQ-Only Deployments</a>
+      <h2 id="name-use-of-slh-dsa-in-pqc-only-">
+<a href="#section-11" class="section-number selfRef">11. </a><a href="#name-use-of-slh-dsa-in-pqc-only-" class="section-name selfRef">Use of SLH-DSA in PQC-Only Deployments</a>
       </h2>
 <p id="section-11-1">SLH-DSA does not introduce any new hardness assumptions beyond those inherent
 to its underlying hash functions. It builds upon established cryptographic
@@ -1898,7 +1893,7 @@ schemes. SLH-DSA would remain unaffected by such attacks due to its distinct
 mathematical foundations, helping to ensure the ongoing security of systems and
 protocols that rely on it for digital signatures. Unlike ML-DSA, SLH-DSA is not
 defined for use in composite certificates and is intended to be deployed directly
-in PQ-only certificate hierarchies.<a href="#section-11-1" class="pilcrow">¶</a></p>
+in PQC-only certificate hierarchies.<a href="#section-11-1" class="pilcrow">¶</a></p>
 <p id="section-11-2">SLH-DSA may be used for both end-entity and CA certificates. It provides strong
 post-quantum security but produces larger signatures than ML-DSA or traditional
 algorithms. At security levels 1, 3, and 5, two parameter sets are available:<a href="#section-11-2" class="pilcrow">¶</a></p>
@@ -1945,7 +1940,7 @@ in use remains unbroken. However, several important security considerations aris
 <a href="#section-12.1" class="section-number selfRef">12.1. </a><a href="#name-downgrade-attacks" class="section-name selfRef">Downgrade Attacks</a>
         </h3>
 <p id="section-12.1-1">Implementations must ensure downgrade protection so that an adversary cannot
-suppress PQ or hybrid schemes and force reliance solely on traditional
+suppress PQC or hybrid schemes and force reliance solely on traditional
 algorithms. This is especially important in scenarios where a CRQC is
 available but not publicly disclosed. Without downgrade protection, a MitM
 attacker could impersonate servers by presenting only traditional
@@ -1960,9 +1955,9 @@ certificates even when PQC certificates are supported.<a href="#section-12.1-1" 
 <p id="section-12.2-1">In hybrid signature schemes, once one component algorithm
 is broken (e.g., the traditional algorithm under a CRQC), the overall scheme
 no longer achieves SUF. While Existential Unforgeability (EUF) (see Section 10.1.1
-of <span>[<a href="#I-D.ietf-pquip-pqc-engineers" class="cite xref">I-D.ietf-pquip-pqc-engineers</a>]</span>) is still preserved by the PQ component,
+of <span>[<a href="#I-D.ietf-pquip-pqc-engineers" class="cite xref">I-D.ietf-pquip-pqc-engineers</a>]</span>) is still preserved by the PQC component,
 meaning that an adversary who can obtain signatures on arbitrary messages still
-cannot forge a valid PQ signature on any new message that was not previously signed.
+cannot forge a valid PQC signature on any new message that was not previously signed.
 The loss of SUF means that hybrid mechanisms will have be eventually retired
 once traditional algorithms are no longer secure.<a href="#section-12.2-1" class="pilcrow">¶</a></p>
 </section>
@@ -1972,7 +1967,7 @@ once traditional algorithms are no longer secure.<a href="#section-12.2-1" class
         <h3 id="name-operational-risks">
 <a href="#section-12.3" class="section-number selfRef">12.3. </a><a href="#name-operational-risks" class="section-name selfRef">Operational Risks</a>
         </h3>
-<p id="section-12.3-1">Managing multiple certificate paths (composite, dual, and PQ-only) increases
+<p id="section-12.3-1">Managing multiple certificate paths (composite, dual, and PQC-only) increases
 the risk of misconfiguration and operational errors. For example, a server
 might continue using a hybrid signature scheme after the traditional algorithm
 is broken, fail to revoke traditional certificates that are no longer secure,
@@ -1999,7 +1994,7 @@ present, valid, and not replaced by weaker alternatives.<a href="#section-12.3-2
       <h2 id="name-acknowledgments">
 <a href="#section-14" class="section-number selfRef">14. </a><a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
       </h2>
-<p id="section-14-1">TODO<a href="#section-14-1" class="pilcrow">¶</a></p>
+<p id="section-14-1">Thanks to Martin McGrath, and German Peinado for the detailed review.<a href="#section-14-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-combined-references">
@@ -2107,8 +2102,12 @@ present, valid, and not replaced by weaker alternatives.<a href="#section-12.3-2
 <span class="refAuthor">Shekh-Yusef, R.</span>, <span class="refAuthor">Tschofenig, H.</span>, <span class="refAuthor">Ounsworth, M.</span>, <span class="refAuthor">Sheffer, Y.</span>, <span class="refAuthor">Reddy.K, T.</span>, and <span class="refAuthor">Y. Rosomakho</span>, <span class="refTitle">"Post-Quantum Traditional (PQ/T) Hybrid Authentication with Dual Certificates in TLS 1.3"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-yusef-tls-pqt-dual-certs-00</span>, <time datetime="2025-06-18" class="refDate">18 June 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-yusef-tls-pqt-dual-certs-00">https://datatracker.ietf.org/doc/html/draft-yusef-tls-pqt-dual-certs-00</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC8555">[RFC8555]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">Barnes, R.</span>, <span class="refAuthor">Hoffman-Andrews, J.</span>, <span class="refAuthor">McCarney, D.</span>, and <span class="refAuthor">J. Kasten</span>, <span class="refTitle">"Automatic Certificate Management Environment (ACME)"</span>, <span class="seriesInfo">RFC 8555</span>, <span class="seriesInfo">DOI 10.17487/RFC8555</span>, <time datetime="2019-03" class="refDate">March 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8555">https://www.rfc-editor.org/rfc/rfc8555</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9810">[RFC9810]</dt>
+      <dd>
+<span class="refAuthor">Brockhaus, H.</span>, <span class="refAuthor">von Oheimb, D.</span>, <span class="refAuthor">Ounsworth, M.</span>, and <span class="refAuthor">J. Gray</span>, <span class="refTitle">"Internet X.509 Public Key Infrastructure -- Certificate Management Protocol (CMP)"</span>, <span class="seriesInfo">RFC 9810</span>, <span class="seriesInfo">DOI 10.17487/RFC9810</span>, <time datetime="2025-07" class="refDate">July 2025</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9810">https://www.rfc-editor.org/rfc/rfc9810</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
@@ -2117,8 +2116,8 @@ present, valid, and not replaced by weaker alternatives.<a href="#section-12.3-2
 </div>
 <div id="authors-addresses">
 <section id="appendix-A">
-      <h2 id="name-authors-address">
-<a href="#name-authors-address" class="section-name selfRef">Author's Address</a>
+      <h2 id="name-authors-addresses">
+<a href="#name-authors-addresses" class="section-name selfRef">Authors' Addresses</a>
       </h2>
 <address class="vcard">
         <div dir="auto" class="left"><span class="fn nameRole">Tirumaleswar Reddy</span></div>
@@ -2130,6 +2129,15 @@ present, valid, and not replaced by weaker alternatives.<a href="#section-12.3-2
 <div class="email">
 <span>Email:</span>
 <a href="mailto:k.tirumaleswar_reddy@nokia.com" class="email">k.tirumaleswar_reddy@nokia.com</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Dan Wing</span></div>
+<div dir="auto" class="left"><span class="org">Cloud Software Group Holdings, Inc.</span></div>
+<div dir="auto" class="left"><span class="country-name">United States of America</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:danwing@gmail.com" class="email">danwing@gmail.com</a>
 </div>
 </address>
 </section>
