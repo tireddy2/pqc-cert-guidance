@@ -559,5 +559,5 @@ This document has no IANA actions.
 
 # Acknowledgments
 
-Thanks to Martin McGrath, and German Peinado for the detailed review.
+Thanks to Martin McGrath, Suresh P. Nair and German Peinado for the detailed review.
 
