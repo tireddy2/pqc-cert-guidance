@@ -107,7 +107,7 @@ requirements.
 {::boilerplate bcp14-tagged}
 
 This document uses the terms "composite certificates", "dual certificates", and
-"PQC-only certificates" as introduced in the Introduction.  
+"PQC-only certificates" as introduced in the Introduction.
 
 Composite: A key, certificate, or signature that merges traditional and PQC algorithms into one object.
 
@@ -172,10 +172,10 @@ requiring new certificate formats.
   Traditional-only to Dual certificates, and later removing support for
   Traditional certificates.
 * Better suited for multi-tenancy cases, where different tenants may
-  prefer different combinations of traditional and PQ algorithms, avoiding the 
+  prefer different combinations of traditional and PQ algorithms, avoiding the
   need for consensus on a composite set.
 * Facilitates simpler future transitions to new PQC algorithms, since a new
-  PQC certificate can simply be issued and paired with an existing certificate, 
+  PQC certificate can simply be issued and paired with an existing certificate,
   without requiring new composite definitions.
 
 ## Disadvantages
