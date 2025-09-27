@@ -280,9 +280,11 @@ clients (2) and dual-trust clients (3), since both advertise PQC algorithms,
 but only dual-trust clients actually recognize PQC roots. To ensure
 compatibility with mixed clients (2), servers may default to sending longer
 PQC chains that include a cross-signed PQC root (i.e., a PQC root certificate
-signed by a traditional root). However, transmitting the PQC root is unnecessary
-for dual-trust clients (3), which already have the PQC root in their
-trust anchors, and including it only increases message size.
+signed by a traditional root). However, this is unnecessary and even counterproductive
+for dual-trust clients (3), which already trust the PQC root directly;
+such clients will fail to validate the cross-signed PQC root. For dual-trust clients,
+including the cross-signed PQC root only increases message size and introduces
+validation errors.
 
 {{!I-D.ietf-tls-trust-anchor-ids}} (TAI) addresses this problem by allowing
 clients to indicate, on a per-connection basis, which trust anchors they
@@ -559,5 +561,5 @@ This document has no IANA actions.
 
 # Acknowledgments
 
-Thanks to Martin McGrath, Suresh P. Nair and German Peinado for the detailed review.
+Thanks to Martin McGrath, Suresh P. Nair, and German Peinado for the detailed review.
 
