@@ -43,7 +43,6 @@ author:
 
 
 normative:
-  RFC2119:
 
 
 informative:
@@ -84,16 +83,16 @@ schemes as an intermediate step before PQC-only adoption.
 The IETF has developed two hybrid transition models for use in TLS, IKEv2/IPsec,
 JOSE/COSE, and PKIX:
 
-* Composite certificates – A single X.509 certificate that contains a composite
+* Composite certificates: A single X.509 certificate that contains a composite
   public key and composite signature, combining a traditional and a PQC algorithm
   {{!I-D.ietf-lamps-pq-composite-sigs}}.
 
-* Dual certificates – Two separate certificates, one traditional and one PQC algorithm,
+* Dual certificates: Two separate certificates, one traditional and one PQC algorithm,
   issued for the same identity, presented and validated together {{!RFC9763}}.
 
 Another approach is using a Post-Quantum certificate,
 
-* PQC-only certificates – A certificate or signature that uses only a PQ
+* PQC-only certificates: A certificate or signature that uses only a PQ
   algorithm ({{!I-D.ietf-lamps-dilithium-certificates}} for ML-DSA and
   {{!I-D.ietf-lamps-x509-slhdsa}} for SLH-DSA).
 
@@ -109,9 +108,11 @@ requirements.
 This document uses the terms "composite certificates", "dual certificates", and
 "PQC-only certificates" as introduced in the Introduction.
 
-Composite: A key, certificate, or signature that merges traditional and PQC algorithms into one object.
+Composite: A key, certificate, or signature that merges traditional
+and PQC algorithms into one object.
 
-The terms hybrid signature scheme and hybrid signature are used as defined in {{!I-D.ietf-pquip-hybrid-signature-spectrums}}.
+The terms hybrid signature scheme and hybrid signature are used as
+defined in {{!I-D.ietf-pquip-hybrid-signature-spectrums}}.
 
 # Motivation for PQC Signatures
 
@@ -130,9 +131,23 @@ investment, preparations will have to begin well before a CRQC is publicly known
 
 # Composite certificates
 
-A composite certificate contains both a traditional public key algorithm (e.g., ECDSA) and a post-quantum algorithm (e.g., ML-DSA) within a single X.509 certificate. This design enables both algorithms to be used in parallel, the traditional component ensures compatibility with existing infrastructure, while the post-quantum component introduces resistance against future quantum attacks.
+A composite certificate contains both a traditional public key
+algorithm (e.g., ECDSA) and a post-quantum algorithm (e.g., ML-DSA)
+within a single X.509 certificate. This design enables both algorithms
+to be used in parallel, the traditional component ensures
+compatibility with existing infrastructure, while the post-quantum
+component introduces resistance against future quantum attacks.
 
-Composite certificates are defined in {{!I-D.ietf-lamps-pq-composite-sigs}}. These combine Post-Quantum algorithms like ML-DSA with traditional algorithms such as RSA-PKCS#1v1.5, RSA-PSS, ECDSA, Ed25519, or Ed448, to provide additional protection against vulnerabilities or implementation bugs in a single algorithm. {{!I-D.reddy-tls-composite-mldsa}} specifies how composite certificates are used for TLS 1.3 authentication. In this case, relying parties validate a single certification path anchored in a multi-algorithm trust anchor, without the need for parallel chains.
+Composite certificates are defined in
+{{!I-D.ietf-lamps-pq-composite-sigs}}. These combine Post-Quantum
+algorithms like ML-DSA with traditional algorithms such as
+RSA-PKCS#1v1.5, RSA-PSS, ECDSA, Ed25519, or Ed448, to provide
+additional protection against vulnerabilities or implementation bugs
+in a single algorithm. {{!I-D.reddy-tls-composite-mldsa}} specifies
+how composite certificates are used for TLS 1.3 authentication. In
+this case, relying parties validate a single certification path
+anchored in a multi-algorithm trust anchor, without the need for
+parallel chains.
 
 ## Advantages
 
@@ -215,9 +230,9 @@ only a post-quantum algorithm and provide no fallback to traditional algorithms.
 
 During the transition, endpoints may support multiple authentication
 schemes (e.g., traditional, composite, dual, or PQC-only). Clients
-advertise their supported schemes using the protocol’s negotiation
-mechanism (for example, the `signature_algorithms` extension in TLS
-{{!RFC8446}}), and servers select from the client’s list or fail the
+advertise their supported schemes using the protocol's negotiation
+mechanism (for example, the 'signature_algorithms' extension in TLS
+{{!RFC8446}}), and servers select from the client's list or fail the
 authentication if no common option is available. In practice,
 deployments are expected to prefer PQC-only or hybrid signature scheme
 over traditional ones, with the choice between PQC-only
@@ -434,7 +449,7 @@ by the authentication procedure. However, in artifact signing
 use cases, the break of a single component does not enable forgery of a
 composite signature but does enable "repudiation": multiple distinct
 composite signatures can exist for the same artifact, undermining the
-“one signature, one artifact” guarantee. This creates ambiguity about
+"one signature, one artifact" guarantee. This creates ambiguity about
 which composite signature is authentic, complicating long-term
 non-repudiation guarantees.
 
