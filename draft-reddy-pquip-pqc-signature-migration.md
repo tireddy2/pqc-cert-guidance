@@ -34,10 +34,15 @@ author:
     region: Karnataka
     country: India
     email: "kondtir@gmail.com"
+  -
+    fullname: Dan Wing
+    organization: Citrix
+    abbrev: Citrix
+    country: United States of America
+    email: danwing@gmail.com
 
 
-normative:
-  RFC2119:
+
 
 
 informative:
@@ -95,8 +100,11 @@ requirements.
 
 {::boilerplate bcp14-tagged}
 
-Composite: A key, certificate, or signature that merges traditional and PQ algorithms into one object.
-Dual certificates: Two independent certificates (traditional and PQ) issued for the same identity, presented and validated together.
+Composite: A key, certificate, or signature that merges traditional
+and PQ algorithms into one object.  Dual certificates: Two independent
+certificates (traditional and PQ) issued for the same identity,
+presented and validated together.
+
 PQ-only: A certificate or signature using only a PQ algorithm.
 
 # Motivation for PQC Signatures
@@ -111,9 +119,22 @@ ecosystem.
 
 # Composite Signatures
 
-A composite certificate contains both a traditional public key algorithm (e.g., ECDSA) and a post-quantum algorithm (e.g., ML-DSA) within a single X.509 certificate. This design enables both algorithms to be used in parallel, the traditional component ensures compatibility with existing infrastructure, while the post-quantum component introduces resistance against future quantum attacks.
+A composite certificate contains both a traditional public key
+algorithm (e.g., ECDSA) and a post-quantum algorithm (e.g., ML-DSA)
+within a single X.509 certificate. This design enables both algorithms
+to be used in parallel, the traditional component ensures
+compatibility with existing infrastructure, while the post-quantum
+component introduces resistance against future quantum attacks.
 
-Composite certificates are defined in {{!I-D.ietf-lamps-pq-composite-sigs}}. These combine Post-Quantum algorithms like ML-DSA with traditional algorithms such as RSA-PKCS#1v1.5, RSA-PSS, ECDSA, Ed25519, or Ed448, to provide additional protection against vulnerabilities or implementation bugs in a single algorithm. {{!I-D.reddy-tls-composite-mldsa}} specifies how composite signatures, including ML-DSA, are used for TLS 1.3 authentication. Composite-trust clients validate a single chain anchored in a composite root, without needing parallel chains.
+Composite certificates are defined in
+{{!I-D.ietf-lamps-pq-composite-sigs}}. These combine Post-Quantum
+algorithms like ML-DSA with traditional algorithms such as
+RSA-PKCS#1v1.5, RSA-PSS, ECDSA, Ed25519, or Ed448, to provide
+additional protection against vulnerabilities or implementation bugs
+in a single algorithm. {{!I-D.reddy-tls-composite-mldsa}} specifies
+how composite signatures, including ML-DSA, are used for TLS 1.3
+authentication. Composite-trust clients validate a single chain
+anchored in a composite root, without needing parallel chains.
 
 ## Advantages
 
@@ -137,6 +158,7 @@ Composite certificates are defined in {{!I-D.ietf-lamps-pq-composite-sigs}}. The
   1. Traditional-only,
   2. Composite (classical + PQ),
   3. PQ-only.
+
   In contrast, the dual certificate approach requires only two paths
   (traditional and PQ).
 
