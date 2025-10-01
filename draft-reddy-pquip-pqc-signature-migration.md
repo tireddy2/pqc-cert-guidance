@@ -36,8 +36,8 @@ author:
     email: "k.tirumaleswar_reddy@nokia.com"
   -
     fullname: Dan Wing
-    organization: Cloud Software Group Holdings, Inc.
-    abbrev: Cloud Software Group
+    organization: Citrix
+    abbrev: Citrix
     country: United States of America
     email: danwing@gmail.com
 
@@ -201,7 +201,7 @@ requiring new certificate formats.
 * Requires significant protocol changes to support validation of two end-entity
   certificates and to ensure they are cryptographically bound to the same
   identity, as protocols typically validate only a single certificate.
-* Complicates debuggability and troubleshooting, since validation failures
+* Complicates debugging and troubleshooting, since validation failures
   may arise from either chain.
 * Increases operational cost, as operators must obtain and manage two end-entity
   certificates from CAs, which can be significant in large-scale deployments.
