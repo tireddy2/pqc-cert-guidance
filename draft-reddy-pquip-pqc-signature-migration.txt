@@ -5,8 +5,8 @@
 PQUIP                                                           T. Reddy
 Internet-Draft                                                     Nokia
 Intended status: Informational                                   D. Wing
-Expires: 1 April 2026                               Cloud Software Group
-                                                       28 September 2025
+Expires: 4 April 2026                                             Citrix
+                                                          1 October 2025
 
 
  Guidance for Migration to Composite, Dual, or PQC-Only Authentication
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 1 April 2026.
+   This Internet-Draft will expire on 4 April 2026.
 
 Copyright Notice
 
@@ -259,7 +259,7 @@ Table of Contents
       end-entity certificates and to ensure they are cryptographically
       bound to the same identity, as protocols typically validate only a
       single certificate.
-   *  Complicates debuggability and troubleshooting, since validation
+   *  Complicates debugging and troubleshooting, since validation
       failures may arise from either chain.
    *  Increases operational cost, as operators must obtain and manage
       two end-entity certificates from CAs, which can be significant in
@@ -691,17 +691,17 @@ Table of Contents
               Westerbaan, "Internet X.509 Public Key Infrastructure -
               Algorithm Identifiers for the Module-Lattice-Based Digital
               Signature Algorithm (ML-DSA)", Work in Progress, Internet-
-              Draft, draft-ietf-lamps-dilithium-certificates-12, 26 June
-              2025, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              lamps-dilithium-certificates-12>.
+              Draft, draft-ietf-lamps-dilithium-certificates-13, 30
+              September 2025, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-lamps-dilithium-certificates-13>.
 
    [I-D.ietf-lamps-pq-composite-sigs]
               Ounsworth, M., Gray, J., Pala, M., Klaußner, J., and S.
               Fluhrer, "Composite ML-DSA for use in X.509 Public Key
               Infrastructure", Work in Progress, Internet-Draft, draft-
-              ietf-lamps-pq-composite-sigs-08, 20 September 2025,
+              ietf-lamps-pq-composite-sigs-09, 28 September 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-lamps-
-              pq-composite-sigs-08>.
+              pq-composite-sigs-09>.
 
    [I-D.ietf-lamps-x509-slhdsa]
               Bashiri, K., Fluhrer, S., Gazdag, S., Van Geest, D., and
@@ -846,6 +846,6 @@ Authors' Addresses
 
 
    Dan Wing
-   Cloud Software Group Holdings, Inc.
+   Citrix
    United States of America
    Email: danwing@gmail.com
