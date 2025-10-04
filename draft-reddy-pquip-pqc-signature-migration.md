@@ -40,6 +40,11 @@ author:
     abbrev: Citrix
     country: United States of America
     email: danwing@gmail.com
+  -
+    ins: "Y. Rosomakho"
+    fullname: Yaroslav Rosomakho
+    organization: Zscaler
+    email: yrosomakho@zscaler.com
 
 
 normative:
