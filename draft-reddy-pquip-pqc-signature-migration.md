@@ -61,7 +61,7 @@ transition to post-quantum authentication.
 
 --- middle
 
-# Introduction
+# Introduction {#intro}
 
 The emergence of cryptographically relevant quantum computer (CRQC) poses a
 threat to widely deployed public-key algorithms such as RSA and elliptic-curve
@@ -80,21 +80,21 @@ downgrades. These risks highlight the need to transition certificate-based
 authentication toward post-quantum security, using hybrid signature
 schemes as an intermediate step before PQC-only adoption.
 
-The IETF has developed two hybrid transition models for use in TLS, IKEv2/IPsec,
+The IETF has defined two hybrid transition models for use in TLS, IKEv2/IPsec,
 JOSE/COSE, and PKIX:
 
 * Composite certificates: A single X.509 certificate that contains a composite
-  public key and composite signature, combining a traditional and a PQC algorithm
-  {{!I-D.ietf-lamps-pq-composite-sigs}}.
+  public key and a composite signature, combining a traditional and a PQC algorithm.
+  Certificates using composite ML-DSA are specified in {{!COMPOSITE-ML-DSA=I-D.ietf-lamps-pq-composite-sigs}}.
 
-* Dual certificates: Two separate certificates, one traditional and one PQC algorithm,
-  issued for the same identity, presented and validated together {{!RFC9763}}.
+* Dual certificates: Two separate certificates, one using a traditional algorithm and one using a PQC algorithm,
+  issued for the same identity, presented and validated together. Some protocols may
+  requeire these certificates to include the RelatedCertificate extension {{?RELATED-CERTS=RFC9763}}
+  to ensure that both refer to the same identity and binding.
 
-Another approach is using a Post-Quantum certificate,
-
-* PQC-only certificates: A certificate or signature that uses only a PQ
-  algorithm ({{!I-D.ietf-lamps-dilithium-certificates}} for ML-DSA and
-  {{!I-D.ietf-lamps-x509-slhdsa}} for SLH-DSA).
+Another approach is to use a PQC-only certificate which contains only a post-quantum
+public key and produces signatures using a PQC algorithm. Examples include {{!ML-DSA=I-D.ietf-lamps-dilithium-certificates}}
+and {{!SLH-DSA=I-D.ietf-lamps-x509-slhdsa}}.
 
 This document provides guidance on selecting among the two hybrid
 certificate models and the PQC-only model depending on the deployment
@@ -106,13 +106,13 @@ requirements.
 {::boilerplate bcp14-tagged}
 
 This document uses the terms "composite certificates", "dual certificates", and
-"PQC-only certificates" as introduced in the Introduction.
+"PQC-only certificates" as defined in the {{intro}}.
 
 Composite: A key, certificate, or signature that merges traditional
 and PQC algorithms into one object.
 
 The terms hybrid signature scheme and hybrid signature are used as
-defined in {{!I-D.ietf-pquip-hybrid-signature-spectrums}}.
+defined in {{!HYBRID-SPECTRUMS=I-D.ietf-pquip-hybrid-signature-spectrums}}.
 
 # Motivation for PQC Signatures
 
