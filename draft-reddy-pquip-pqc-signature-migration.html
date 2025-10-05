@@ -1347,17 +1347,39 @@ defined in <span>[<a href="#HYBRID-SPECTRUMS" class="cite xref">HYBRID-SPECTRUMS
       <h2 id="name-motivation-for-pqc-signatur">
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-motivation-for-pqc-signatur" class="section-name selfRef">Motivation for PQC Signatures</a>
       </h2>
-<p id="section-3-1">Unlike "Harvest Now, Decrypt Later" attacks that target confidentiality,
-this risk directly impacts authentication and trust. Once a CRQC is
-available, the continued use of traditional certificates becomes untenable.
-In practice, however, the availability of a CRQC may not be publicly disclosed.
-Similar to a zero-day vulnerability, an adversary could secretly exploit CRQC
-capabilities to compromise traditional certificates without alerting the wider
-ecosystem.<a href="#section-3-1" class="pilcrow">¶</a></p>
-<p id="section-3-2">Addressing this risk requires replacing traditional signatures with PQC signatures, which in turn
-demands ecosystem-wide upgrades involving cryptographic libraries, HSMs, TPMs, CAs, intermediate CAs,
-and dependent protocols. Because these transitions take years of planning, coordination, and
-investment, preparations will have to begin well before a CRQC is publicly known.<a href="#section-3-2" class="pilcrow">¶</a></p>
+<p id="section-3-1">Unlike "Harvest Now, Decrypt Later" attacks (see <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-pquip-pqc-engineers-14#section-7" class="relref">Section 7</a> of [<a href="#PQC-ENGINEERS" class="cite xref">PQC-ENGINEERS</a>]</span>)
+that target the confidentiality of encrypted data, the threat to authentication arises
+only from the moment a CRQC becomes available. Compromise of authentication
+is therefore not retrospective: previously established identities and signatures
+cannot be forged in hindsight, but all future authentications using traditional
+algrotihms become insecure once a CRQC exists.<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-3-2">Once a CRQC is available, continued reliance on traditional public-key
+algorithms (e.g., RSA, ECDSA) becomes untenable, as an attacker could forge
+digital signatures and impersonate legitimate entities. In practice, the
+availability of a CRQC may not be publicly disclosed. Similar to a zero-day
+vulnerability, an adversary could exploit quantum capabilities privately to
+compromise traditional certificates without alerting the wider ecosystem.<a href="#section-3-2" class="pilcrow">¶</a></p>
+<p id="section-3-3">Addressing this risk requires replacing traditional signatures with
+post-quantum (PQC) signatures.  Doing so entails ecosystem-wide upgrades across:<a href="#section-3-3" class="pilcrow">¶</a></p>
+<ul class="compact">
+<li class="compact" id="section-3-4.1">
+          <p id="section-3-4.1.1">Software components: cryptographic libraries and protocol
+implementations;<a href="#section-3-4.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="compact" id="section-3-4.2">
+          <p id="section-3-4.2.1">Hardware security devices: Hardware Security Modules (HSMs) and
+Trusted Platform Modules (TPMs);<a href="#section-3-4.2.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="compact" id="section-3-4.3">
+          <p id="section-3-4.3.1">Public Key Infrastructure (PKI): Certification Authorities (CAs),
+intermediate CAs, and trust anchors;<a href="#section-3-4.3.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="compact" id="section-3-4.4">
+          <p id="section-3-4.4.1">Dependent protocols: TLS (<span>[<a href="#TLS" class="cite xref">TLS</a>]</span>, <span>[<a href="#DTLS" class="cite xref">DTLS</a>]</span>), <span>[<a href="#IKEv2" class="cite xref">IKEv2</a>]</span>, and JOSE/COSE.<a href="#section-3-4.4.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+<p id="section-3-5">Because these transitions require years of planning, coordination, and
+investment, preparations <span class="bcp14">MUST</span> begin well before a CRQC is publicly known.<a href="#section-3-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="composite-certificates">
@@ -2105,6 +2127,10 @@ present, valid, and not replaced by weaker alternatives.<a href="#section-12.3-2
 <a href="#section-15.2" class="section-number selfRef">15.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
         </h3>
 <dl class="references">
+<dt id="DTLS">[DTLS]</dt>
+        <dd>
+<span class="refAuthor">Rescorla, E.</span>, <span class="refAuthor">Tschofenig, H.</span>, and <span class="refAuthor">N. Modadugu</span>, <span class="refTitle">"The Datagram Transport Layer Security (DTLS) Protocol Version 1.3"</span>, <span class="seriesInfo">RFC 9147</span>, <span class="seriesInfo">DOI 10.17487/RFC9147</span>, <time datetime="2022-04" class="refDate">April 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9147">https://www.rfc-editor.org/rfc/rfc9147</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="I-D.bonnell-lamps-chameleon-certs">[I-D.bonnell-lamps-chameleon-certs]</dt>
         <dd>
 <span class="refAuthor">Bonnell, C.</span>, <span class="refAuthor">Gray, J.</span>, <span class="refAuthor">Hook, D.</span>, <span class="refAuthor">Okubo, T.</span>, and <span class="refAuthor">M. Ounsworth</span>, <span class="refTitle">"A Mechanism for Encoding Differences in Paired Certificates"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-bonnell-lamps-chameleon-certs-06</span>, <time datetime="2025-04-16" class="refDate">16 April 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-bonnell-lamps-chameleon-certs-06">https://datatracker.ietf.org/doc/html/draft-bonnell-lamps-chameleon-certs-06</a>&gt;</span>. </dd>
@@ -2133,6 +2159,14 @@ present, valid, and not replaced by weaker alternatives.<a href="#section-12.3-2
         <dd>
 <span class="refAuthor">Shekh-Yusef, R.</span>, <span class="refAuthor">Tschofenig, H.</span>, <span class="refAuthor">Ounsworth, M.</span>, <span class="refAuthor">Sheffer, Y.</span>, <span class="refAuthor">Reddy.K, T.</span>, and <span class="refAuthor">Y. Rosomakho</span>, <span class="refTitle">"Post-Quantum Traditional (PQ/T) Hybrid Authentication with Dual Certificates in TLS 1.3"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-yusef-tls-pqt-dual-certs-00</span>, <time datetime="2025-06-18" class="refDate">18 June 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-yusef-tls-pqt-dual-certs-00">https://datatracker.ietf.org/doc/html/draft-yusef-tls-pqt-dual-certs-00</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="IKEv2">[IKEv2]</dt>
+        <dd>
+<span class="refAuthor">Kaufman, C.</span>, <span class="refAuthor">Hoffman, P.</span>, <span class="refAuthor">Nir, Y.</span>, and <span class="refAuthor">P. Eronen</span>, <span class="refTitle">"Internet Key Exchange Protocol Version 2 (IKEv2)"</span>, <span class="seriesInfo">RFC 5996</span>, <span class="seriesInfo">DOI 10.17487/RFC5996</span>, <time datetime="2010-09" class="refDate">September 2010</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc5996">https://www.rfc-editor.org/rfc/rfc5996</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="PQC-ENGINEERS">[PQC-ENGINEERS]</dt>
+        <dd>
+<span class="refAuthor">Banerjee, A.</span>, <span class="refAuthor">Reddy.K, T.</span>, <span class="refAuthor">Schoinianakis, D.</span>, <span class="refAuthor">Hollebeek, T.</span>, and <span class="refAuthor">M. Ounsworth</span>, <span class="refTitle">"Post-Quantum Cryptography for Engineers"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-pquip-pqc-engineers-14</span>, <time datetime="2025-08-25" class="refDate">25 August 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-pquip-pqc-engineers-14">https://datatracker.ietf.org/doc/html/draft-ietf-pquip-pqc-engineers-14</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RELATED-CERTS">[RELATED-CERTS]</dt>
         <dd>
 <span class="refAuthor">Becker, A.</span>, <span class="refAuthor">Guthrie, R.</span>, and <span class="refAuthor">M. Jenkins</span>, <span class="refTitle">"Related Certificates for Use in Multiple Authentications within a Protocol"</span>, <span class="seriesInfo">RFC 9763</span>, <span class="seriesInfo">DOI 10.17487/RFC9763</span>, <time datetime="2025-06" class="refDate">June 2025</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9763">https://www.rfc-editor.org/rfc/rfc9763</a>&gt;</span>. </dd>
@@ -2142,8 +2176,12 @@ present, valid, and not replaced by weaker alternatives.<a href="#section-12.3-2
 <span class="refAuthor">Barnes, R.</span>, <span class="refAuthor">Hoffman-Andrews, J.</span>, <span class="refAuthor">McCarney, D.</span>, and <span class="refAuthor">J. Kasten</span>, <span class="refTitle">"Automatic Certificate Management Environment (ACME)"</span>, <span class="seriesInfo">RFC 8555</span>, <span class="seriesInfo">DOI 10.17487/RFC8555</span>, <time datetime="2019-03" class="refDate">March 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8555">https://www.rfc-editor.org/rfc/rfc8555</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC9810">[RFC9810]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">Brockhaus, H.</span>, <span class="refAuthor">von Oheimb, D.</span>, <span class="refAuthor">Ounsworth, M.</span>, and <span class="refAuthor">J. Gray</span>, <span class="refTitle">"Internet X.509 Public Key Infrastructure -- Certificate Management Protocol (CMP)"</span>, <span class="seriesInfo">RFC 9810</span>, <span class="seriesInfo">DOI 10.17487/RFC9810</span>, <time datetime="2025-07" class="refDate">July 2025</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9810">https://www.rfc-editor.org/rfc/rfc9810</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="TLS">[TLS]</dt>
+      <dd>
+<span class="refTitle">"*** BROKEN REFERENCE ***"</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
