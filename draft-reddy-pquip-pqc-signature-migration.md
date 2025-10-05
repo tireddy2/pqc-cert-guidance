@@ -147,43 +147,61 @@ investment, preparations MUST begin well before a CRQC is publicly known.
 # Composite certificates
 
 A composite certificate contains both a traditional public key
-algorithm (e.g., ECDSA) and a post-quantum algorithm (e.g., ML-DSA)
-within a single X.509 certificate. This design enables both algorithms
-to be used in parallel, the traditional component ensures
-compatibility with existing infrastructure, while the post-quantum
-component introduces resistance against future quantum attacks.
+algorithm (for example, ECDSA) and a post-quantum algorithm (such as ML-DSA)
+within a single X.509 structure. The goal is defense-in-depth: the traditional
+component preserves authentication security if a flaw is found in the PQC
+algorithm before a CRQC exists, while the PQC component preserves security after CRQCs can break
+traditional algorithms. Verification succeeds only if all component signatures
+validate over the same canonical message.
 
-Composite certificates are defined in
-{{!I-D.ietf-lamps-pq-composite-sigs}}. These combine Post-Quantum
-algorithms like ML-DSA with traditional algorithms such as
-RSA-PKCS#1v1.5, RSA-PSS, ECDSA, Ed25519, or Ed448, to provide
-additional protection against vulnerabilities or implementation bugs
-in a single algorithm. {{!I-D.reddy-tls-composite-mldsa}} specifies
-how composite certificates are used for TLS 1.3 authentication. In
-this case, relying parties validate a single certification path
-anchored in a multi-algorithm trust anchor, without the need for
-parallel chains.
+ML-DSA composite certificates are defined in
+{{!I-D.ietf-lamps-pq-composite-sigs}}, which defines the use of ML-DSA
+in combination with one or more traditional algorithms such as
+RSA-PKCS#1v1.5, RSA-PSS, ECDSA, Ed25519, or Ed448. The framework in that
+document is designed to be extensible and is expected to accommodate
+additional post-quantum algorithms in future specifications.
+
+Protocol-specific drafts describe how composite certificates are used in
+different environments, including:
+{{?TLS-COMPOSITE-ML-DSA=I-D.reddy-tls-composite-mldsa}} for TLS,
+{{?IKEv2-COMPOSITE-ML-DSA=I-D.hu-ipsecme-pqt-hybrid-auth}} for IKEv2,
+and {{?JOSE-COSE-COMPOSITE-ML-DSA=I-D.prabel-jose-pq-composite-sigs}} for JOSE and COSE.
+In each case, the relying party validates a single certification path
+anchored in a multi-algorithm trust anchor, avoiding the need for
+parallel certificate chains.
 
 ## Advantages
 
-* A single certificate chain supports both traditional and PQC algorithms, thereby
-  simplifying certificate management.
-* A single composite certificate, conveyed within one certificate chain, reduces
-  protocol message size compared to transmitting multiple separate signatures,
-  each requiring its own certificate chain.
-* No need to manage or validate multiple parallel certificate chains.
-* No significant modifications to the base protocol are required to support the
-  composite approach.
+A key benefit of the composite model is single-path operation. Because both
+algorithms are embedded in one certificate chain, the relying party validates
+only one path, which reduces chain-management complexity compared to dual-chain
+deployments. Conveying a single certificate and signature object can also
+reduce message size relative to transmitting two independent chains. From a
+protocol perspective, composite certificates typically require minimal changes
+to handshakes, since authentication still relies on one certificate and one signature.
 
 ## Disadvantages
 
-* Requires clients, servers, and CAs to support composite public keys
-  and composite signature verification, which are not widely deployed at the
-  time of writing of the specification.
-* Introduces new certificate formats and signature generation and verification
-  mechanisms, requiring updates to PKI infrastructure.
-* Requires multiple migration steps, with deployments moving from
-  Traditional-only to Composite, and later from Composite to PQC-only.
+The main challenge with composite certificates is ecosystem readiness.
+Clients, servers, and Certification Authorities must support composite
+public keys and composite signature verification, which are not yet
+widely deployed. The new certificate encodings and multi-algorithm
+signing introduce updates across PKI components, libraries, and Hardware
+Security Modules.
+
+Another operational limitation is the need for algorithm-set
+coordination: all participants in a composite ecosystem must agree on
+the specific and acceptable combinations of post-quantum and traditional
+algorithms (for example, ML-DSA-44 + ECDSA P-256 or ML-DSA-65 + EdDSA Ed448).
+A composite certificate can only be validated if both endpoints and all
+intermediate CAs recognize the same algorithm identifiers and policy.
+Disagreement on permitted combinations can lead to handshake failures,
+certificate re-issuance delays, or policy fragmentation across vendors.
+
+Composite deployments are also an intermediate step: once traditional
+algorithms are deprecated due to CRQCs, operators will still need to
+transition from composite to PQC-only certificates. For some
+organizations, this two-stage path may lengthen the overall migration.
 
 # Dual Certificates
 
