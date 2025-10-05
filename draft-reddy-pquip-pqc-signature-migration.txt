@@ -204,45 +204,64 @@ Table of Contents
 4.  Composite certificates
 
    A composite certificate contains both a traditional public key
-   algorithm (e.g., ECDSA) and a post-quantum algorithm (e.g., ML-DSA)
-   within a single X.509 certificate.  This design enables both
-   algorithms to be used in parallel, the traditional component ensures
-   compatibility with existing infrastructure, while the post-quantum
-   component introduces resistance against future quantum attacks.
+   algorithm (for example, ECDSA) and a post-quantum algorithm (such as
+   ML-DSA) within a single X.509 structure.  The goal is defense-in-
+   depth: the traditional component preserves authentication security if
+   a flaw is found in the PQC algorithm before a CRQC exists, while the
+   PQC component preserves security after CRQCs can break traditional
+   algorithms.  Verification succeeds only if all component signatures
+   validate over the same canonical message.
 
-   Composite certificates are defined in
-   [I-D.ietf-lamps-pq-composite-sigs].  These combine Post-Quantum
-   algorithms like ML-DSA with traditional algorithms such as RSA-
-   PKCS#1v1.5, RSA-PSS, ECDSA, Ed25519, or Ed448, to provide additional
-   protection against vulnerabilities or implementation bugs in a single
-   algorithm.  [I-D.reddy-tls-composite-mldsa] specifies how composite
-   certificates are used for TLS 1.3 authentication.  In this case,
-   relying parties validate a single certification path anchored in a
-   multi-algorithm trust anchor, without the need for parallel chains.
+   ML-DSA composite certificates are defined in
+   [I-D.ietf-lamps-pq-composite-sigs], which defines the use of ML-DSA
+   in combination with one or more traditional algorithms such as RSA-
+   PKCS#1v1.5, RSA-PSS, ECDSA, Ed25519, or Ed448.  The framework in that
+   document is designed to be extensible and is expected to accommodate
+   additional post-quantum algorithms in future specifications.
+
+   Protocol-specific drafts describe how composite certificates are used
+   in different environments, including: [TLS-COMPOSITE-ML-DSA] for TLS,
+   [IKEv2-COMPOSITE-ML-DSA] for IKEv2, and [JOSE-COSE-COMPOSITE-ML-DSA]
+   for JOSE and COSE.  In each case, the relying party validates a
+   single certification path anchored in a multi-algorithm trust anchor,
+   avoiding the need for parallel certificate chains.
 
 4.1.  Advantages
 
-   *  A single certificate chain supports both traditional and PQC
-      algorithms, thereby simplifying certificate management.
-   *  A single composite certificate, conveyed within one certificate
-      chain, reduces protocol message size compared to transmitting
-      multiple separate signatures, each requiring its own certificate
-      chain.
-   *  No need to manage or validate multiple parallel certificate
-      chains.
-   *  No significant modifications to the base protocol are required to
-      support the composite approach.
+   A key benefit of the composite model is single-path operation.
+   Because both algorithms are embedded in one certificate chain, the
+   relying party validates only one path, which reduces chain-management
+   complexity compared to dual-chain deployments.  Conveying a single
+   certificate and signature object can also reduce message size
+   relative to transmitting two independent chains.  From a protocol
+   perspective, composite certificates typically require minimal changes
+   to handshakes, since authentication still relies on one certificate
+   and one signature.
 
 4.2.  Disadvantages
 
-   *  Requires clients, servers, and CAs to support composite public
-      keys and composite signature verification, which are not widely
-      deployed at the time of writing of the specification.
-   *  Introduces new certificate formats and signature generation and
-      verification mechanisms, requiring updates to PKI infrastructure.
-   *  Requires multiple migration steps, with deployments moving from
-      Traditional-only to Composite, and later from Composite to PQC-
-      only.
+   The main challenge with composite certificates is ecosystem
+   readiness.  Clients, servers, and Certification Authorities must
+   support composite public keys and composite signature verification,
+   which are not yet widely deployed.  The new certificate encodings and
+   multi-algorithm signing introduce updates across PKI components,
+   libraries, and Hardware Security Modules.
+
+   Another operational limitation is the need for algorithm-set
+   coordination: all participants in a composite ecosystem must agree on
+   the specific and acceptable combinations of post-quantum and
+   traditional algorithms (for example, ML-DSA-44 + ECDSA P-256 or ML-
+   DSA-65 + EdDSA Ed448).  A composite certificate can only be validated
+   if both endpoints and all intermediate CAs recognize the same
+   algorithm identifiers and policy.  Disagreement on permitted
+   combinations can lead to handshake failures, certificate re-issuance
+   delays, or policy fragmentation across vendors.
+
+   Composite deployments are also an intermediate step: once traditional
+   algorithms are deprecated due to CRQCs, operators will still need to
+   transition from composite to PQC-only certificates.  For some
+   organizations, this two-stage path may lengthen the overall
+   migration.
 
 5.  Dual Certificates
 
@@ -749,13 +768,6 @@ Table of Contents
               2025, <https://datatracker.ietf.org/doc/html/draft-ietf-
               tls-trust-anchor-ids-02>.
 
-   [I-D.reddy-tls-composite-mldsa]
-              Reddy.K, T., Hollebeek, T., Gray, J., and S. Fluhrer, "Use
-              of Composite ML-DSA in TLS 1.3", Work in Progress,
-              Internet-Draft, draft-reddy-tls-composite-mldsa-05, 4 July
-              2025, <https://datatracker.ietf.org/doc/html/draft-reddy-
-              tls-composite-mldsa-05>.
-
    [ML-DSA]   Massimo, J., Kampanakis, P., Turner, S., and B.
               Westerbaan, "Internet X.509 Public Key Infrastructure -
               Algorithm Identifiers for the Module-Lattice-Based Digital
@@ -844,6 +856,13 @@ Table of Contents
               <https://datatracker.ietf.org/doc/html/draft-prabel-jose-
               pq-composite-sigs-04>.
 
+   [I-D.reddy-tls-composite-mldsa]
+              Reddy.K, T., Hollebeek, T., Gray, J., and S. Fluhrer, "Use
+              of Composite ML-DSA in TLS 1.3", Work in Progress,
+              Internet-Draft, draft-reddy-tls-composite-mldsa-05, 4 July
+              2025, <https://datatracker.ietf.org/doc/html/draft-reddy-
+              tls-composite-mldsa-05>.
+
    [I-D.yusef-tls-pqt-dual-certs]
               Shekh-Yusef, R., Tschofenig, H., Ounsworth, M., Sheffer,
               Y., Reddy.K, T., and Y. Rosomakho, "Post-Quantum
@@ -857,6 +876,23 @@ Table of Contents
               "Internet Key Exchange Protocol Version 2 (IKEv2)",
               RFC 5996, DOI 10.17487/RFC5996, September 2010,
               <https://www.rfc-editor.org/rfc/rfc5996>.
+
+   [IKEv2-COMPOSITE-ML-DSA]
+              Hu, J., Morioka, Y., and G. WANG, "Post-Quantum
+              Traditional (PQ/T) Hybrid PKI Authentication in the
+              Internet Key Exchange Version 2 (IKEv2)", Work in
+              Progress, Internet-Draft, draft-hu-ipsecme-pqt-hybrid-
+              auth-02, 1 May 2025,
+              <https://datatracker.ietf.org/doc/html/draft-hu-ipsecme-
+              pqt-hybrid-auth-02>.
+
+   [JOSE-COSE-COMPOSITE-ML-DSA]
+              Prabel, L., Shuzhou, S., Gray, J., and T. Reddy.K, "PQ/T
+              Hybrid Composite Signatures for JOSE and COSE", Work in
+              Progress, Internet-Draft, draft-prabel-jose-pq-composite-
+              sigs-04, 22 August 2025,
+              <https://datatracker.ietf.org/doc/html/draft-prabel-jose-
+              pq-composite-sigs-04>.
 
    [PQC-ENGINEERS]
               Banerjee, A., Reddy.K, T., Schoinianakis, D., Hollebeek,
@@ -884,6 +920,13 @@ Table of Contents
               <https://www.rfc-editor.org/rfc/rfc9810>.
 
    [TLS]      "*** BROKEN REFERENCE ***".
+
+   [TLS-COMPOSITE-ML-DSA]
+              Reddy.K, T., Hollebeek, T., Gray, J., and S. Fluhrer, "Use
+              of Composite ML-DSA in TLS 1.3", Work in Progress,
+              Internet-Draft, draft-reddy-tls-composite-mldsa-05, 4 July
+              2025, <https://datatracker.ietf.org/doc/html/draft-reddy-
+              tls-composite-mldsa-05>.
 
 Authors' Addresses
 
