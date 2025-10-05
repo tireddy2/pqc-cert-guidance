@@ -6,6 +6,8 @@ PQUIP                                                           T. Reddy
 Internet-Draft                                                     Nokia
 Intended status: Informational                                   D. Wing
 Expires: 8 April 2026                                             Citrix
+                                                            Y. Rosomakho
+                                                                 Zscaler
                                                           5 October 2025
 
 
@@ -989,3 +991,8 @@ Authors' Addresses
    Citrix
    United States of America
    Email: danwing@gmail.com
+
+
+   Yaroslav Rosomakho
+   Zscaler
+   Email: yrosomakho@zscaler.com
