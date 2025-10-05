@@ -5,11 +5,12 @@
 PQUIP                                                           T. Reddy
 Internet-Draft                                                     Nokia
 Intended status: Informational                                   D. Wing
-Expires: 4 April 2026                                             Citrix
-                                                          1 October 2025
+Expires: 8 April 2026                                             Citrix
+                                                          5 October 2025
 
 
- Guidance for Migration to Composite, Dual, or PQC-Only Authentication
+   Guidance for Migration to Composite, Dual, or PQC-Only Certificate
+                             Authentication
             draft-reddy-pquip-pqc-signature-migration-latest
 
 Abstract
@@ -50,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 4 April 2026.
+   This Internet-Draft will expire on 8 April 2026.
 
 Copyright Notice
 
