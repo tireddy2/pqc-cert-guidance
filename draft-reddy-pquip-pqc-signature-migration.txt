@@ -82,28 +82,28 @@ Table of Contents
    6.  PQC-Only Certificates
      6.1.  Advantages
      6.2.  Disadvantages
-   7.  Negotiation of Authentication Schemes
-   8.  Operational and Ecosystem Considerations
-     8.1.  Trust Anchors and Transitions
-     8.2.  Multiple Transitions and Crypto-Agility
-     8.3.  Support from Hardware Security Modules (HSMs)
-     8.4.  Constrained Devices and IoT Environments
-   9.  Transition Considerations
-     9.1.  Composite Certificates
-     9.2.  Dual Certificates
-     9.3.  Loss of Strong Unforgeability in Composite and Dual
+   7.  Operational and Ecosystem Considerations
+     7.1.  Trust Anchors and Transitions
+     7.2.  Multiple Transitions and Crypto-Agility
+     7.3.  Support from Hardware Security Modules (HSMs)
+     7.4.  Constrained Devices and IoT Environments
+   8.  Transition Considerations
+     8.1.  Negotiation and Interoperability
+     8.2.  Composite Certificates
+     8.3.  Dual Certificates
+     8.4.  Loss of Strong Unforgeability in Composite and Dual
            Certificates
-   10. Migration Guidance
-   11. Use of SLH-DSA in PQC-Only Deployments
-   12. Security Considerations
-     12.1.  Downgrade Attacks
-     12.2.  Strong Unforgeability versus Existential Unforgeability
-     12.3.  Operational Risks
-   13. IANA Considerations
-   14. Acknowledgments
-   15. References
-     15.1.  Normative References
-     15.2.  Informative References
+   9.  Migration Guidance
+   10. Use of SLH-DSA in PQC-Only Deployments
+   11. Security Considerations
+     11.1.  Downgrade Attacks
+     11.2.  Strong Unforgeability versus Existential Unforgeability
+     11.3.  Operational Risks
+   12. IANA Considerations
+   13. Acknowledgments
+   14. References
+     14.1.  Normative References
+     14.2.  Informative References
    Authors' Addresses
 
 1.  Introduction
@@ -373,26 +373,13 @@ Table of Contents
    by hardware security modules, operating systems, and major
    application ecosystems.
 
-7.  Negotiation of Authentication Schemes
-
-   During the transition, endpoints may support multiple authentication
-   schemes (e.g., traditional, composite, dual, or PQC-only).  Clients
-   advertise their supported schemes using the protocol's negotiation
-   mechanism (for example, the 'signature_algorithms' extension in TLS
-   [RFC8446]), and servers select from the client's list or fail the
-   authentication if no common option is available.  In practice,
-   deployments are expected to prefer PQC-only or hybrid signature
-   scheme over traditional ones, with the choice between PQC-only and
-   hybrid signature scheme influenced by regulatory mandates or by
-   whether defense-in-depth is prioritized.
-
-8.  Operational and Ecosystem Considerations
+7.  Operational and Ecosystem Considerations
 
    Migration to post-quantum authentication requires addressing broader
    ecosystem dependencies, including trust anchors, hardware security
    modules, and constrained devices.
 
-8.1.  Trust Anchors and Transitions
+7.1.  Trust Anchors and Transitions
 
    Trust anchors represent the ultimate root of trust in a PKI.  If
    existing trust anchors are RSA or ECC-based, then new PQC-capable
@@ -467,7 +454,7 @@ Table of Contents
    retirement of traditional and composite roots once PQC adoption is
    widespread.
 
-8.2.  Multiple Transitions and Crypto-Agility
+7.2.  Multiple Transitions and Crypto-Agility
 
    Post-quantum migration is not a single event.  There may be multiple
    transitions over time, as:
@@ -488,7 +475,7 @@ Table of Contents
       policy guidance evolves.
    *  Protection against downgrade attacks across all transition phases.
 
-8.3.  Support from Hardware Security Modules (HSMs)
+7.3.  Support from Hardware Security Modules (HSMs)
 
    Many organizations rely on HSMs for secure key storage and
    operations.  Challenges include:
@@ -509,7 +496,7 @@ Table of Contents
    require software-based fallback solutions, which will weaken
    security.
 
-8.4.  Constrained Devices and IoT Environments
+7.4.  Constrained Devices and IoT Environments
 
    Constrained environments, such as IoT devices, present unique
    challenges for PQC deployment due to limited processing, memory, and
@@ -519,7 +506,38 @@ Table of Contents
    techniques for enabling PQC in lightweight HSMs and resource-
    constrained devices.
 
-9.  Transition Considerations
+8.  Transition Considerations
+
+   Migration to post-quantum authentication will proceed gradually
+   across protocols, products, and organizations.  During this period,
+   endpoints may support multiple authentication models (traditional,
+   composite, dual, or PQC-only) depending on their stage of deployment.
+   The transition requires careful coordination of certificate
+   management, protocol negotiation, and policy enforcement to maintain
+   security and interoperability throughout the migration.
+
+8.1.  Negotiation and Interoperability
+
+   During coexistence, endpoints must be able to discover which
+   authentication mechanisms the peer supports.  In most protocols, this
+   is achieved through existing negotiation mechanisms such as, the
+   signature_algorithms extension in [TLS].  Clients advertise their
+   supported algorithms and certificate types, and servers select the
+   strongest mutually supported option or fail authentication if no
+   common algorithm is found.
+
+   Hybrid or PQC-capable deployments SHOULD prefer PQC-only or hybrid
+   signatures over traditional ones whenever possible.  The specific
+   choice between PQC-only and hybrid mechanisms may be influenced by
+   regulatory guidance, national cryptography policies, or the
+   organization's appetite for defense-in-depth during early adoption.
+
+   Negotiation mechanisms MUST also include downgrade protection so that
+   an adversary cannot suppress PQC or hybrid options and force a
+   fallback to traditional signatures.  TLS already provide such
+   protection through transcript binding of the handshake messages that
+   carry the algorithm negotiation results, but new or proprietary
+   protocols have to ensure similar safeguards.
 
    A deployment will typically adopt one of three models, PQC-only
    certificates, dual certificates, or composite certificates.
@@ -530,8 +548,8 @@ Table of Contents
    *  The expected timeline for CRQC availability
    *  Operational flexibility to deploy, enable, and retire PQC
       algorithms
-   *  Availability of automated certificate provisioning mechanisms
-      (e.g., ACME [RFC8555], CMP [RFC9810])
+   *  Availability of automated certificate provisioning mechanisms such
+      as [ACME] and [CMP]
 
    Deployments with limited flexibility benefit from hybrid signature
    schemes.  These approaches mitigate risks associated with delays in
@@ -550,26 +568,25 @@ Table of Contents
 
    However, each approach comes with long-term implications.
 
-9.1.  Composite Certificates
+8.2.  Composite Certificates
 
    Composite certificate embeds both a traditional and a PQC algorithm
    into a single certificate and signature.  However, once a traditional
    algorithm is no longer secure against CRQCs, it will have to be
    deprecated.  For discussion of the security impact in security
-   protocols (e.g., TLS, IKEv2) versus artifact-signing use cases, see
-   Section Section 9.3.
+   protocols, such as TLS and IKEv2, versus artifact-signing use cases,
+   see Section 8.4.
 
    To complete the transition to a fully quantum-resistant
    authentication model, operators will need a PQC CA root and CA
    intermediates, resulting in PQC-only end-entity certificates.
 
-   Protocol configurations (e.g., TLS, IKEv2) will likewise need to be
-   updated to negotiate only PQC-based authentication, ensuring that the
-   entire certification path and protocol handshake are
-   cryptographically resistant to quantum attacks and no longer depend
-   on any traditional algorithms.
+   Protocol configurations will likewise need to be updated to negotiate
+   only PQC-based authentication, ensuring that the entire certification
+   path and protocol handshake are cryptographically resistant to
+   quantum attacks and no longer depend on any traditional algorithms.
 
-9.2.  Dual Certificates
+8.3.  Dual Certificates
 
    When CRQCs become available, the traditional certificate chain will
    no longer be secure.  At that point, the traditional chain must be
@@ -581,7 +598,7 @@ Table of Contents
    not avoid, the need to update protocol configurations and move to a
    PQC-only environment.
 
-9.3.  Loss of Strong Unforgeability in Composite and Dual Certificates
+8.4.  Loss of Strong Unforgeability in Composite and Dual Certificates
 
    A deployment may choose to continue using a composite or dual
    certificate configuration even after a traditional algorithm has been
@@ -592,12 +609,12 @@ Table of Contents
 
    In composite certificates, the composite signature will no longer
    achieve Strong Unforgeability under chosen message attack (SUF-CMA)
-   (see Section 10.1.1 of [I-D.ietf-pquip-pqc-engineers] and
-   Section 10.2 of [I-D.ietf-lamps-pq-composite-sigs]).  A CRQC can
-   forge the broken traditional signature component (s1_) over a message
-   (m).  That forged component can then be combined with the valid post-
-   quantum component (s2) to produce a new composite signature (m, (s1_,
-   s2)) that verifies successfully, thereby violating SUF-CMA.
+   (see Section 10.1.1 of [PQC-ENGINEERS] and Section 10.2 of
+   [I-D.ietf-lamps-pq-composite-sigs]).  A CRQC can forge the broken
+   traditional signature component (s1_) over a message (m).  That
+   forged component can then be combined with the valid post-quantum
+   component (s2) to produce a new composite signature (m, (s1_, s2))
+   that verifies successfully, thereby violating SUF-CMA.
 
    In dual certificate deployments where the client requires both a
    traditional and a PQC chain, the SUF-CMA property is likewise not
@@ -616,17 +633,17 @@ Table of Contents
    complicating long-term non-repudiation guarantees.
 
    Hybrid signature schemes should not be used for artifact signing
-   (e.g., software packages), since the loss of SUF-CMA makes them
-   unsuitable for long-term non-repudiation.  In security protocols
-   (e.g., TLS, IKEv2), hybrid signature schemes may continue to function
-   for a limited time after a CRQC is realized, since they still provide
-   impersonation resistance as long as one component algorithm remains
-   secure.  This situation does not constitute a zero-day vulnerability
-   requiring an immediate upgrade.  However, operators will have to plan
-   an orderly migration to PQC-only certificates in order to restore
-   SUF-CMA security guarantees.
+   (such as software packages), since the loss of SUF-CMA makes them
+   unsuitable for long-term non-repudiation.  In security protocols,
+   hybrid signature schemes may continue to function for a limited time
+   after a CRQC is realized, since they still provide impersonation
+   resistance as long as one component algorithm remains secure.  This
+   situation does not constitute a zero-day vulnerability requiring an
+   immediate upgrade.  However, operators will have to plan an orderly
+   migration to PQC-only certificates in order to restore SUF-CMA
+   security guarantees.
 
-10.  Migration Guidance
+9.  Migration Guidance
 
    *  Long-term to adopt and deploy:: Dual certificates have been
       standardized in [RFC9763].  However, at the time of writing, none
@@ -651,7 +668,7 @@ Table of Contents
       [I-D.ietf-cose-dilithium], TLS [I-D.ietf-tls-mldsa], and IPsec
       [I-D.ietf-ipsecme-ikev2-pqc-auth].
 
-11.  Use of SLH-DSA in PQC-Only Deployments
+10.  Use of SLH-DSA in PQC-Only Deployments
 
    SLH-DSA does not introduce any new hardness assumptions beyond those
    inherent to its underlying hash functions.  It builds upon
@@ -697,7 +714,7 @@ Table of Contents
    allowing the use of larger signature algorithms like SLH-DSA for
    those certificates without adding overhead to the handshake.
 
-12.  Security Considerations
+11.  Security Considerations
 
    Hybrid signature schemes are designed to provide defense in depth
    during the migration to PQC.  Their goal is to ensure that
@@ -705,7 +722,7 @@ Table of Contents
    algorithms in use remains unbroken.  However, several important
    security considerations arise.
 
-12.1.  Downgrade Attacks
+11.1.  Downgrade Attacks
 
    Implementations must ensure downgrade protection so that an adversary
    cannot suppress PQC or hybrid schemes and force reliance solely on
@@ -715,7 +732,7 @@ Table of Contents
    presenting only traditional certificates even when PQC certificates
    are supported.
 
-12.2.  Strong Unforgeability versus Existential Unforgeability
+11.2.  Strong Unforgeability versus Existential Unforgeability
 
    In hybrid signature schemes, once one component algorithm is broken
    (e.g., the traditional algorithm under a CRQC), the overall scheme no
@@ -728,7 +745,7 @@ Table of Contents
    means that hybrid mechanisms will have be eventually retired once
    traditional algorithms are no longer secure.
 
-12.3.  Operational Risks
+11.3.  Operational Risks
 
    Managing multiple certificate paths (composite, dual, and PQC-only)
    increases the risk of misconfiguration and operational errors.  For
@@ -744,18 +761,18 @@ Table of Contents
    ensure PQC chains remain present, valid, and not replaced by weaker
    alternatives.
 
-13.  IANA Considerations
+12.  IANA Considerations
 
    This document has no IANA actions.
 
-14.  Acknowledgments
+13.  Acknowledgments
 
    Thanks to Martin McGrath, Suresh P.  Nair, and German Peinado for the
    detailed review.
 
-15.  References
+14.  References
 
-15.1.  Normative References
+14.1.  Normative References
 
    [COMPOSITE-ML-DSA]
               Ounsworth, M., Gray, J., Pala, M., Klaußner, J., and S.
@@ -834,10 +851,6 @@ Table of Contents
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
 
-   [RFC8446]  Rescorla, E., "The Transport Layer Security (TLS) Protocol
-              Version 1.3", RFC 8446, DOI 10.17487/RFC8446, August 2018,
-              <https://www.rfc-editor.org/rfc/rfc8446>.
-
    [RFC9763]  Becker, A., Guthrie, R., and M. Jenkins, "Related
               Certificates for Use in Multiple Authentications within a
               Protocol", RFC 9763, DOI 10.17487/RFC9763, June 2025,
@@ -850,7 +863,18 @@ Table of Contents
               2025, <https://datatracker.ietf.org/doc/html/draft-ietf-
               lamps-x509-slhdsa-09>.
 
-15.2.  Informative References
+14.2.  Informative References
+
+   [ACME]     Barnes, R., Hoffman-Andrews, J., McCarney, D., and J.
+              Kasten, "Automatic Certificate Management Environment
+              (ACME)", RFC 8555, DOI 10.17487/RFC8555, March 2019,
+              <https://www.rfc-editor.org/rfc/rfc8555>.
+
+   [CMP]      Brockhaus, H., von Oheimb, D., Ounsworth, M., and J. Gray,
+              "Internet X.509 Public Key Infrastructure -- Certificate
+              Management Protocol (CMP)", RFC 9810,
+              DOI 10.17487/RFC9810, July 2025,
+              <https://www.rfc-editor.org/rfc/rfc9810>.
 
    [DTLS]     Rescorla, E., Tschofenig, H., and N. Modadugu, "The
               Datagram Transport Layer Security (DTLS) Protocol Version
@@ -956,17 +980,6 @@ Table of Contents
               Certificates for Use in Multiple Authentications within a
               Protocol", RFC 9763, DOI 10.17487/RFC9763, June 2025,
               <https://www.rfc-editor.org/rfc/rfc9763>.
-
-   [RFC8555]  Barnes, R., Hoffman-Andrews, J., McCarney, D., and J.
-              Kasten, "Automatic Certificate Management Environment
-              (ACME)", RFC 8555, DOI 10.17487/RFC8555, March 2019,
-              <https://www.rfc-editor.org/rfc/rfc8555>.
-
-   [RFC9810]  Brockhaus, H., von Oheimb, D., Ounsworth, M., and J. Gray,
-              "Internet X.509 Public Key Infrastructure -- Certificate
-              Management Protocol (CMP)", RFC 9810,
-              DOI 10.17487/RFC9810, July 2025,
-              <https://www.rfc-editor.org/rfc/rfc9810>.
 
    [TLS]      "*** BROKEN REFERENCE ***".
 
