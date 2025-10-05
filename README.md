@@ -1,8 +1,8 @@
 <!-- regenerate: on (set to off if you edit this file) -->
 
-# Guidance for Migration to Composite, Dual-Certificate, or PQ-Only Certificate Authentication
+# Guidance for Migration to Composite, Dual-Certificate, or PQ-Only Authentication
 
-This is the working area for the individual Internet-Draft, "Guidance for Migration to Composite, Dual-Certificate, or PQ-Only Certificate Authentication".
+This is the working area for the individual Internet-Draft, "Guidance for Migration to Composite, Dual-Certificate, or PQ-Only Authentication".
 
 * [Editor's Copy](https://tireddy2.github.io/pqc-cert-guidance/#go.draft-reddy-pquip-pqc-signature-migration.html)
 * [Datatracker Page](https://datatracker.ietf.org/doc/draft-reddy-pquip-pqc-signature-migration)

@@ -1,5 +1,5 @@
 ---
-title: Guidance for Migration to Composite, Dual, or PQC-Only Certificate Authentication
+title: Guidance for Migration to Composite, Dual, or PQC-Only Authentication
 abbrev: PQC Signature Migration Guidance
 docname: draft-reddy-pquip-pqc-signature-migration-latest
 category: info
@@ -206,38 +206,60 @@ organizations, this two-stage path may lengthen the overall migration.
 # Dual Certificates
 
 Dual certificates rely on issuing two separate certificates for the same
-identity: one with a traditional algorithm (e.g., RSA or ECDSA) and one with
-a post-quantum algorithm (e.g., ML-DSA). Both certificates are presented
-and validated during authentication, providing hybrid assurance without
-requiring new certificate formats.
+identity: one using a traditional algorithm (for example, RSA or ECDSA)
+and one using a post-quantum algorithm (for example, ML-DSA). Both
+certificates are presented and validated during authentication,
+providing hybrid assurance without introducing new certificate formats
+or encodings.
 
 ## Advantages
 
-* Uses standard, single-algorithm X.509 certificates and chains,
-  maximizing compatibility with existing PKI infrastructures.
-* Maintains clear separation between traditional and PQC keys.
-* Requires only one migration step, with deployments moving from
-  Traditional-only to Dual certificates, and later removing support for
-  Traditional certificates.
-* Better suited for multi-tenancy cases, where different tenants may
-  prefer different combinations of traditional and PQ algorithms, avoiding the
-  need for consensus on a composite set.
-* Facilitates simpler future transitions to new PQC algorithms, since a new
-  PQC certificate can simply be issued and paired with an existing certificate,
-  without requiring new composite definitions.
+A major advantage of the dual-certificate model is its negotiation
+flexibility. Because each certificate contains only a single algorithm,
+endpoints do not need to agree in advance on a specific combination of
+traditional and post-quantum algorithms. The server can select which
+certificate (or both) to present based on the client's advertised
+capabilities, and the client can validate whichever chain it supports.
+This enables smoother incremental deployment and interoperation between
+implementations that support different PQC algorithms or security
+policies.
+
+Dual certificates also use standard X.509 structures and single-algorithm
+chains, maximizing compatibility with existing PKI and avoiding changes
+to certificate parsing or signature verification logic. The clear separation
+between traditional and PQC keys simplifies operational control, audit,
+and incident response. Deployments can move from traditional-only to dual
+certificates, and later retire the traditional certificate when PQC support
+is ubiquitous, without redefining certificate formats or introducing composite
+encodings. The model also fits well in multi-tenant environments where
+different tenants or business units may adopt different combinations of
+traditional and PQC algorithms without requiring global agreement on a
+composite set.
 
 ## Disadvantages
 
-* Increases protocol message size due to the transmission of multiple
-  certificate chains and signatures.
-* Requires management of multiple certificates.
-* Requires significant protocol changes to support validation of two end-entity
-  certificates and to ensure they are cryptographically bound to the same
-  identity, as protocols typically validate only a single certificate.
-* Complicates debugging and troubleshooting, since validation failures
-  may arise from either chain.
-* Increases operational cost, as operators must obtain and manage two end-entity
-  certificates from CAs, which can be significant in large-scale deployments.
+The dual-certificate model increases protocol overhead, since both
+certificate chains and signatures must be transmitted and validated.
+Protocols that traditionally authenticate a single certificate chain,
+such as {{?TLS=I-D.ietf-tlsrfc8446bis}} and {{?IKEv2=RFC5996}}, require
+extensions to support validation of two end-entity certificates and to
+ensure that both are cryptographically bound to the same identity.
+This adds implementation complexity and may increase handshake latency.
+
+Managing two distinct certificate chains introduces operational cost and
+new failure modes. Debugging becomes more difficult, as validation
+errors may originate from either chain or from inconsistent identity
+binding. Operators must also obtain and renew two certificates from
+Certification Authorities, which can be significant in large-scale
+deployments.
+
+Finally, while dual certificates avoid the need for a fixed algorithm
+pairing, they require explicit binding and coordination between the
+two chains. Each relying party must verify that the traditional and PQC
+certificates correspond to the same entity, typically using mechanisms
+such as the RelatedCertificate extension {{?RELATED-CERTS=RFC9763}}.
+Lack of consistent binding policies can lead to interoperability issues
+and potential downgrade risks if only one chain is validated.
 
 # PQC-Only Certificates
 
