@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="Common,Latin" name="scripts">
 <meta content="initial-scale=1.0" name="viewport">
-<title>Guidance for Migration to Composite, Dual, or PQC-Only Certificate Authentication</title>
+<title>Guidance for Migration to Composite, Dual, or PQC-Only Authentication</title>
 <meta content="Tirumaleswar Reddy" name="author">
 <meta content="Dan Wing" name="author">
 <meta content="
@@ -1089,7 +1089,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </dd>
 </dl>
 </div>
-<h1 id="title">Guidance for Migration to Composite, Dual, or PQC-Only Certificate Authentication</h1>
+<h1 id="title">Guidance for Migration to Composite, Dual, or PQC-Only Authentication</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
 <p id="section-abstract-1">This document provides guidance for migration from traditional digital
@@ -1455,39 +1455,36 @@ organizations, this two-stage path may lengthen the overall migration.<a href="#
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-dual-certificates" class="section-name selfRef">Dual Certificates</a>
       </h2>
 <p id="section-5-1">Dual certificates rely on issuing two separate certificates for the same
-identity: one with a traditional algorithm (e.g., RSA or ECDSA) and one with
-a post-quantum algorithm (e.g., ML-DSA). Both certificates are presented
-and validated during authentication, providing hybrid assurance without
-requiring new certificate formats.<a href="#section-5-1" class="pilcrow">¶</a></p>
+identity: one using a traditional algorithm (for example, RSA or ECDSA)
+and one using a post-quantum algorithm (for example, ML-DSA). Both
+certificates are presented and validated during authentication,
+providing hybrid assurance without introducing new certificate formats
+or encodings.<a href="#section-5-1" class="pilcrow">¶</a></p>
 <div id="advantages-1">
 <section id="section-5.1">
         <h3 id="name-advantages-2">
 <a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-advantages-2" class="section-name selfRef">Advantages</a>
         </h3>
-<ul class="compact">
-<li class="compact" id="section-5.1-1.1">
-            <p id="section-5.1-1.1.1">Uses standard, single-algorithm X.509 certificates and chains,
-maximizing compatibility with existing PKI infrastructures.<a href="#section-5.1-1.1.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="compact" id="section-5.1-1.2">
-            <p id="section-5.1-1.2.1">Maintains clear separation between traditional and PQC keys.<a href="#section-5.1-1.2.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="compact" id="section-5.1-1.3">
-            <p id="section-5.1-1.3.1">Requires only one migration step, with deployments moving from
-Traditional-only to Dual certificates, and later removing support for
-Traditional certificates.<a href="#section-5.1-1.3.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="compact" id="section-5.1-1.4">
-            <p id="section-5.1-1.4.1">Better suited for multi-tenancy cases, where different tenants may
-prefer different combinations of traditional and PQ algorithms, avoiding the
-need for consensus on a composite set.<a href="#section-5.1-1.4.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="compact" id="section-5.1-1.5">
-            <p id="section-5.1-1.5.1">Facilitates simpler future transitions to new PQC algorithms, since a new
-PQC certificate can simply be issued and paired with an existing certificate,
-without requiring new composite definitions.<a href="#section-5.1-1.5.1" class="pilcrow">¶</a></p>
-</li>
-        </ul>
+<p id="section-5.1-1">A major advantage of the dual-certificate model is its negotiation
+flexibility. Because each certificate contains only a single algorithm,
+endpoints do not need to agree in advance on a specific combination of
+traditional and post-quantum algorithms. The server can select which
+certificate (or both) to present based on the client's advertised
+capabilities, and the client can validate whichever chain it supports.
+This enables smoother incremental deployment and interoperation between
+implementations that support different PQC algorithms or security
+policies.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
+<p id="section-5.1-2">Dual certificates also use standard X.509 structures and single-algorithm
+chains, maximizing compatibility with existing PKI and avoiding changes
+to certificate parsing or signature verification logic. The clear separation
+between traditional and PQC keys simplifies operational control, audit,
+and incident response. Deployments can move from traditional-only to dual
+certificates, and later retire the traditional certificate when PQC support
+is ubiquitous, without redefining certificate formats or introducing composite
+encodings. The model also fits well in multi-tenant environments where
+different tenants or business units may adopt different combinations of
+traditional and PQC algorithms without requiring global agreement on a
+composite set.<a href="#section-5.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="disadvantages-1">
@@ -1495,28 +1492,26 @@ without requiring new composite definitions.<a href="#section-5.1-1.5.1" class="
         <h3 id="name-disadvantages-2">
 <a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-disadvantages-2" class="section-name selfRef">Disadvantages</a>
         </h3>
-<ul class="compact">
-<li class="compact" id="section-5.2-1.1">
-            <p id="section-5.2-1.1.1">Increases protocol message size due to the transmission of multiple
-certificate chains and signatures.<a href="#section-5.2-1.1.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="compact" id="section-5.2-1.2">
-            <p id="section-5.2-1.2.1">Requires management of multiple certificates.<a href="#section-5.2-1.2.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="compact" id="section-5.2-1.3">
-            <p id="section-5.2-1.3.1">Requires significant protocol changes to support validation of two end-entity
-certificates and to ensure they are cryptographically bound to the same
-identity, as protocols typically validate only a single certificate.<a href="#section-5.2-1.3.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="compact" id="section-5.2-1.4">
-            <p id="section-5.2-1.4.1">Complicates debugging and troubleshooting, since validation failures
-may arise from either chain.<a href="#section-5.2-1.4.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="compact" id="section-5.2-1.5">
-            <p id="section-5.2-1.5.1">Increases operational cost, as operators must obtain and manage two end-entity
-certificates from CAs, which can be significant in large-scale deployments.<a href="#section-5.2-1.5.1" class="pilcrow">¶</a></p>
-</li>
-        </ul>
+<p id="section-5.2-1">The dual-certificate model increases protocol overhead, since both
+certificate chains and signatures must be transmitted and validated.
+Protocols that traditionally authenticate a single certificate chain,
+such as <span>[<a href="#TLS" class="cite xref">TLS</a>]</span> and <span>[<a href="#IKEv2" class="cite xref">IKEv2</a>]</span>, require
+extensions to support validation of two end-entity certificates and to
+ensure that both are cryptographically bound to the same identity.
+This adds implementation complexity and may increase handshake latency.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
+<p id="section-5.2-2">Managing two distinct certificate chains introduces operational cost and
+new failure modes. Debugging becomes more difficult, as validation
+errors may originate from either chain or from inconsistent identity
+binding. Operators must also obtain and renew two certificates from
+Certification Authorities, which can be significant in large-scale
+deployments.<a href="#section-5.2-2" class="pilcrow">¶</a></p>
+<p id="section-5.2-3">Finally, while dual certificates avoid the need for a fixed algorithm
+pairing, they require explicit binding and coordination between the
+two chains. Each relying party must verify that the traditional and PQC
+certificates correspond to the same entity, typically using mechanisms
+such as the RelatedCertificate extension <span>[<a href="#RELATED-CERTS" class="cite xref">RELATED-CERTS</a>]</span>.
+Lack of consistent binding policies can lead to interoperability issues
+and potential downgrade risks if only one chain is validated.<a href="#section-5.2-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
