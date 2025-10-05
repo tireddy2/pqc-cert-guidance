@@ -1281,7 +1281,7 @@ transition to post-quantum authentication.<a href="#section-abstract-1" class="p
 </nav>
 </section>
 </div>
-<div id="introduction">
+<div id="intro">
 <section id="section-1">
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
@@ -1301,31 +1301,28 @@ suppress PQC certificates and present only traditional ones, enabling
 downgrades. These risks highlight the need to transition certificate-based
 authentication toward post-quantum security, using hybrid signature
 schemes as an intermediate step before PQC-only adoption.<a href="#section-1-2" class="pilcrow">¶</a></p>
-<p id="section-1-3">The IETF has developed two hybrid transition models for use in TLS, IKEv2/IPsec,
+<p id="section-1-3">The IETF has defined two hybrid transition models for use in TLS, IKEv2/IPsec,
 JOSE/COSE, and PKIX:<a href="#section-1-3" class="pilcrow">¶</a></p>
 <ul class="compact">
 <li class="compact" id="section-1-4.1">
           <p id="section-1-4.1.1">Composite certificates: A single X.509 certificate that contains a composite
-public key and composite signature, combining a traditional and a PQC algorithm
-<span>[<a href="#I-D.ietf-lamps-pq-composite-sigs" class="cite xref">I-D.ietf-lamps-pq-composite-sigs</a>]</span>.<a href="#section-1-4.1.1" class="pilcrow">¶</a></p>
+public key and a composite signature, combining a traditional and a PQC algorithm.
+Certificates using composite ML-DSA are specified in <span>[<a href="#COMPOSITE-ML-DSA" class="cite xref">COMPOSITE-ML-DSA</a>]</span>.<a href="#section-1-4.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="compact" id="section-1-4.2">
-          <p id="section-1-4.2.1">Dual certificates: Two separate certificates, one traditional and one PQC algorithm,
-issued for the same identity, presented and validated together <span>[<a href="#RFC9763" class="cite xref">RFC9763</a>]</span>.<a href="#section-1-4.2.1" class="pilcrow">¶</a></p>
+          <p id="section-1-4.2.1">Dual certificates: Two separate certificates, one using a traditional algorithm and one using a PQC algorithm,
+issued for the same identity, presented and validated together. Some protocols may
+requeire these certificates to include the RelatedCertificate extension <span>[<a href="#RELATED-CERTS" class="cite xref">RELATED-CERTS</a>]</span>
+to ensure that both refer to the same identity and binding.<a href="#section-1-4.2.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-1-5">Another approach is using a Post-Quantum certificate,<a href="#section-1-5" class="pilcrow">¶</a></p>
-<ul class="compact">
-<li class="compact" id="section-1-6.1">
-          <p id="section-1-6.1.1">PQC-only certificates: A certificate or signature that uses only a PQ
-algorithm (<span>[<a href="#I-D.ietf-lamps-dilithium-certificates" class="cite xref">I-D.ietf-lamps-dilithium-certificates</a>]</span> for ML-DSA and
-<span>[<a href="#I-D.ietf-lamps-x509-slhdsa" class="cite xref">I-D.ietf-lamps-x509-slhdsa</a>]</span> for SLH-DSA).<a href="#section-1-6.1.1" class="pilcrow">¶</a></p>
-</li>
-      </ul>
-<p id="section-1-7">This document provides guidance on selecting among the two hybrid
+<p id="section-1-5">Another approach is to use a PQC-only certificate which contains only a post-quantum
+public key and produces signatures using a PQC algorithm. Examples include <span>[<a href="#ML-DSA" class="cite xref">ML-DSA</a>]</span>
+and <span>[<a href="#SLH-DSA" class="cite xref">SLH-DSA</a>]</span>.<a href="#section-1-5" class="pilcrow">¶</a></p>
+<p id="section-1-6">This document provides guidance on selecting among the two hybrid
 certificate models and the PQC-only model depending on the deployment
 context, the readiness of the supporting ecosystem, and security
-requirements.<a href="#section-1-7" class="pilcrow">¶</a></p>
+requirements.<a href="#section-1-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="conventions-and-definitions">
@@ -1338,11 +1335,11 @@ requirements.<a href="#section-1-7" class="pilcrow">¶</a></p>
 described in BCP 14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span> <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span> when, and only when, they
 appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶</a></p>
 <p id="section-2-2">This document uses the terms "composite certificates", "dual certificates", and
-"PQC-only certificates" as introduced in the Introduction.<a href="#section-2-2" class="pilcrow">¶</a></p>
+"PQC-only certificates" as defined in the <a href="#intro" class="auto internal xref">Section 1</a>.<a href="#section-2-2" class="pilcrow">¶</a></p>
 <p id="section-2-3">Composite: A key, certificate, or signature that merges traditional
 and PQC algorithms into one object.<a href="#section-2-3" class="pilcrow">¶</a></p>
 <p id="section-2-4">The terms hybrid signature scheme and hybrid signature are used as
-defined in <span>[<a href="#I-D.ietf-pquip-hybrid-signature-spectrums" class="cite xref">I-D.ietf-pquip-hybrid-signature-spectrums</a>]</span>.<a href="#section-2-4" class="pilcrow">¶</a></p>
+defined in <span>[<a href="#HYBRID-SPECTRUMS" class="cite xref">HYBRID-SPECTRUMS</a>]</span>.<a href="#section-2-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="motivation-for-pqc-signatures">
@@ -2039,6 +2036,14 @@ present, valid, and not replaced by weaker alternatives.<a href="#section-12.3-2
 <a href="#section-15.1" class="section-number selfRef">15.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
         </h3>
 <dl class="references">
+<dt id="COMPOSITE-ML-DSA">[COMPOSITE-ML-DSA]</dt>
+        <dd>
+<span class="refAuthor">Ounsworth, M.</span>, <span class="refAuthor">Gray, J.</span>, <span class="refAuthor">Pala, M.</span>, <span class="refAuthor">Klaußner, J.</span>, and <span class="refAuthor">S. Fluhrer</span>, <span class="refTitle">"Composite ML-DSA for use in X.509 Public Key Infrastructure"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-lamps-pq-composite-sigs-09</span>, <time datetime="2025-09-28" class="refDate">28 September 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-lamps-pq-composite-sigs-09">https://datatracker.ietf.org/doc/html/draft-ietf-lamps-pq-composite-sigs-09</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="HYBRID-SPECTRUMS">[HYBRID-SPECTRUMS]</dt>
+        <dd>
+<span class="refAuthor">Bindel, N.</span>, <span class="refAuthor">Hale, B.</span>, <span class="refAuthor">Connolly, D.</span>, and <span class="refAuthor">F. D</span>, <span class="refTitle">"Hybrid signature spectrums"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-pquip-hybrid-signature-spectrums-07</span>, <time datetime="2025-06-20" class="refDate">20 June 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-pquip-hybrid-signature-spectrums-07">https://datatracker.ietf.org/doc/html/draft-ietf-pquip-hybrid-signature-spectrums-07</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="I-D.ietf-cose-dilithium">[I-D.ietf-cose-dilithium]</dt>
         <dd>
 <span class="refAuthor">Prorock, M.</span> and <span class="refAuthor">O. Steele</span>, <span class="refTitle">"ML-DSA for JOSE and COSE"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-cose-dilithium-09</span>, <time datetime="2025-09-12" class="refDate">12 September 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-cose-dilithium-09">https://datatracker.ietf.org/doc/html/draft-ietf-cose-dilithium-09</a>&gt;</span>. </dd>
@@ -2047,21 +2052,9 @@ present, valid, and not replaced by weaker alternatives.<a href="#section-12.3-2
         <dd>
 <span class="refAuthor">Reddy.K, T.</span>, <span class="refAuthor">Smyslov, V.</span>, and <span class="refAuthor">S. Fluhrer</span>, <span class="refTitle">"Signature Authentication in the Internet Key Exchange Version 2 (IKEv2) using PQC"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-ipsecme-ikev2-pqc-auth-03</span>, <time datetime="2025-08-29" class="refDate">29 August 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-ipsecme-ikev2-pqc-auth-03">https://datatracker.ietf.org/doc/html/draft-ietf-ipsecme-ikev2-pqc-auth-03</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="I-D.ietf-lamps-dilithium-certificates">[I-D.ietf-lamps-dilithium-certificates]</dt>
-        <dd>
-<span class="refAuthor">Massimo, J.</span>, <span class="refAuthor">Kampanakis, P.</span>, <span class="refAuthor">Turner, S.</span>, and <span class="refAuthor">B. Westerbaan</span>, <span class="refTitle">"Internet X.509 Public Key Infrastructure - Algorithm Identifiers for the Module-Lattice-Based Digital Signature Algorithm (ML-DSA)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-lamps-dilithium-certificates-13</span>, <time datetime="2025-09-30" class="refDate">30 September 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-lamps-dilithium-certificates-13">https://datatracker.ietf.org/doc/html/draft-ietf-lamps-dilithium-certificates-13</a>&gt;</span>. </dd>
-<dd class="break"></dd>
 <dt id="I-D.ietf-lamps-pq-composite-sigs">[I-D.ietf-lamps-pq-composite-sigs]</dt>
         <dd>
 <span class="refAuthor">Ounsworth, M.</span>, <span class="refAuthor">Gray, J.</span>, <span class="refAuthor">Pala, M.</span>, <span class="refAuthor">Klaußner, J.</span>, and <span class="refAuthor">S. Fluhrer</span>, <span class="refTitle">"Composite ML-DSA for use in X.509 Public Key Infrastructure"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-lamps-pq-composite-sigs-09</span>, <time datetime="2025-09-28" class="refDate">28 September 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-lamps-pq-composite-sigs-09">https://datatracker.ietf.org/doc/html/draft-ietf-lamps-pq-composite-sigs-09</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="I-D.ietf-lamps-x509-slhdsa">[I-D.ietf-lamps-x509-slhdsa]</dt>
-        <dd>
-<span class="refAuthor">Bashiri, K.</span>, <span class="refAuthor">Fluhrer, S.</span>, <span class="refAuthor">Gazdag, S.</span>, <span class="refAuthor">Van Geest, D.</span>, and <span class="refAuthor">S. Kousidis</span>, <span class="refTitle">"Internet X.509 Public Key Infrastructure: Algorithm Identifiers for SLH-DSA"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-lamps-x509-slhdsa-09</span>, <time datetime="2025-06-30" class="refDate">30 June 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-lamps-x509-slhdsa-09">https://datatracker.ietf.org/doc/html/draft-ietf-lamps-x509-slhdsa-09</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="I-D.ietf-pquip-hybrid-signature-spectrums">[I-D.ietf-pquip-hybrid-signature-spectrums]</dt>
-        <dd>
-<span class="refAuthor">Bindel, N.</span>, <span class="refAuthor">Hale, B.</span>, <span class="refAuthor">Connolly, D.</span>, and <span class="refAuthor">F. D</span>, <span class="refTitle">"Hybrid signature spectrums"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-pquip-hybrid-signature-spectrums-07</span>, <time datetime="2025-06-20" class="refDate">20 June 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-pquip-hybrid-signature-spectrums-07">https://datatracker.ietf.org/doc/html/draft-ietf-pquip-hybrid-signature-spectrums-07</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-pquip-pqc-hsm-constrained">[I-D.ietf-pquip-pqc-hsm-constrained]</dt>
         <dd>
@@ -2079,6 +2072,10 @@ present, valid, and not replaced by weaker alternatives.<a href="#section-12.3-2
         <dd>
 <span class="refAuthor">Reddy.K, T.</span>, <span class="refAuthor">Hollebeek, T.</span>, <span class="refAuthor">Gray, J.</span>, and <span class="refAuthor">S. Fluhrer</span>, <span class="refTitle">"Use of Composite ML-DSA in TLS 1.3"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-reddy-tls-composite-mldsa-05</span>, <time datetime="2025-07-04" class="refDate">4 July 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-reddy-tls-composite-mldsa-05">https://datatracker.ietf.org/doc/html/draft-reddy-tls-composite-mldsa-05</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="ML-DSA">[ML-DSA]</dt>
+        <dd>
+<span class="refAuthor">Massimo, J.</span>, <span class="refAuthor">Kampanakis, P.</span>, <span class="refAuthor">Turner, S.</span>, and <span class="refAuthor">B. Westerbaan</span>, <span class="refTitle">"Internet X.509 Public Key Infrastructure - Algorithm Identifiers for the Module-Lattice-Based Digital Signature Algorithm (ML-DSA)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-lamps-dilithium-certificates-13</span>, <time datetime="2025-09-30" class="refDate">30 September 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-lamps-dilithium-certificates-13">https://datatracker.ietf.org/doc/html/draft-ietf-lamps-dilithium-certificates-13</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC2119">[RFC2119]</dt>
         <dd>
 <span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc2119">https://www.rfc-editor.org/rfc/rfc2119</a>&gt;</span>. </dd>
@@ -2092,8 +2089,12 @@ present, valid, and not replaced by weaker alternatives.<a href="#section-12.3-2
 <span class="refAuthor">Rescorla, E.</span>, <span class="refTitle">"The Transport Layer Security (TLS) Protocol Version 1.3"</span>, <span class="seriesInfo">RFC 8446</span>, <span class="seriesInfo">DOI 10.17487/RFC8446</span>, <time datetime="2018-08" class="refDate">August 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8446">https://www.rfc-editor.org/rfc/rfc8446</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC9763">[RFC9763]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">Becker, A.</span>, <span class="refAuthor">Guthrie, R.</span>, and <span class="refAuthor">M. Jenkins</span>, <span class="refTitle">"Related Certificates for Use in Multiple Authentications within a Protocol"</span>, <span class="seriesInfo">RFC 9763</span>, <span class="seriesInfo">DOI 10.17487/RFC9763</span>, <time datetime="2025-06" class="refDate">June 2025</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9763">https://www.rfc-editor.org/rfc/rfc9763</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="SLH-DSA">[SLH-DSA]</dt>
+      <dd>
+<span class="refAuthor">Bashiri, K.</span>, <span class="refAuthor">Fluhrer, S.</span>, <span class="refAuthor">Gazdag, S.</span>, <span class="refAuthor">Van Geest, D.</span>, and <span class="refAuthor">S. Kousidis</span>, <span class="refTitle">"Internet X.509 Public Key Infrastructure: Algorithm Identifiers for SLH-DSA"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-lamps-x509-slhdsa-09</span>, <time datetime="2025-06-30" class="refDate">30 June 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-lamps-x509-slhdsa-09">https://datatracker.ietf.org/doc/html/draft-ietf-lamps-x509-slhdsa-09</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
@@ -2131,6 +2132,10 @@ present, valid, and not replaced by weaker alternatives.<a href="#section-12.3-2
 <dt id="I-D.yusef-tls-pqt-dual-certs">[I-D.yusef-tls-pqt-dual-certs]</dt>
         <dd>
 <span class="refAuthor">Shekh-Yusef, R.</span>, <span class="refAuthor">Tschofenig, H.</span>, <span class="refAuthor">Ounsworth, M.</span>, <span class="refAuthor">Sheffer, Y.</span>, <span class="refAuthor">Reddy.K, T.</span>, and <span class="refAuthor">Y. Rosomakho</span>, <span class="refTitle">"Post-Quantum Traditional (PQ/T) Hybrid Authentication with Dual Certificates in TLS 1.3"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-yusef-tls-pqt-dual-certs-00</span>, <time datetime="2025-06-18" class="refDate">18 June 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-yusef-tls-pqt-dual-certs-00">https://datatracker.ietf.org/doc/html/draft-yusef-tls-pqt-dual-certs-00</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RELATED-CERTS">[RELATED-CERTS]</dt>
+        <dd>
+<span class="refAuthor">Becker, A.</span>, <span class="refAuthor">Guthrie, R.</span>, and <span class="refAuthor">M. Jenkins</span>, <span class="refTitle">"Related Certificates for Use in Multiple Authentications within a Protocol"</span>, <span class="seriesInfo">RFC 9763</span>, <span class="seriesInfo">DOI 10.17487/RFC9763</span>, <time datetime="2025-06" class="refDate">June 2025</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9763">https://www.rfc-editor.org/rfc/rfc9763</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC8555">[RFC8555]</dt>
         <dd>
