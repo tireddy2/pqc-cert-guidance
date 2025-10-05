@@ -1,5 +1,5 @@
 ---
-title: Guidance for Migration to Composite, Dual, or PQC-Only Authentication
+title: Guidance for Migration to Composite, Dual, or PQC-Only Certificate Authentication
 abbrev: PQC Signature Migration Guidance
 docname: draft-reddy-pquip-pqc-signature-migration-latest
 category: info
