@@ -313,19 +313,6 @@ Finally, PQC-only deployments remain feasible only once PQC algorithms
 are fully standardized, broadly implemented, and supported by hardware
 security modules, operating systems, and major application ecosystems.
 
-# Negotiation of Authentication Schemes
-
-During the transition, endpoints may support multiple authentication
-schemes (e.g., traditional, composite, dual, or PQC-only). Clients
-advertise their supported schemes using the protocol's negotiation
-mechanism (for example, the 'signature_algorithms' extension in TLS
-{{!RFC8446}}), and servers select from the client's list or fail the
-authentication if no common option is available. In practice,
-deployments are expected to prefer PQC-only or hybrid signature scheme
-over traditional ones, with the choice between PQC-only
-and hybrid signature scheme influenced by regulatory mandates or
-by whether defense-in-depth is prioritized.
-
 # Operational and Ecosystem Considerations
 
 Migration to post-quantum authentication requires addressing broader
@@ -451,6 +438,37 @@ resource-constrained devices.
 
 # Transition Considerations
 
+Migration to post-quantum authentication will proceed gradually across
+protocols, products, and organizations. During this period, endpoints
+may support multiple authentication models (traditional, composite,
+dual, or PQC-only) depending on their stage of deployment. The
+transition requires careful coordination of certificate management,
+protocol negotiation, and policy enforcement to maintain security and
+interoperability throughout the migration.
+
+## Negotiation and Interoperability
+
+During coexistence, endpoints must be able to discover which
+authentication mechanisms the peer supports. In most protocols, this is
+achieved through existing negotiation mechanisms such as, the
+`signature_algorithms` extension in {{?TLS=RFC8446}}. Clients
+advertise their supported algorithms and certificate types, and servers
+select the strongest mutually supported option or fail authentication if
+no common algorithm is found.
+
+Hybrid or PQC-capable deployments SHOULD prefer PQC-only or hybrid
+signatures over traditional ones whenever possible. The specific choice
+between PQC-only and hybrid mechanisms may be influenced by regulatory
+guidance, national cryptography policies, or the organization's appetite
+for defense-in-depth during early adoption.
+
+Negotiation mechanisms MUST also include downgrade protection so
+that an adversary cannot suppress PQC or hybrid options and force a
+fallback to traditional signatures. TLS already provide such
+protection through transcript binding of the handshake messages that
+carry the algorithm negotiation results, but new or proprietary protocols
+have to ensure similar safeguards.
+
 A deployment will typically adopt one of three models, PQC-only certificates,
 dual certificates, or composite certificates.
 
@@ -459,8 +477,7 @@ The choice depends on several factors, including:
 - Frequency and duration of system upgrades
 - The expected timeline for CRQC availability
 - Operational flexibility to deploy, enable, and retire PQC algorithms
-- Availability of automated certificate provisioning mechanisms
-  (e.g., ACME {{?RFC8555}}, CMP {{?RFC9810}})
+- Availability of automated certificate provisioning mechanisms such as {{?ACME=RFC8555}} and {{?CMP=RFC9810}}
 
 Deployments with limited flexibility benefit from hybrid signature schemes.
 These approaches mitigate risks associated with delays in
@@ -483,18 +500,17 @@ However, each approach comes with long-term implications.
 Composite certificate embeds both a traditional and a PQC algorithm into a
 single certificate and signature. However, once a traditional algorithm is no
 longer secure against CRQCs, it will have to be deprecated. For discussion
-of the security impact in security protocols (e.g., TLS, IKEv2)
-versus artifact-signing use cases, see Section {{suf}}.
+of the security impact in security protocols, such as TLS and IKEv2,
+versus artifact-signing use cases, see {{suf}}.
 
 To complete the transition to a fully quantum-resistant authentication model,
 operators will need a PQC CA root and CA intermediates, resulting in PQC-only
 end-entity certificates.
 
-Protocol configurations (e.g., TLS, IKEv2) will likewise
-need to be updated to negotiate only PQC-based authentication, ensuring that
-the entire certification path and protocol handshake are cryptographically
-resistant to quantum attacks and no longer depend on any traditional
-algorithms.
+Protocol configurations will likewise need to be updated to negotiate only
+PQC-based authentication, ensuring that the entire certification path and
+protocol handshake are cryptographically resistant to quantum attacks and
+no longer depend on any traditional algorithms.
 
 ## Dual Certificates
 
@@ -517,8 +533,8 @@ security properties degrade once one component of the hybrid is no longer
 secure.
 
 In composite certificates, the composite signature will no longer achieve Strong
-Unforgeability under chosen message attack (SUF-CMA) (see Section 10.1.1 of {{?I-D.ietf-pquip-pqc-engineers}}
-and Section 10.2 of {{!I-D.ietf-lamps-pq-composite-sigs}}). A CRQC can forge the
+Unforgeability under chosen message attack (SUF-CMA) (see {{Section 10.1.1 of ?PQC-ENGINEERS=I-D.ietf-pquip-pqc-engineers}}
+and {{Section 10.2 of !I-D.ietf-lamps-pq-composite-sigs}}). A CRQC can forge the
 broken traditional signature component (s1*) over a message (m). That forged
 component can then be combined with the valid post-quantum component (s2) to
 produce a new composite signature (m, (s1*, s2)) that verifies successfully,
@@ -540,9 +556,9 @@ composite signatures can exist for the same artifact, undermining the
 which composite signature is authentic, complicating long-term
 non-repudiation guarantees.
 
-Hybrid signature schemes should not be used for artifact signing (e.g., software packages),
+Hybrid signature schemes should not be used for artifact signing (such as software packages),
 since the loss of SUF-CMA makes them unsuitable for long-term non-repudiation.
-In security protocols (e.g., TLS, IKEv2), hybrid signature schemes may continue to
+In security protocols, hybrid signature schemes may continue to
 function for a limited time after a CRQC is realized, since they still provide
 impersonation resistance as long as one component algorithm remains secure.
 This situation does not constitute a zero-day vulnerability requiring an
