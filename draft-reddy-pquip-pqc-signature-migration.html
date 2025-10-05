@@ -1521,25 +1521,26 @@ and potential downgrade risks if only one chain is validated.<a href="#section-5
       <h2 id="name-pqc-only-certificates">
 <a href="#section-6" class="section-number selfRef">6. </a><a href="#name-pqc-only-certificates" class="section-name selfRef">PQC-Only Certificates</a>
       </h2>
-<p id="section-6-1">PQC-only certificates represent the final stage of migration. They use
-only a post-quantum algorithm and provide no fallback to traditional algorithms.<a href="#section-6-1" class="pilcrow">¶</a></p>
+<p id="section-6-1">PQC-only certificates represent the final stage of migration.
+They use exclusively post-quantum cryptographic algorithms for both
+public keys and signatures, providing no fallback to traditional
+algorithms.  Once adopted at scale, they eliminate hybrid complexity and
+rely entirely on quantum-resistant primitives for authentication.<a href="#section-6-1" class="pilcrow">¶</a></p>
 <div id="advantages-2">
 <section id="section-6.1">
         <h3 id="name-advantages-3">
 <a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-advantages-3" class="section-name selfRef">Advantages</a>
         </h3>
-<ul class="compact">
-<li class="compact" id="section-6.1-1.1">
-            <p id="section-6.1-1.1.1">Simpler model without the complexity of hybrid signature scheme.<a href="#section-6.1-1.1.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="compact" id="section-6.1-1.2">
-            <p id="section-6.1-1.2.1">Forward-looking design, avoiding eventual deprecation of traditional
-algorithms.<a href="#section-6.1-1.2.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="compact" id="section-6.1-1.3">
-            <p id="section-6.1-1.3.1">Reduced operational burden compared to managing dual or composite certificates.<a href="#section-6.1-1.3.1" class="pilcrow">¶</a></p>
-</li>
-        </ul>
+<p id="section-6.1-1">The PQC-only model offers the simplest and most forward-looking
+architecture. It removes all dependency on classical algorithms, thus
+avoiding future deprecation or phased-out support for RSA and ECC.
+Certificate management is streamlined, as there is only one algorithm
+family to provision, monitor, and renew. Operational overhead decreases
+compared to hybrid or dual deployments, since each entity maintains a
+single certificate chain and consistent cryptographic policy.<a href="#section-6.1-1" class="pilcrow">¶</a></p>
+<p id="section-6.1-2">PQC-only certificates also enable long-term assurance: the entire
+certificate path is verifiable using post-quantum signatures, ensuring
+uniform resistance against quantum adversaries.<a href="#section-6.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="disadvantages-2">
@@ -1547,19 +1548,25 @@ algorithms.<a href="#section-6.1-1.2.1" class="pilcrow">¶</a></p>
         <h3 id="name-disadvantages-3">
 <a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-disadvantages-3" class="section-name selfRef">Disadvantages</a>
         </h3>
-<ul class="compact">
-<li class="compact" id="section-6.2-1.1">
-            <p id="section-6.2-1.1.1">Risk if a deployed PQC algorithm is broken due to a bug.<a href="#section-6.2-1.1.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="compact" id="section-6.2-1.2">
-            <p id="section-6.2-1.2.1">No interoperability with legacy systems that only support traditional
-algorithms.<a href="#section-6.2-1.2.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="compact" id="section-6.2-1.3">
-            <p id="section-6.2-1.3.1">Deployment is only feasible once PQC algorithms are standardized and
-broadly supported across the ecosystem.<a href="#section-6.2-1.3.1" class="pilcrow">¶</a></p>
-</li>
-        </ul>
+<p id="section-6.2-1">The primary risk of PQC-only deployments is algorithmic fragility. If a
+vulnerability or cryptanalytic weakness is discovered in a deployed PQC
+scheme, there is no classical fallback for continued authentication.
+Protocols and infrastructures must therefore maintain strong
+crypto-agility and be prepared to replace algorithms rapidly if needed.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
+<p id="section-6.2-2">Interoperability with legacy systems becomes impossible once classical
+algorithms are fully removed. PQC-only certificates can only be used in
+ecosystems where all endpoints, Certification Authorities, and
+trust anchors already support post-quantum algorithms and corresponding
+signature verification.<a href="#section-6.2-2" class="pilcrow">¶</a></p>
+<p id="section-6.2-3">Adoption may also be uneven across jurisdictions. Regulatory frameworks
+and certification programs may not recognize the same PQC
+algorithms at the same time. Divergent compliance regimes could delay
+global deployment or require organizations operating in multiple
+regions to maintain mixed trust infrastructures until regulatory
+alignment is achieved.<a href="#section-6.2-3" class="pilcrow">¶</a></p>
+<p id="section-6.2-4">Finally, PQC-only deployments remain feasible only once PQC algorithms
+are fully standardized, broadly implemented, and supported by hardware
+security modules, operating systems, and major application ecosystems.<a href="#section-6.2-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>

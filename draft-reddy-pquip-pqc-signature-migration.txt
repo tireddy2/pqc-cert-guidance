@@ -324,24 +324,52 @@ Table of Contents
 6.  PQC-Only Certificates
 
    PQC-only certificates represent the final stage of migration.  They
-   use only a post-quantum algorithm and provide no fallback to
-   traditional algorithms.
+   use exclusively post-quantum cryptographic algorithms for both public
+   keys and signatures, providing no fallback to traditional algorithms.
+   Once adopted at scale, they eliminate hybrid complexity and rely
+   entirely on quantum-resistant primitives for authentication.
 
 6.1.  Advantages
 
-   *  Simpler model without the complexity of hybrid signature scheme.
-   *  Forward-looking design, avoiding eventual deprecation of
-      traditional algorithms.
-   *  Reduced operational burden compared to managing dual or composite
-      certificates.
+   The PQC-only model offers the simplest and most forward-looking
+   architecture.  It removes all dependency on classical algorithms,
+   thus avoiding future deprecation or phased-out support for RSA and
+   ECC.  Certificate management is streamlined, as there is only one
+   algorithm family to provision, monitor, and renew.  Operational
+   overhead decreases compared to hybrid or dual deployments, since each
+   entity maintains a single certificate chain and consistent
+   cryptographic policy.
+
+   PQC-only certificates also enable long-term assurance: the entire
+   certificate path is verifiable using post-quantum signatures,
+   ensuring uniform resistance against quantum adversaries.
 
 6.2.  Disadvantages
 
-   *  Risk if a deployed PQC algorithm is broken due to a bug.
-   *  No interoperability with legacy systems that only support
-      traditional algorithms.
-   *  Deployment is only feasible once PQC algorithms are standardized
-      and broadly supported across the ecosystem.
+   The primary risk of PQC-only deployments is algorithmic fragility.
+   If a vulnerability or cryptanalytic weakness is discovered in a
+   deployed PQC scheme, there is no classical fallback for continued
+   authentication.  Protocols and infrastructures must therefore
+   maintain strong crypto-agility and be prepared to replace algorithms
+   rapidly if needed.
+
+   Interoperability with legacy systems becomes impossible once
+   classical algorithms are fully removed.  PQC-only certificates can
+   only be used in ecosystems where all endpoints, Certification
+   Authorities, and trust anchors already support post-quantum
+   algorithms and corresponding signature verification.
+
+   Adoption may also be uneven across jurisdictions.  Regulatory
+   frameworks and certification programs may not recognize the same PQC
+   algorithms at the same time.  Divergent compliance regimes could
+   delay global deployment or require organizations operating in
+   multiple regions to maintain mixed trust infrastructures until
+   regulatory alignment is achieved.
+
+   Finally, PQC-only deployments remain feasible only once PQC
+   algorithms are fully standardized, broadly implemented, and supported
+   by hardware security modules, operating systems, and major
+   application ecosystems.
 
 7.  Negotiation of Authentication Schemes
 
