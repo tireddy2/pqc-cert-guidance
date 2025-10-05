@@ -116,18 +116,33 @@ defined in {{!HYBRID-SPECTRUMS=I-D.ietf-pquip-hybrid-signature-spectrums}}.
 
 # Motivation for PQC Signatures
 
-Unlike "Harvest Now, Decrypt Later" attacks that target confidentiality,
-this risk directly impacts authentication and trust. Once a CRQC is
-available, the continued use of traditional certificates becomes untenable.
-In practice, however, the availability of a CRQC may not be publicly disclosed.
-Similar to a zero-day vulnerability, an adversary could secretly exploit CRQC
-capabilities to compromise traditional certificates without alerting the wider
-ecosystem.
+Unlike "Harvest Now, Decrypt Later" attacks (see {{Section 7 of ?PQC-ENGINEERS=I-D.ietf-pquip-pqc-engineers}})
+that target the confidentiality of encrypted data, the threat to authentication arises
+only from the moment a CRQC becomes available. Compromise of authentication
+is therefore not retrospective: previously established identities and signatures
+cannot be forged in hindsight, but all future authentications using traditional
+algrotihms become insecure once a CRQC exists.
 
-Addressing this risk requires replacing traditional signatures with PQC signatures, which in turn
-demands ecosystem-wide upgrades involving cryptographic libraries, HSMs, TPMs, CAs, intermediate CAs,
-and dependent protocols. Because these transitions take years of planning, coordination, and
-investment, preparations will have to begin well before a CRQC is publicly known.
+Once a CRQC is available, continued reliance on traditional public-key
+algorithms (e.g., RSA, ECDSA) becomes untenable, as an attacker could forge
+digital signatures and impersonate legitimate entities. In practice, the
+availability of a CRQC may not be publicly disclosed. Similar to a zero-day
+vulnerability, an adversary could exploit quantum capabilities privately to
+compromise traditional certificates without alerting the wider ecosystem.
+
+Addressing this risk requires replacing traditional signatures with
+post-quantum (PQC) signatures.  Doing so entails ecosystem-wide upgrades across:
+
+* Software components: cryptographic libraries and protocol
+  implementations;
+* Hardware security devices: Hardware Security Modules (HSMs) and
+  Trusted Platform Modules (TPMs);
+* Public Key Infrastructure (PKI): Certification Authorities (CAs),
+  intermediate CAs, and trust anchors;
+* Dependent protocols: TLS ({{?TLS=I-D.ietf-tlsrfc8446bis}}, {{?DTLS=RFC9147}}), {{?IKEv2=RFC5996}}, and JOSE/COSE.
+
+Because these transitions require years of planning, coordination, and
+investment, preparations MUST begin well before a CRQC is publicly known.
 
 # Composite certificates
 
