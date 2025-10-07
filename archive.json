@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-05T01:51:11.172597+00:00",
+  "timestamp": "2025-10-07T01:42:06.879258+00:00",
   "repo": "tireddy2/pqc-cert-guidance",
   "labels": [
     {
@@ -544,208 +544,336 @@
       "id": "PR_kwDOPwC-uc6sFu5j",
       "title": "Clarified title",
       "url": "https://github.com/tireddy2/pqc-cert-guidance/pull/18",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "yaroslavros",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Since the document talks only about Certificate based authentication, this should be in the title. There are many other authentication techniques that are out of scope.",
       "createdAt": "2025-10-04T12:52:20Z",
-      "updatedAt": "2025-10-04T12:52:20Z",
+      "updatedAt": "2025-10-05T06:08:32Z",
       "baseRepository": "tireddy2/pqc-cert-guidance",
       "baseRefName": "main",
       "baseRefOid": "69dc699a36ca3d15b661030de613af8c12a26b31",
       "headRepository": "yaroslavros/pqc-cert-guidance",
       "headRefName": "main",
       "headRefOid": "785619cc5431097490f2a79f272cecad388d4371",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-10-05T06:08:32Z",
+      "mergedAt": "2025-10-05T06:08:31Z",
+      "mergedBy": "tireddy2",
+      "mergeCommit": {
+        "oid": "b25fc9173987ad294d7c7847adb81310f5677b78"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOPwC-uc7E0-pw",
+          "commit": {
+            "abbreviatedOid": "785619c"
+          },
+          "author": "tireddy2",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-10-05T06:08:25Z",
+          "updatedAt": "2025-10-05T06:08:25Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 19,
       "id": "PR_kwDOPwC-uc6sF4OH",
       "title": "Misc updates to introduction",
       "url": "https://github.com/tireddy2/pqc-cert-guidance/pull/19",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "yaroslavros",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Various minor updates to tighten language a bit",
       "createdAt": "2025-10-04T13:22:33Z",
-      "updatedAt": "2025-10-04T13:22:34Z",
+      "updatedAt": "2025-10-05T06:10:04Z",
       "baseRepository": "tireddy2/pqc-cert-guidance",
       "baseRefName": "main",
       "baseRefOid": "69dc699a36ca3d15b661030de613af8c12a26b31",
       "headRepository": "yaroslavros/pqc-cert-guidance",
       "headRefName": "introduction-update",
       "headRefOid": "d85268fd08e0cd1269733f64435cdacb142c0e1c",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-10-05T06:10:04Z",
+      "mergedAt": "2025-10-05T06:10:04Z",
+      "mergedBy": "tireddy2",
+      "mergeCommit": {
+        "oid": "efe14310316c555e422532b22f9426b8e0d11dce"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOPwC-uc7E0-ug",
+          "commit": {
+            "abbreviatedOid": "d85268f"
+          },
+          "author": "tireddy2",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-10-05T06:09:57Z",
+          "updatedAt": "2025-10-05T06:09:57Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 20,
       "id": "PR_kwDOPwC-uc6sF8a8",
       "title": "Various updates to motivation section",
       "url": "https://github.com/tireddy2/pqc-cert-guidance/pull/20",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "yaroslavros",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-10-04T13:40:36Z",
-      "updatedAt": "2025-10-04T13:40:37Z",
+      "updatedAt": "2025-10-05T06:15:40Z",
       "baseRepository": "tireddy2/pqc-cert-guidance",
       "baseRefName": "main",
       "baseRefOid": "69dc699a36ca3d15b661030de613af8c12a26b31",
       "headRepository": "yaroslavros/pqc-cert-guidance",
       "headRefName": "motivation-update",
       "headRefOid": "2ea16a21ccb572f4ddae5380c0d9e6d6aee08855",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-10-05T06:15:40Z",
+      "mergedAt": "2025-10-05T06:15:40Z",
+      "mergedBy": "tireddy2",
+      "mergeCommit": {
+        "oid": "abf5c55d3b47ff4dce81252347a6a2f3d01df65d"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOPwC-uc7E0_AM",
+          "commit": {
+            "abbreviatedOid": "2ea16a2"
+          },
+          "author": "tireddy2",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "Looks good. ",
+          "createdAt": "2025-10-05T06:15:32Z",
+          "updatedAt": "2025-10-05T06:15:32Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 21,
       "id": "PR_kwDOPwC-uc6sGBTv",
       "title": "Various updates to composite certificates section",
       "url": "https://github.com/tireddy2/pqc-cert-guidance/pull/21",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "yaroslavros",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-10-04T14:00:49Z",
-      "updatedAt": "2025-10-04T14:01:46Z",
+      "updatedAt": "2025-10-05T06:28:34Z",
       "baseRepository": "tireddy2/pqc-cert-guidance",
       "baseRefName": "main",
       "baseRefOid": "69dc699a36ca3d15b661030de613af8c12a26b31",
       "headRepository": "yaroslavros/pqc-cert-guidance",
       "headRefName": "composite-update",
       "headRefOid": "6ffb31be6cd77348dd004e9688bc59fde6ba9f00",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-10-05T06:28:34Z",
+      "mergedAt": "2025-10-05T06:28:34Z",
+      "mergedBy": "tireddy2",
+      "mergeCommit": {
+        "oid": "86a829e210ede99aa1cf5b349f839d035f16b2c4"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOPwC-uc7E0_pr",
+          "commit": {
+            "abbreviatedOid": "6ffb31b"
+          },
+          "author": "tireddy2",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-10-05T06:28:27Z",
+          "updatedAt": "2025-10-05T06:28:27Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 22,
       "id": "PR_kwDOPwC-uc6sGEpe",
       "title": "Various updates to dual certificates section",
       "url": "https://github.com/tireddy2/pqc-cert-guidance/pull/22",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "yaroslavros",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-10-04T14:17:42Z",
-      "updatedAt": "2025-10-04T14:17:43Z",
+      "updatedAt": "2025-10-05T06:36:57Z",
       "baseRepository": "tireddy2/pqc-cert-guidance",
       "baseRefName": "main",
       "baseRefOid": "69dc699a36ca3d15b661030de613af8c12a26b31",
       "headRepository": "yaroslavros/pqc-cert-guidance",
       "headRefName": "dual-update",
       "headRefOid": "b6aeae6f1fc3646cdd2c18a7c25ba6ec58cce169",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-10-05T06:36:57Z",
+      "mergedAt": "2025-10-05T06:36:57Z",
+      "mergedBy": "tireddy2",
+      "mergeCommit": {
+        "oid": "540ff2489918c0eabcaf8714e40574f07fe42d62"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOPwC-uc7E1AE2",
+          "commit": {
+            "abbreviatedOid": "b6aeae6"
+          },
+          "author": "tireddy2",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-10-05T06:36:51Z",
+          "updatedAt": "2025-10-05T06:36:51Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 23,
       "id": "PR_kwDOPwC-uc6sGFv2",
       "title": "PQC-only certificates section update",
       "url": "https://github.com/tireddy2/pqc-cert-guidance/pull/23",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "yaroslavros",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-10-04T14:23:34Z",
-      "updatedAt": "2025-10-04T14:25:02Z",
+      "updatedAt": "2025-10-05T06:43:21Z",
       "baseRepository": "tireddy2/pqc-cert-guidance",
       "baseRefName": "main",
       "baseRefOid": "69dc699a36ca3d15b661030de613af8c12a26b31",
       "headRepository": "yaroslavros/pqc-cert-guidance",
       "headRefName": "pqc-only-update",
       "headRefOid": "e2116dd3d89a020e6811f6eaeb64e3e61a23447c",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-10-05T06:43:20Z",
+      "mergedAt": "2025-10-05T06:43:20Z",
+      "mergedBy": "tireddy2",
+      "mergeCommit": {
+        "oid": "03590a5334c4f3151bec39d71118ec9ae0a34a30"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOPwC-uc7E1AOW",
+          "commit": {
+            "abbreviatedOid": "e2116dd"
+          },
+          "author": "tireddy2",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-10-05T06:39:35Z",
+          "updatedAt": "2025-10-05T06:39:35Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 24,
       "id": "PR_kwDOPwC-uc6sGGg7",
       "title": "Added a co-author",
       "url": "https://github.com/tireddy2/pqc-cert-guidance/pull/24",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "yaroslavros",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-10-04T14:27:35Z",
-      "updatedAt": "2025-10-04T14:27:35Z",
+      "updatedAt": "2025-10-05T06:45:29Z",
       "baseRepository": "tireddy2/pqc-cert-guidance",
       "baseRefName": "main",
       "baseRefOid": "69dc699a36ca3d15b661030de613af8c12a26b31",
       "headRepository": "yaroslavros/pqc-cert-guidance",
       "headRefName": "add-author",
       "headRefOid": "cbdb960a3a13b8980bd971268d8ab9ce7635929c",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-10-05T06:45:29Z",
+      "mergedAt": "2025-10-05T06:45:29Z",
+      "mergedBy": "tireddy2",
+      "mergeCommit": {
+        "oid": "c9ca06746ad0fd30513258c5ac8970b6d4c4cfac"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOPwC-uc7E1AjY",
+          "commit": {
+            "abbreviatedOid": "cbdb960"
+          },
+          "author": "tireddy2",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-10-05T06:45:22Z",
+          "updatedAt": "2025-10-05T06:45:22Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 25,
       "id": "PR_kwDOPwC-uc6sGKpD",
       "title": "Transition Considerations updates",
       "url": "https://github.com/tireddy2/pqc-cert-guidance/pull/25",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "yaroslavros",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Merged Negotiation and Interoperability into it as a sub-section.",
       "createdAt": "2025-10-04T14:42:24Z",
-      "updatedAt": "2025-10-04T14:42:25Z",
+      "updatedAt": "2025-10-05T06:48:28Z",
       "baseRepository": "tireddy2/pqc-cert-guidance",
       "baseRefName": "main",
       "baseRefOid": "69dc699a36ca3d15b661030de613af8c12a26b31",
       "headRepository": "yaroslavros/pqc-cert-guidance",
       "headRefName": "transition-update",
       "headRefOid": "023e7e94268eaa79175aba9f7421a66af0b11e52",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-10-05T06:48:28Z",
+      "mergedAt": "2025-10-05T06:48:28Z",
+      "mergedBy": "tireddy2",
+      "mergeCommit": {
+        "oid": "f10118b29c98de15073fbef08557bb3324c9b19d"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOPwC-uc7E1Au6",
+          "commit": {
+            "abbreviatedOid": "023e7e9"
+          },
+          "author": "tireddy2",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-10-05T06:48:22Z",
+          "updatedAt": "2025-10-05T06:48:22Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
