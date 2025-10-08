@@ -475,18 +475,6 @@ transition requires careful coordination of certificate management,
 protocol negotiation, and policy enforcement to maintain security and
 interoperability throughout the migration.
 
-# ## Transition Logic Overview
-
-The migration to post-quantum authentication will occur gradually as
-relying parties and authenticated parties update their systems to
-support PQC algorithms. Because cryptographically relevant quantum
-computers (CRQCs) may be deployed without public disclosure, relying on
-traditional algorithms will become increasingly risky over time.
-Post-quantum security is achieved only when relying parties stop
-accepting traditional-only authentication. At that point, authenticated
-parties can also stop issuing or presenting traditional-only
-certificates.
-
 ## Transition Logic Overview
 
 The migration to post-quantum authentication will occur in phases as
