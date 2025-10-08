@@ -5,10 +5,10 @@
 PQUIP                                                           T. Reddy
 Internet-Draft                                                     Nokia
 Intended status: Informational                                   D. Wing
-Expires: 8 April 2026                                             Citrix
+Expires: 11 April 2026                                            Citrix
                                                             Y. Rosomakho
                                                                  Zscaler
-                                                          5 October 2025
+                                                          8 October 2025
 
 
  Guidance for Migration to Composite, Dual, or PQC-Only Authentication
@@ -52,7 +52,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 8 April 2026.
+   This Internet-Draft will expire on 11 April 2026.
 
 Copyright Notice
 
@@ -767,7 +767,7 @@ Table of Contents
 
 13.  Acknowledgments
 
-   Thanks to Martin McGrath, Suresh P.  Nair, and German Peinado for the
+   Thanks to Martin McGrath, Suresh P. Nair, and German Peinado for the
    detailed review.
 
 14.  References
@@ -778,9 +778,9 @@ Table of Contents
               Ounsworth, M., Gray, J., Pala, M., Klaußner, J., and S.
               Fluhrer, "Composite ML-DSA for use in X.509 Public Key
               Infrastructure", Work in Progress, Internet-Draft, draft-
-              ietf-lamps-pq-composite-sigs-09, 28 September 2025,
+              ietf-lamps-pq-composite-sigs-10, 5 October 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-lamps-
-              pq-composite-sigs-09>.
+              pq-composite-sigs-10>.
 
    [HYBRID-SPECTRUMS]
               Bindel, N., Hale, B., Connolly, D., and F. D, "Hybrid
@@ -800,17 +800,17 @@ Table of Contents
               Reddy.K, T., Smyslov, V., and S. Fluhrer, "Signature
               Authentication in the Internet Key Exchange Version 2
               (IKEv2) using PQC", Work in Progress, Internet-Draft,
-              draft-ietf-ipsecme-ikev2-pqc-auth-03, 29 August 2025,
+              draft-ietf-ipsecme-ikev2-pqc-auth-04, 5 October 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-ipsecme-
-              ikev2-pqc-auth-03>.
+              ikev2-pqc-auth-04>.
 
    [I-D.ietf-lamps-pq-composite-sigs]
               Ounsworth, M., Gray, J., Pala, M., Klaußner, J., and S.
               Fluhrer, "Composite ML-DSA for use in X.509 Public Key
               Infrastructure", Work in Progress, Internet-Draft, draft-
-              ietf-lamps-pq-composite-sigs-09, 28 September 2025,
+              ietf-lamps-pq-composite-sigs-10, 5 October 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-lamps-
-              pq-composite-sigs-09>.
+              pq-composite-sigs-10>.
 
    [I-D.ietf-pquip-pqc-hsm-constrained]
               Reddy.K, T., Wing, D., S, B., and K. Kwiatkowski,
