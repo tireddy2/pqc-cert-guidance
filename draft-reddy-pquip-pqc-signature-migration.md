@@ -108,6 +108,15 @@ certificate models and the PQC-only model depending on the deployment
 context, the readiness of the supporting ecosystem, and security
 requirements.
 
+It is important to note that the use of PQC-only certificates, composite
+certificates, or the dual-certificate model alone does not guarantee
+post-quantum security. As long as relying parties continue to trust or
+accept traditional-only certificates, an attacker equipped with a CRQC
+can forge traditional certificates and impersonate an authenticated
+party, even if that party does not use a traditional certificate. Post-quantum security
+is achieved only when relying parties enforce policies that reject
+traditional-only authentication.
+
 # Conventions and Definitions
 
 {::boilerplate bcp14-tagged}
@@ -465,6 +474,32 @@ dual, or PQC-only) depending on their stage of deployment. The
 transition requires careful coordination of certificate management,
 protocol negotiation, and policy enforcement to maintain security and
 interoperability throughout the migration.
+
+# ## Transition Logic Overview
+
+The migration to post-quantum authentication will occur gradually as
+relying parties and authenticated parties update their systems to
+support PQC algorithms. Because cryptographically relevant quantum
+computers (CRQCs) may be deployed without public disclosure, relying on
+traditional algorithms will become increasingly risky over time.
+Post-quantum security is achieved only when relying parties stop
+accepting traditional-only authentication. At that point, authenticated
+parties can also stop issuing or presenting traditional-only
+certificates.
+
+## Transition Logic Overview
+
+The migration to post-quantum authentication will occur in phases as
+organizations adopt PQC algorithms and update their infrastructures.
+Because CRQCs may be deployed without public disclosure, continued
+reliance on traditional algorithms will become increasingly risky.
+During the transition, dual certificates enable interoperability between
+PQC-capable and legacy systems, while composite certificates provide
+hybrid authentication within upgraded ecosystems. These approaches serve
+as intermediate steps toward PQC-only deployments. Post-quantum security
+is achieved only when relying parties stop accepting traditional-only
+authentication. At that point, authenticated parties can also stop
+issuing or presenting traditional-only certificates.
 
 ## Negotiation and Interoperability
 
