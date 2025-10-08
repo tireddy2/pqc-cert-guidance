@@ -176,7 +176,7 @@ Table of Contents
    becomes available.  Compromise of authentication is therefore not
    retrospective: previously established identities and signatures
    cannot be forged in hindsight, but all future authentications using
-   traditional algrotihms become insecure once a CRQC exists.
+   traditional algrorithms become insecure once a CRQC exists.
 
    Once a CRQC is available, continued reliance on traditional public-
    key algorithms (e.g., RSA, ECDSA) becomes untenable, as an attacker
