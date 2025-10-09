@@ -5,10 +5,10 @@
 PQUIP                                                           T. Reddy
 Internet-Draft                                                     Nokia
 Intended status: Informational                                   D. Wing
-Expires: 11 April 2026                                            Citrix
+Expires: 12 April 2026                                            Citrix
                                                             Y. Rosomakho
                                                                  Zscaler
-                                                          8 October 2025
+                                                          9 October 2025
 
 
  Guidance for Migration to Composite, Dual, or PQC-Only Authentication
@@ -52,7 +52,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 11 April 2026.
+   This Internet-Draft will expire on 12 April 2026.
 
 Copyright Notice
 
@@ -143,7 +143,7 @@ Table of Contents
       certificates, one using a traditional algorithm and one using a
       PQC algorithm, issued for the same identity, presented and
       validated together during authentication.  Some protocols may
-      requeire these certificates to include the RelatedCertificate
+      require these certificates to include the RelatedCertificate
       extension [RELATED-CERTS] to ensure that both refer to the same
       identity and binding.
 
