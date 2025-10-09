@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-07T01:42:06.879258+00:00",
+  "timestamp": "2025-10-09T01:43:06.805571+00:00",
   "repo": "tireddy2/pqc-cert-guidance",
   "labels": [
     {
@@ -872,6 +872,99 @@
           "createdAt": "2025-10-05T06:48:22Z",
           "updatedAt": "2025-10-05T06:48:22Z",
           "comments": []
+        }
+      ]
+    },
+    {
+      "number": 26,
+      "id": "PR_kwDOPwC-uc6so0P5",
+      "title": "Address comments from Ekr",
+      "url": "https://github.com/tireddy2/pqc-cert-guidance/pull/26",
+      "state": "OPEN",
+      "author": "tireddy2",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-10-08T07:33:11Z",
+      "updatedAt": "2025-10-08T18:12:25Z",
+      "baseRepository": "tireddy2/pqc-cert-guidance",
+      "baseRefName": "main",
+      "baseRefOid": "f10118b29c98de15073fbef08557bb3324c9b19d",
+      "headRepository": "tireddy2/pqc-cert-guidance",
+      "headRefName": "tireddy2-patch-16",
+      "headRefOid": "bbe9d67b68816ce374a79dcf08a16736cd814b38",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOPwC-uc7FoIyK",
+          "commit": {
+            "abbreviatedOid": "bbe9d67"
+          },
+          "author": "danwing",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-08T16:25:03Z",
+          "updatedAt": "2025-10-08T16:25:03Z",
+          "comments": [
+            {
+              "originalPosition": 18,
+              "body": "how does breakage of classic cryptography allow DNS cache poisoning?  Is this related to DNSSEC??  (seems not).  Perhaps it's related to TLS between authoritative servers, but I thought that was merely opportunistic in 2025; is that the attack?  I agree with the rest of the listed items but DNS cache  poisoning needs a citation or example or justification or something.  It's a bit \"left field\", as is.",
+              "createdAt": "2025-10-08T16:25:03Z",
+              "updatedAt": "2025-10-08T16:25:03Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPwC-uc7FoJOh",
+          "commit": {
+            "abbreviatedOid": "bbe9d67"
+          },
+          "author": "danwing",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-08T16:25:38Z",
+          "updatedAt": "2025-10-08T16:25:39Z",
+          "comments": [
+            {
+              "originalPosition": 38,
+              "body": "```suggestion\r\n  during authentication. Some protocols may require these certificates to include the RelatedCertificate extension {{?RELATED-CERTS=RFC9763}} to ensure that both refer to the same identity and binding.\r\n```",
+              "createdAt": "2025-10-08T16:25:38Z",
+              "updatedAt": "2025-10-08T16:25:39Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPwC-uc7Fpbp7",
+          "commit": {
+            "abbreviatedOid": "bbe9d67"
+          },
+          "author": "danwing",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-08T18:11:21Z",
+          "updatedAt": "2025-10-08T18:12:25Z",
+          "comments": [
+            {
+              "originalPosition": 62,
+              "body": "```suggestion\r\nas defined in {{intro}}.\r\n```",
+              "createdAt": "2025-10-08T18:11:21Z",
+              "updatedAt": "2025-10-08T18:12:25Z"
+            },
+            {
+              "originalPosition": 65,
+              "body": "```suggestion\r\ndual-certificate model as defined in {{intro}}.\r\n```",
+              "createdAt": "2025-10-08T18:11:33Z",
+              "updatedAt": "2025-10-08T18:12:25Z"
+            }
+          ]
         }
       ]
     }
