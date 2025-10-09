@@ -97,7 +97,7 @@ JOSE/COSE, and PKIX:
 
 * Dual-certificate model: A deployment model in which two separate certificates, one using a traditional
   algorithm and one using a PQC algorithm, issued for the same identity, presented and validated together
-  during authentication. Some protocols may requeire these certificates to include the RelatedCertificate extension {{?RELATED-CERTS=RFC9763}} to ensure that both refer to the same identity and binding.
+  during authentication. Some protocols may require these certificates to include the RelatedCertificate extension {{?RELATED-CERTS=RFC9763}} to ensure that both refer to the same identity and binding.
 
 Another approach is to use a PQC-only certificate which contains only a post-quantum
 public key and produces signatures using a PQC algorithm. Examples include {{!ML-DSA=I-D.ietf-lamps-dilithium-certificates}}
