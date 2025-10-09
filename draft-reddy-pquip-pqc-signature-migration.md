@@ -140,7 +140,7 @@ that target the confidentiality of encrypted data, the threat to authentication 
 only from the moment a CRQC becomes available. Compromise of authentication
 is therefore not retrospective: previously established identities and signatures
 cannot be forged in hindsight, but all future authentications using traditional
-algrotihms become insecure once a CRQC exists.
+algrorithms become insecure once a CRQC exists.
 
 Once a CRQC is available, continued reliance on traditional public-key
 algorithms (e.g., RSA, ECDSA) becomes untenable, as an attacker could forge
@@ -722,5 +722,5 @@ This document has no IANA actions.
 
 # Acknowledgments
 
-Thanks to Martin McGrath, Suresh P. Nair, Eric Rescorla, and German Peinado for the detailed review.
+Thanks to Martin McGrath, Suresh Nair, Eric Rescorla, and German Peinado for the detailed review.
 
