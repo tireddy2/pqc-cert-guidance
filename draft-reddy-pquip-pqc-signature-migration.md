@@ -125,7 +125,7 @@ This document uses the terms "composite certificates" and "PQC-only certificates
 as defined in {{intro}}.
 
 The term "dual certificates" in this document refers to the
-dual-certificate model as defined in the {{intro}}.
+dual-certificate model as defined in {{intro}}.
 
 Composite: A key, certificate, or signature that merges traditional
 and PQC algorithms into one object.
