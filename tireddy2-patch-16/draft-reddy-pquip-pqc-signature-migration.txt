@@ -175,10 +175,10 @@ Table of Contents
    capitals, as shown here.
 
    This document uses the terms "composite certificates" and "PQC-only
-   certificates" as defined in the Section 1.
+   certificates" as defined in Section 1.
 
    The term "dual certificates" in this document refers to the dual-
-   certificate model as defined in the Section 1.
+   certificate model as defined in Section 1.
 
    Composite: A key, certificate, or signature that merges traditional
    and PQC algorithms into one object.
