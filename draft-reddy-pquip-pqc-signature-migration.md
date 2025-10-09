@@ -122,7 +122,7 @@ traditional-only authentication.
 {::boilerplate bcp14-tagged}
 
 This document uses the terms "composite certificates" and "PQC-only certificates"
-as defined in the {{intro}}.
+as defined in {{intro}}.
 
 The term "dual certificates" in this document refers to the
 dual-certificate model as defined in the {{intro}}.
