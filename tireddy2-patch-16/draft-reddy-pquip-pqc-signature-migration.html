@@ -1322,7 +1322,7 @@ Certificates using composite ML-DSA are specified in <span>[<a href="#COMPOSITE-
         <li class="compact" id="section-1-4.2">
           <p id="section-1-4.2.1">Dual-certificate model: A deployment model in which two separate certificates, one using a traditional
 algorithm and one using a PQC algorithm, issued for the same identity, presented and validated together
-during authentication. Some protocols may requeire these certificates to include the RelatedCertificate extension <span>[<a href="#RELATED-CERTS" class="cite xref">RELATED-CERTS</a>]</span> to ensure that both refer to the same identity and binding.<a href="#section-1-4.2.1" class="pilcrow">¶</a></p>
+during authentication. Some protocols may require these certificates to include the RelatedCertificate extension <span>[<a href="#RELATED-CERTS" class="cite xref">RELATED-CERTS</a>]</span> to ensure that both refer to the same identity and binding.<a href="#section-1-4.2.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="section-1-5">Another approach is to use a PQC-only certificate which contains only a post-quantum
@@ -1352,9 +1352,9 @@ traditional-only authentication.<a href="#section-1-7" class="pilcrow">¶</a></p
 described in BCP 14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span> <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span> when, and only when, they
 appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶</a></p>
 <p id="section-2-2">This document uses the terms "composite certificates" and "PQC-only certificates"
-as defined in the <a href="#intro" class="auto internal xref">Section 1</a>.<a href="#section-2-2" class="pilcrow">¶</a></p>
+as defined in <a href="#intro" class="auto internal xref">Section 1</a>.<a href="#section-2-2" class="pilcrow">¶</a></p>
 <p id="section-2-3">The term "dual certificates" in this document refers to the
-dual-certificate model as defined in the <a href="#intro" class="auto internal xref">Section 1</a>.<a href="#section-2-3" class="pilcrow">¶</a></p>
+dual-certificate model as defined in <a href="#intro" class="auto internal xref">Section 1</a>.<a href="#section-2-3" class="pilcrow">¶</a></p>
 <p id="section-2-4">Composite: A key, certificate, or signature that merges traditional
 and PQC algorithms into one object.<a href="#section-2-4" class="pilcrow">¶</a></p>
 <p id="section-2-5">The terms hybrid signature scheme and hybrid signature are used as
@@ -1371,7 +1371,7 @@ that target the confidentiality of encrypted data, the threat to authentication 
 only from the moment a CRQC becomes available. Compromise of authentication
 is therefore not retrospective: previously established identities and signatures
 cannot be forged in hindsight, but all future authentications using traditional
-algrotihms become insecure once a CRQC exists.<a href="#section-3-1" class="pilcrow">¶</a></p>
+algorithms become insecure once a CRQC exists.<a href="#section-3-1" class="pilcrow">¶</a></p>
 <p id="section-3-2">Once a CRQC is available, continued reliance on traditional public-key
 algorithms (e.g., RSA, ECDSA) becomes untenable, as an attacker could forge
 digital signatures and impersonate legitimate entities. In practice, the

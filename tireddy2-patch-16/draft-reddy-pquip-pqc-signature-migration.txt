@@ -142,7 +142,7 @@ Table of Contents
       certificates, one using a traditional algorithm and one using a
       PQC algorithm, issued for the same identity, presented and
       validated together during authentication.  Some protocols may
-      requeire these certificates to include the RelatedCertificate
+      require these certificates to include the RelatedCertificate
       extension [RELATED-CERTS] to ensure that both refer to the same
       identity and binding.
 
@@ -174,10 +174,10 @@ Table of Contents
    capitals, as shown here.
 
    This document uses the terms "composite certificates" and "PQC-only
-   certificates" as defined in the Section 1.
+   certificates" as defined in Section 1.
 
    The term "dual certificates" in this document refers to the dual-
-   certificate model as defined in the Section 1.
+   certificate model as defined in Section 1.
 
    Composite: A key, certificate, or signature that merges traditional
    and PQC algorithms into one object.
@@ -193,7 +193,7 @@ Table of Contents
    becomes available.  Compromise of authentication is therefore not
    retrospective: previously established identities and signatures
    cannot be forged in hindsight, but all future authentications using
-   traditional algrotihms become insecure once a CRQC exists.
+   traditional algorithms become insecure once a CRQC exists.
 
    Once a CRQC is available, continued reliance on traditional public-
    key algorithms (e.g., RSA, ECDSA) becomes untenable, as an attacker
