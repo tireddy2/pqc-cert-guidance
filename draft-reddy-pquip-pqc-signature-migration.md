@@ -79,8 +79,7 @@ For data authentication, the primary concern is that adversaries who obtain a
 CRQC will be able to forge digital signatures produced by traditional
 public-key algorithms (e.g., RSA, ECDSA). Such forgeries enable a
 range of attacks, including on-path man-in-the-middle (MitM)
-attacks, and off-path attacks such as software-artifact forgery, DNS
-cache poisoning that redirects clients to attacker-controlled servers, and client
+attacks, and off-path attacks such as software-artifact forgery, and client
 impersonation in mutual TLS when a client private key is compromised. In addition,
 on-path adversaries can attempt active downgrade techniques (for example,
 suppressing PQC-only or hybrid signature schemes during negotiation) to force reliance on
@@ -97,7 +96,7 @@ JOSE/COSE, and PKIX:
 
 * Dual-certificate model: A deployment model in which two separate certificates, one using a traditional
   algorithm and one using a PQC algorithm, issued for the same identity, presented and validated together
-  during authentication. Some protocols may require these certificates to include the RelatedCertificate extension {{?RELATED-CERTS=RFC9763}} to ensure that both refer to the same identity and binding.
+  during authentication. Some protocols may requeire these certificates to include the RelatedCertificate extension {{?RELATED-CERTS=RFC9763}} to ensure that both refer to the same identity and binding.
 
 Another approach is to use a PQC-only certificate which contains only a post-quantum
 public key and produces signatures using a PQC algorithm. Examples include {{!ML-DSA=I-D.ietf-lamps-dilithium-certificates}}
@@ -122,10 +121,10 @@ traditional-only authentication.
 {::boilerplate bcp14-tagged}
 
 This document uses the terms "composite certificates" and "PQC-only certificates"
-as defined in {{intro}}.
+as defined in the {{intro}}.
 
 The term "dual certificates" in this document refers to the
-dual-certificate model as defined in {{intro}}.
+dual-certificate model as defined in the {{intro}}.
 
 Composite: A key, certificate, or signature that merges traditional
 and PQC algorithms into one object.
@@ -140,7 +139,7 @@ that target the confidentiality of encrypted data, the threat to authentication 
 only from the moment a CRQC becomes available. Compromise of authentication
 is therefore not retrospective: previously established identities and signatures
 cannot be forged in hindsight, but all future authentications using traditional
-algrorithms become insecure once a CRQC exists.
+algrotihms become insecure once a CRQC exists.
 
 Once a CRQC is available, continued reliance on traditional public-key
 algorithms (e.g., RSA, ECDSA) becomes untenable, as an attacker could forge
@@ -722,5 +721,5 @@ This document has no IANA actions.
 
 # Acknowledgments
 
-Thanks to Martin McGrath, Suresh Nair, Eric Rescorla, and German Peinado for the detailed review.
+Thanks to Martin McGrath, Suresh P. Nair, Eric Rescorla, and German Peinado for the detailed review.
 
