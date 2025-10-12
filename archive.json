@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-09T01:43:06.805571+00:00",
+  "timestamp": "2025-10-12T01:47:04.113369+00:00",
   "repo": "tireddy2/pqc-cert-guidance",
   "labels": [
     {
@@ -880,24 +880,26 @@
       "id": "PR_kwDOPwC-uc6so0P5",
       "title": "Address comments from Ekr",
       "url": "https://github.com/tireddy2/pqc-cert-guidance/pull/26",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "tireddy2",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-10-08T07:33:11Z",
-      "updatedAt": "2025-10-08T18:12:25Z",
+      "updatedAt": "2025-10-10T05:32:47Z",
       "baseRepository": "tireddy2/pqc-cert-guidance",
       "baseRefName": "main",
-      "baseRefOid": "f10118b29c98de15073fbef08557bb3324c9b19d",
+      "baseRefOid": "d4fdb48dc49f2fa0f459cb9f20dcca8da49b03b7",
       "headRepository": "tireddy2/pqc-cert-guidance",
       "headRefName": "tireddy2-patch-16",
-      "headRefOid": "bbe9d67b68816ce374a79dcf08a16736cd814b38",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "d86a86bcf939f60bc38a8eed197ed36df111a4d4",
+      "closedAt": "2025-10-10T05:32:47Z",
+      "mergedAt": "2025-10-10T05:32:47Z",
+      "mergedBy": "tireddy2",
+      "mergeCommit": {
+        "oid": "49ab72febca961d2f909a3c0ac3dfcc5ea6d452d"
+      },
       "comments": [],
       "reviews": [
         {
@@ -963,6 +965,66 @@
               "body": "```suggestion\r\ndual-certificate model as defined in {{intro}}.\r\n```",
               "createdAt": "2025-10-08T18:11:33Z",
               "updatedAt": "2025-10-08T18:12:25Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPwC-uc7FuNRc",
+          "commit": {
+            "abbreviatedOid": "bbe9d67"
+          },
+          "author": "tireddy2",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-09T04:58:59Z",
+          "updatedAt": "2025-10-09T04:58:59Z",
+          "comments": [
+            {
+              "originalPosition": 18,
+              "body": "I was to https://www.rfc-editor.org/rfc/rfc9715.html#section-7.3 which is an off-path attack.",
+              "createdAt": "2025-10-09T04:58:59Z",
+              "updatedAt": "2025-10-09T04:58:59Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPwC-uc7F1yK3",
+          "commit": {
+            "abbreviatedOid": "bbe9d67"
+          },
+          "author": "danwing",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-09T14:13:13Z",
+          "updatedAt": "2025-10-09T14:13:13Z",
+          "comments": [
+            {
+              "originalPosition": 18,
+              "body": "That section is a fragmentation attack. How does classic encyrption make that weak with a CRQC?",
+              "createdAt": "2025-10-09T14:13:13Z",
+              "updatedAt": "2025-10-09T14:13:13Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPwC-uc7F-KQc",
+          "commit": {
+            "abbreviatedOid": "bbe9d67"
+          },
+          "author": "tireddy2",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-10T05:29:25Z",
+          "updatedAt": "2025-10-10T05:29:25Z",
+          "comments": [
+            {
+              "originalPosition": 18,
+              "body": "As per our discussion, removed it.",
+              "createdAt": "2025-10-10T05:29:25Z",
+              "updatedAt": "2025-10-10T05:29:25Z"
             }
           ]
         }
