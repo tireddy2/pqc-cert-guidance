@@ -133,6 +133,14 @@ and PQC algorithms into one object.
 The terms hybrid signature scheme and hybrid signature are used as
 defined in {{!HYBRID-SPECTRUMS=I-D.ietf-pquip-hybrid-signature-spectrums}}.
 
+Relying Party:  An endpoint which validates the certificate of a remote peer.  
+With classic HTTPS authentication, this is the HTTPS client.  With mutual TLS 
+authentication, this is both TLS endpoints.
+
+Authenticated Party: An endpoint which provides its certificate for a 
+remote peer to validate.  With classic HTTPS authentication, this is the HTTPS 
+server.  With mutual TLS authentication, this is both TLS endpoints.
+
 # Motivation for PQC Signatures
 
 Unlike "Harvest Now, Decrypt Later" attacks (see {{Section 7 of ?PQC-ENGINEERS=I-D.ietf-pquip-pqc-engineers}})
