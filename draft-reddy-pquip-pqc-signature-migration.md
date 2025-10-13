@@ -169,7 +169,7 @@ across deployment environments:
 
 - Open environments (e.g., the Web):
   Enforcing rejection of traditional-only certificates would cause substantial disruption
-  because of the diversity of clients, servers, and intermediaries.
+  because of the diversity of clients and servers.
   In such ecosystems, it is unlikely that relying parties will stop accepting traditional
   certificates until PQC-only or hybrid certificate deployment becomes significantly high
   or there is credible evidence that CRQCs exist.
@@ -179,7 +179,7 @@ across deployment environments:
   are managed by the same organization, enforcing PQC-only or hybrid authentication
   policies is operationally feasible. Organizations can coordinate certificate issuance
   and validation policies centrally, enabling earlier transition to PQC-only or hybrid
-  models without affecting interoperability outside their domain.
+  models without affecting interoperability.
 
 # Composite certificates
 
@@ -346,7 +346,7 @@ crypto-agility and be prepared to replace algorithms rapidly if needed.
 Backward compatibility can be maintained if the authenticating party also
 holds a traditional certificate and presents it to relying parties
 that have not yet deployed PQC support. While this approach preserves
-interoperability during the transition, it also reintroduces downgrade risk:
+interoperability during the transition, it also introduces downgrade risk:
 an attacker could suppress PQC options and force peers to authenticate
 using the traditional certificate.
 
@@ -457,12 +457,11 @@ supporting:
 * Phased migration paths, including initial use of hybrid signature schemes,
   eventual transition to PQC-only certificates, and later migration
   to new PQC algorithms as cryptanalysis or security policy guidance evolves.
-* Protection against downgrade attacks across all transition phases.
-  Downgrade protection is critical throughout the migration period,
+* Downgrade protection is critical throughout the migration period,
   since relying parties may otherwise be tricked into accepting weaker
   traditional authentication even when PQC-only or composite credentials exist.
   For open environments (for example, the Web), one possible mitigation is
-  the X.509 Post-Quantum/Composite Hosting Continuity (PQCHC) extension {{?PQCHC=I-D.reddy-lamps-x509-pq-commit-latest}}, which enables a certificate subject to
+  the X.509 Post-Quantum/Composite Hosting Continuity (PQCHC) extension {{!PQCHC=I-D.reddy-lamps-x509-pq-commit-latest}}, which enables a certificate subject to
   convey an intent to continue presenting PQC or composite credentials
   for a configured continuity period beyond the certificate’s notAfter date.
 
