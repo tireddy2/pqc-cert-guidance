@@ -711,7 +711,7 @@ Hybrid signature schemes are designed to provide defense in depth during the mig
 Their goal is to ensure that authentication remains secure as long as at least one of the algorithms
 in use remains unbroken. However, several important security considerations arise.
 
-## Downgrade Attacks
+## Downgrade Attacks {#downgrade}
 
 Implementations must ensure downgrade protection so that an adversary cannot
 suppress PQC or hybrid schemes and force reliance solely on traditional
