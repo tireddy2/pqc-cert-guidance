@@ -1407,7 +1407,7 @@ across deployment environments:<a href="#section-3-6" class="pilcrow">¶</a></p>
 <li class="compact" id="section-3-7.1">
           <p id="section-3-7.1.1">Open environments (e.g., the Web):
 Enforcing rejection of traditional-only certificates would cause substantial disruption
-because of the diversity of clients, servers, and intermediaries.
+because of the diversity of clients and servers.
 In such ecosystems, it is unlikely that relying parties will stop accepting traditional
 certificates until PQC-only or hybrid certificate deployment becomes significantly high
 or there is credible evidence that CRQCs exist.<a href="#section-3-7.1.1" class="pilcrow">¶</a></p>
@@ -1418,7 +1418,7 @@ In deployments where both the authenticating party and the relying party
 are managed by the same organization, enforcing PQC-only or hybrid authentication
 policies is operationally feasible. Organizations can coordinate certificate issuance
 and validation policies centrally, enabling earlier transition to PQC-only or hybrid
-models without affecting interoperability outside their domain.<a href="#section-3-7.2.1" class="pilcrow">¶</a></p>
+models without affecting interoperability.<a href="#section-3-7.2.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 </section>
@@ -1612,7 +1612,7 @@ crypto-agility and be prepared to replace algorithms rapidly if needed.<a href="
 <p id="section-6.2-2">Backward compatibility can be maintained if the authenticating party also
 holds a traditional certificate and presents it to relying parties
 that have not yet deployed PQC support. While this approach preserves
-interoperability during the transition, it also reintroduces downgrade risk:
+interoperability during the transition, it also introduces downgrade risk:
 an attacker could suppress PQC options and force peers to authenticate
 using the traditional certificate.<a href="#section-6.2-2" class="pilcrow">¶</a></p>
 <p id="section-6.2-3">PQC-only operation where traditional algorithms are completely removed
@@ -1765,8 +1765,7 @@ eventual transition to PQC-only certificates, and later migration
 to new PQC algorithms as cryptanalysis or security policy guidance evolves.<a href="#section-7.2-4.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="compact" id="section-7.2-4.3">
-            <p id="section-7.2-4.3.1">Protection against downgrade attacks across all transition phases.
-Downgrade protection is critical throughout the migration period,
+            <p id="section-7.2-4.3.1">Downgrade protection is critical throughout the migration period,
 since relying parties may otherwise be tricked into accepting weaker
 traditional authentication even when PQC-only or composite credentials exist.
 For open environments (for example, the Web), one possible mitigation is
@@ -2191,6 +2190,10 @@ present, valid, and not replaced by weaker alternatives.<a href="#section-11.3-2
         <dd>
 <span class="refAuthor">Massimo, J.</span>, <span class="refAuthor">Kampanakis, P.</span>, <span class="refAuthor">Turner, S.</span>, and <span class="refAuthor">B. Westerbaan</span>, <span class="refTitle">"Internet X.509 Public Key Infrastructure - Algorithm Identifiers for the Module-Lattice-Based Digital Signature Algorithm (ML-DSA)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-lamps-dilithium-certificates-13</span>, <time datetime="2025-09-30" class="refDate">30 September 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-lamps-dilithium-certificates-13">https://datatracker.ietf.org/doc/html/draft-ietf-lamps-dilithium-certificates-13</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="PQCHC">[PQCHC]</dt>
+        <dd>
+<span class="refTitle">"*** BROKEN REFERENCE ***"</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC2119">[RFC2119]</dt>
         <dd>
 <span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc2119">https://www.rfc-editor.org/rfc/rfc2119</a>&gt;</span>. </dd>
@@ -2275,10 +2278,6 @@ present, valid, and not replaced by weaker alternatives.<a href="#section-11.3-2
 <dt id="PQC-ENGINEERS">[PQC-ENGINEERS]</dt>
         <dd>
 <span class="refAuthor">Banerjee, A.</span>, <span class="refAuthor">Reddy.K, T.</span>, <span class="refAuthor">Schoinianakis, D.</span>, <span class="refAuthor">Hollebeek, T.</span>, and <span class="refAuthor">M. Ounsworth</span>, <span class="refTitle">"Post-Quantum Cryptography for Engineers"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-pquip-pqc-engineers-14</span>, <time datetime="2025-08-25" class="refDate">25 August 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-pquip-pqc-engineers-14">https://datatracker.ietf.org/doc/html/draft-ietf-pquip-pqc-engineers-14</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="PQCHC">[PQCHC]</dt>
-        <dd>
-<span class="refTitle">"*** BROKEN REFERENCE ***"</span>. </dd>
 <dd class="break"></dd>
 <dt id="RELATED-CERTS">[RELATED-CERTS]</dt>
         <dd>

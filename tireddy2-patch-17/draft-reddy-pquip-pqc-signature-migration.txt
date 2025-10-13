@@ -227,8 +227,8 @@ Table of Contents
 
    *  Open environments (e.g., the Web): Enforcing rejection of
       traditional-only certificates would cause substantial disruption
-      because of the diversity of clients, servers, and intermediaries.
-      In such ecosystems, it is unlikely that relying parties will stop
+      because of the diversity of clients and servers.  In such
+      ecosystems, it is unlikely that relying parties will stop
       accepting traditional certificates until PQC-only or hybrid
       certificate deployment becomes significantly high or there is
       credible evidence that CRQCs exist.
@@ -238,7 +238,7 @@ Table of Contents
       policies is operationally feasible.  Organizations can coordinate
       certificate issuance and validation policies centrally, enabling
       earlier transition to PQC-only or hybrid models without affecting
-      interoperability outside their domain.
+      interoperability.
 
 4.  Composite certificates
 
@@ -411,9 +411,9 @@ Table of Contents
    Backward compatibility can be maintained if the authenticating party
    also holds a traditional certificate and presents it to relying
    parties that have not yet deployed PQC support.  While this approach
-   preserves interoperability during the transition, it also
-   reintroduces downgrade risk: an attacker could suppress PQC options
-   and force peers to authenticate using the traditional certificate.
+   preserves interoperability during the transition, it also introduces
+   downgrade risk: an attacker could suppress PQC options and force
+   peers to authenticate using the traditional certificate.
 
    PQC-only operation where traditional algorithms are completely
    removed eliminates this downgrade vector, but it is feasible only
@@ -531,8 +531,7 @@ Table of Contents
       schemes, eventual transition to PQC-only certificates, and later
       migration to new PQC algorithms as cryptanalysis or security
       policy guidance evolves.
-   *  Protection against downgrade attacks across all transition phases.
-      Downgrade protection is critical throughout the migration period,
+   *  Downgrade protection is critical throughout the migration period,
       since relying parties may otherwise be tricked into accepting
       weaker traditional authentication even when PQC-only or composite
       credentials exist.  For open environments (for example, the Web),
@@ -925,6 +924,8 @@ Table of Contents
               September 2025, <https://datatracker.ietf.org/doc/html/
               draft-ietf-lamps-dilithium-certificates-13>.
 
+   [PQCHC]    "*** BROKEN REFERENCE ***".
+
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
@@ -1057,8 +1058,6 @@ Table of Contents
               pquip-pqc-engineers-14, 25 August 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-pquip-
               pqc-engineers-14>.
-
-   [PQCHC]    "*** BROKEN REFERENCE ***".
 
    [RELATED-CERTS]
               Becker, A., Guthrie, R., and M. Jenkins, "Related
