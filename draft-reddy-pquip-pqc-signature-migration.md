@@ -740,8 +740,7 @@ for a configured continuity period beyond the certificate’s "notAfter" date.
 Relying parties can use this information to detect downgrade attempts and
 enforce continuity by rejecting traditional-only certificates during that period.
 
-Other mechanisms may complement this approach.  For example, browser vendors
-or operating system platforms could maintain and distribute curated lists of
+Other mechanisms may complement this approach.  For example, relying parties could maintain and distribute curated lists of
 domains known to use PQC-capable authentication, similar to mechanisms used by
 Safe Browsing. Such mechanisms could automatically enforce downgrade
 resistance for public domains.
