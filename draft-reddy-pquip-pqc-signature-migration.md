@@ -733,7 +733,7 @@ since relying parties may otherwise be tricked into accepting weaker
 traditional authentication even when PQC or hybrid credentials exist.
 
 In open environments (for example, the Web), there will likely be no single
-“flag day” for post-quantum authentication. One possible mitigation is
+"flag day" for post-quantum authentication. One possible mitigation is
 the X.509 Post-Quantum/Composite Hosting Continuity (PQCHC) extension {{!PQCHC=I-D.reddy-lamps-x509-pq-commit-latest}}, which allows a certificate subject to
 to signal its intent to continue presenting PQC or composite credentials
 for a configured continuity period beyond the certificate’s "notAfter" date.
