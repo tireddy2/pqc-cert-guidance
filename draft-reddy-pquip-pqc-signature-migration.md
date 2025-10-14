@@ -183,7 +183,7 @@ across deployment environments:
   due to the wide diversity of clients and servers. As discussed in {{downgrade}}, there
   will be no single “flag day” for PQC authentication; instead, relying parties
   will have to adopt PQC enforcement gradually, using mechanisms such as continuity signals
-  or learned authenticating party behavior to resist downgrades while maintaining
+  or learned authenticated party behavior to resist downgrades while maintaining
   compatibility during the transition.
 
 - Closed or enterprise-managed environments:
@@ -358,7 +358,7 @@ scheme, there is no classical fallback for continued authentication.
 Protocols and infrastructures must therefore maintain strong
 crypto-agility and be prepared to replace algorithms rapidly if needed.
 
-Backward compatibility can be maintained if the authenticating party also
+Backward compatibility can be maintained if the authenticated party also
 holds a traditional certificate and presents it to relying parties
 that have not yet deployed PQC support. While this approach preserves
 interoperability during the transition, it also introduces downgrade risk:
@@ -748,7 +748,7 @@ resistance for public domains.
 
 Together, these mechanisms help ensure that PQC-aware relying parties maintain
 strong downgrade resistance where possible, while still allowing interoperability
-with traditional-only authenticating parties during the transition.
+with traditional-only authenticatedparties during the transition.
 
 ## Strong Unforgeability versus Existential Unforgeability
 
@@ -771,7 +771,7 @@ or select an incorrect chain when multiple options are available, resulting in
 validation of weaker authentication than intended. Effective downgrade
 protection (see {{downgrade}}) requires relying parties to reject traditional-only
 certificate paths once post-quantum alternatives are available, regardless of
-whether authenticating parties continue to support traditional credentials for
+whether authenticated parties continue to support traditional credentials for
 legacy interoperability.
 
 Clear operational guidance and automated monitoring are essential to minimize
