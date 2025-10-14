@@ -188,7 +188,9 @@ across deployment environments:
   policies is operationally feasible. Organizations can coordinate certificate issuance
   and validation policies centrally, enabling earlier transition to PQC-only or hybrid
   models without affecting interoperability.
+- mixed environments
 
+In environments where a relying party visits authenticated parties that have a mix of quantum-safe and classic authentication, and administrators or users need to protect against downgrade attacks ({{downgrade}}), relying parties will need the configurations that are per-domain or per-FQDN. Such mixed environments will likely be the long tail.
 # Composite certificates
 
 A composite certificate contains a composite public key and a composite
