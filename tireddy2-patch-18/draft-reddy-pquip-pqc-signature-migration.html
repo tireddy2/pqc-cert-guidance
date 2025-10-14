@@ -1418,7 +1418,7 @@ Enforcing rejection of traditional-only certificates would cause substantial dis
 due to the wide diversity of clients and servers. As discussed in <a href="#downgrade" class="auto internal xref">Section 11.1</a>, there
 will be no single “flag day” for PQC authentication; instead, relying parties
 will have to adopt PQC enforcement gradually, using mechanisms such as continuity signals
-or learned authenticating party behavior to resist downgrades while maintaining
+or learned authenticated party behavior to resist downgrades while maintaining
 compatibility during the transition.<a href="#section-3-7.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="compact" id="section-3-7.2">
@@ -1622,7 +1622,7 @@ vulnerability or cryptanalytic weakness is discovered in a deployed PQC
 scheme, there is no classical fallback for continued authentication.
 Protocols and infrastructures must therefore maintain strong
 crypto-agility and be prepared to replace algorithms rapidly if needed.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
-<p id="section-6.2-2">Backward compatibility can be maintained if the authenticating party also
+<p id="section-6.2-2">Backward compatibility can be maintained if the authenticated party also
 holds a traditional certificate and presents it to relying parties
 that have not yet deployed PQC support. While this approach preserves
 interoperability during the transition, it also introduces downgrade risk:
@@ -2112,7 +2112,7 @@ Safe Browsing. Such mechanisms could automatically enforce downgrade
 resistance for public domains.<a href="#section-11.1-4" class="pilcrow">¶</a></p>
 <p id="section-11.1-5">Together, these mechanisms help ensure that PQC-aware relying parties maintain
 strong downgrade resistance where possible, while still allowing interoperability
-with traditional-only authenticating parties during the transition.<a href="#section-11.1-5" class="pilcrow">¶</a></p>
+with traditional-only authenticatedparties during the transition.<a href="#section-11.1-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="strong-unforgeability-versus-existential-unforgeability">
@@ -2143,7 +2143,7 @@ or select an incorrect chain when multiple options are available, resulting in
 validation of weaker authentication than intended. Effective downgrade
 protection (see <a href="#downgrade" class="auto internal xref">Section 11.1</a>) requires relying parties to reject traditional-only
 certificate paths once post-quantum alternatives are available, regardless of
-whether authenticating parties continue to support traditional credentials for
+whether authenticated parties continue to support traditional credentials for
 legacy interoperability.<a href="#section-11.3-1" class="pilcrow">¶</a></p>
 <p id="section-11.3-2">Clear operational guidance and automated monitoring are essential to minimize
 these risks. Operators need best practices for certificate lifecycle and
