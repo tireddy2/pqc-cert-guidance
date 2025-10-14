@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-12T01:47:04.113369+00:00",
+  "timestamp": "2025-10-14T01:44:06.588152+00:00",
   "repo": "tireddy2/pqc-cert-guidance",
   "labels": [
     {
@@ -1025,6 +1025,83 @@
               "body": "As per our discussion, removed it.",
               "createdAt": "2025-10-10T05:29:25Z",
               "updatedAt": "2025-10-10T05:29:25Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 27,
+      "id": "PR_kwDOPwC-uc6tY3ZC",
+      "title": "Address pending comments from Ekr",
+      "url": "https://github.com/tireddy2/pqc-cert-guidance/pull/27",
+      "state": "OPEN",
+      "author": "tireddy2",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-10-13T06:23:54Z",
+      "updatedAt": "2025-10-13T17:08:24Z",
+      "baseRepository": "tireddy2/pqc-cert-guidance",
+      "baseRefName": "main",
+      "baseRefOid": "49ab72febca961d2f909a3c0ac3dfcc5ea6d452d",
+      "headRepository": "tireddy2/pqc-cert-guidance",
+      "headRefName": "tireddy2-patch-17",
+      "headRefOid": "b94aa618afd2c09a8e700908d88811b717f4317e",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOPwC-uc7Gnp6-",
+          "commit": {
+            "abbreviatedOid": "b94aa61"
+          },
+          "author": "danwing",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "a few comments and suggestions.\r\n\r\nDo a pull first, as I also did a few commits on top of your commit -- which I think are non-controversial but who knows!  Check them over.  Commit were:\r\n* add anchor to Downgrade Attack section.\r\n* add 'relying party' and 'authenticated party' to terminology.  \r\n\r\nI don't know if 'authenticating party' should be in terminology, or if that differs from 'relying party' or not.  ",
+          "createdAt": "2025-10-13T16:30:48Z",
+          "updatedAt": "2025-10-13T17:08:24Z",
+          "comments": [
+            {
+              "originalPosition": 19,
+              "body": "```suggestion\r\nPQC-only or hybrid certificates provide post-quantum security only when relying parties\r\nreject traditional-only certificates (see {{downgrade}}). The implications of this requirement differ\r\n```",
+              "createdAt": "2025-10-13T16:30:49Z",
+              "updatedAt": "2025-10-13T17:08:24Z"
+            },
+            {
+              "originalPosition": 27,
+              "body": "er, I have a little difficulty here.  This text assumes there is a flag day when this might occur.\r\n\r\nI suggest it won't be a flag day, but rather there will be a list of servers the client has noticed are using post-quantum certificates, and the client will resist downgrades to classic for those servers.  Just like you proposed in that other document which (effectively) extended the certificate lifetime.  \r\n\r\nThere are other techniques, too -- consulting a list maintained not by that browser but by the browser vendor, akin to Safe Browsing.  I could see Safe Browsing even being extended to handle this exact case.  Obviously that only covers the Big Websites on the Internet, which Google, et al, favor anyway.  And enterprise websites wanting / needing same behavior would be out of luck.  Hence, your other I-D.\r\n\r\nIn any event, I would soften the wording here in this I-D somewhat, as there clearly are methods to protect certain communications from downgrade, while still allowing other communications to use classic certificates.",
+              "createdAt": "2025-10-13T16:36:23Z",
+              "updatedAt": "2025-10-13T17:08:24Z"
+            },
+            {
+              "originalPosition": 30,
+              "body": "```suggestion\r\n  In deployments where both the authenticated party and the relying party\r\n```",
+              "createdAt": "2025-10-13T16:54:10Z",
+              "updatedAt": "2025-10-13T17:08:24Z"
+            },
+            {
+              "originalPosition": 35,
+              "body": "```suggestion\r\n- mixed environments\r\n\r\nIn environments where a relying party visits authenticated parties that have a mix of quantum-safe and classic authentication, and administrators or users need to protect against downgrade attacks ({{downgrade}}), relying parties will need the configurations that are per-domain or per-FQDN. Such mixed environments will likely be the long tail.\r\n```",
+              "createdAt": "2025-10-13T16:57:19Z",
+              "updatedAt": "2025-10-13T17:08:24Z"
+            },
+            {
+              "originalPosition": 48,
+              "body": "is 'authenticating party' the same as 'relying party'?  If so, why different terminology.\r\n\r\n",
+              "createdAt": "2025-10-13T17:00:08Z",
+              "updatedAt": "2025-10-13T17:08:24Z"
+            },
+            {
+              "originalPosition": 72,
+              "body": "it feels like this is best said once in the document, perhaps in the Downgrade section itself.  And point to it.\r\n\r\nRight now this downgrade fear (without this text's suggestion on a mitigation) is scattered into several places in the document.",
+              "createdAt": "2025-10-13T17:01:40Z",
+              "updatedAt": "2025-10-13T17:08:24Z"
             }
           ]
         }
