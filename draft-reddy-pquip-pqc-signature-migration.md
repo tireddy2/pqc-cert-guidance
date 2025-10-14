@@ -748,7 +748,7 @@ resistance for public domains.
 
 Together, these mechanisms help ensure that PQC-aware relying parties maintain
 strong downgrade resistance where possible, while still allowing interoperability
-with traditional-only authenticatedparties during the transition.
+with traditional-only authenticated parties during the transition.
 
 ## Strong Unforgeability versus Existential Unforgeability
 
