@@ -964,7 +964,12 @@ Table of Contents
               September 2025, <https://datatracker.ietf.org/doc/html/
               draft-ietf-lamps-dilithium-certificates-13>.
 
-   [PQCHC]    "*** BROKEN REFERENCE ***".
+   [PQCHC]    Reddy.K, T., Gray, J., and Y. Sheffer, "X.509 Extensions
+              for PQC or Composite Certificate Hosting Continuity", Work
+              in Progress, Internet-Draft, draft-reddy-lamps-x509-pq-
+              commit-00, 12 October 2025,
+              <https://datatracker.ietf.org/doc/html/draft-reddy-lamps-
+              x509-pq-commit-00>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
