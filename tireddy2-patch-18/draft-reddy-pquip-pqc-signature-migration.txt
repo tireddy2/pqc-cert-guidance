@@ -828,7 +828,7 @@ Table of Contents
    traditional authentication even when PQC or hybrid credentials exist.
 
    In open environments (for example, the Web), there will likely be no
-   single “flag day” for post-quantum authentication.  One possible
+   single "flag day" for post-quantum authentication.  One possible
    mitigation is the X.509 Post-Quantum/Composite Hosting Continuity
    (PQCHC) extension [PQCHC], which allows a certificate subject to to
    signal its intent to continue presenting PQC or composite credentials
