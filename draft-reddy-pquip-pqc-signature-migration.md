@@ -1,5 +1,5 @@
 ---
-title: Guidance for Migration to Composite, Dual, or PQC-Only Authentication
+title: Guidance for Migration to Composite, Dual, or PQC Authentication
 abbrev: PQC Signature Migration Guidance
 docname: draft-reddy-pquip-pqc-signature-migration-latest
 category: info
@@ -58,7 +58,7 @@ This document provides guidance for migration from traditional digital
 signature algorithms to post-quantum cryptographic (PQC) signature
 algorithms. It compares three models under discussion in the IETF for
 PKI-based protocols: composite certificates, dual
-certificates, and PQC-only certificates. The goal is to help operators
+certificates, and PQC certificates. The goal is to help operators
 and engineers working on cryptographic libraries, network security, and
 PKI/key management infrastructure select an approach that balances
 interoperability, security, and operational efficiency during the
@@ -82,8 +82,8 @@ range of attacks, including on-path man-in-the-middle (MitM)
 attacks, and off-path attacks such as software-artifact forgery, and client
 impersonation in mutual TLS when a client private key is compromised. In addition,
 on-path adversaries can attempt active downgrade techniques (for example,
-suppressing PQC-only or hybrid signature schemes during negotiation) to force reliance on
-broken traditional algorithms. PQC-only or Hybrid certificates do not by themselves
+suppressing PQC or hybrid signature schemes during negotiation) to force reliance on
+broken traditional algorithms. PQC or Hybrid certificates do not by themselves
 prevent downgrade attack when relying parties continue to accept traditional-only
 certificates. These risks motivate a transition of certificate-based authentication
 toward post-quantum security.
@@ -99,16 +99,16 @@ JOSE/COSE, and PKIX:
   algorithm and one using a PQC algorithm, issued for the same identity, presented and validated together
   during authentication. Some protocols may require these certificates to include the RelatedCertificate extension {{?RELATED-CERTS=RFC9763}} to ensure that both refer to the same identity and binding.
 
-Another approach is to use a PQC-only certificate which contains only a post-quantum
+Another approach is to use a PQC certificate which contains only a post-quantum
 public key and produces signatures using a PQC algorithm. Examples include {{!ML-DSA=I-D.ietf-lamps-dilithium-certificates}}
 and {{!SLH-DSA=I-D.ietf-lamps-x509-slhdsa}}.
 
 This document provides guidance on selecting among the two hybrid
-certificate models and the PQC-only model depending on the deployment
+certificate models and the PQC model depending on the deployment
 context, the readiness of the supporting ecosystem, and security
 requirements.
 
-It is important to note that the use of PQC-only certificates, composite
+It is important to note that the use of PQC certificates, composite
 certificates, or the dual-certificate model alone does not guarantee
 post-quantum security. As long as relying parties continue to trust or
 accept traditional-only certificates, an attacker equipped with a CRQC
@@ -121,7 +121,7 @@ traditional-only authentication.
 
 {::boilerplate bcp14-tagged}
 
-This document uses the terms "composite certificates" and "PQC-only certificates"
+This document uses the terms "composite certificates" and "PQC certificates"
 as defined in {{intro}}.
 
 The term "dual certificates" in this document refers to the
@@ -133,12 +133,15 @@ and PQC algorithms into one object.
 The terms hybrid signature scheme and hybrid signature are used as
 defined in {{!HYBRID-SPECTRUMS=I-D.ietf-pquip-hybrid-signature-spectrums}}.
 
-Relying Party:  An endpoint which validates the certificate of a remote peer.  
-With classic HTTPS authentication, this is the HTTPS client.  With mutual TLS 
+The term hybrid certificates is used herein to refer to either
+composite or dual certificate models.
+
+Relying Party:  An endpoint which validates the certificate of a remote peer.
+With classic HTTPS authentication, this is the HTTPS client.  With mutual TLS
 authentication, this is both TLS endpoints.
 
-Authenticated Party: An endpoint which provides its certificate for a 
-remote peer to validate.  With classic HTTPS authentication, this is the HTTPS 
+Authenticated Party: An endpoint which provides its certificate for a
+remote peer to validate.  With classic HTTPS authentication, this is the HTTPS
 server.  With mutual TLS authentication, this is both TLS endpoints.
 
 # Motivation for PQC Signatures
@@ -171,26 +174,28 @@ post-quantum (PQC) signatures.  Doing so entails ecosystem-wide upgrades across:
 Because these transitions require years of planning, coordination, and
 investment, preparations must begin well before a CRQC is publicly known.
 
-PQC-only or hybrid certificates provide post-quantum security only when relying parties
+PQC or hybrid certificates provide post-quantum security only when relying parties
 reject traditional-only certificates (see {{downgrade}}). The implications of this requirement differ
 across deployment environments:
 
 - Open environments (e.g., the Web):
   Enforcing rejection of traditional-only certificates would cause substantial disruption
-  because of the diversity of clients and servers.
-  In such ecosystems, it is unlikely that relying parties will stop accepting traditional
-  certificates until PQC-only or hybrid certificate deployment becomes significantly high
-  or there is credible evidence that CRQCs exist.
+  due to the wide diversity of clients and servers. As discussed in {{downgrade}}, there
+  will be no single “flag day” for PQC authentication; instead, relying parties
+  will have to adopt PQC enforcement gradually, using mechanisms such as continuity signals
+  or learned authenticating party behavior to resist downgrades while maintaining
+  compatibility during the transition.
 
 - Closed or enterprise-managed environments:
   In deployments where both the authenticated party and the relying party
-  are managed by the same organization, enforcing PQC-only or hybrid authentication
+  are managed by the same organization, enforcing PQC or hybrid authentication
   policies is operationally feasible. Organizations can coordinate certificate issuance
-  and validation policies centrally, enabling earlier transition to PQC-only or hybrid
+  and validation policies centrally, enabling earlier transition to PQC or hybrid
   models without affecting interoperability.
 - mixed environments
 
-In environments where a relying party visits authenticated parties that have a mix of quantum-safe and classic authentication, and administrators or users need to protect against downgrade attacks ({{downgrade}}), relying parties will need the configurations that are per-domain or per-FQDN. Such mixed environments will likely be the long tail.
+In environments where a relying party visits authenticated parties that have a mix of quantum-safe and traditional authentication, and administrators or users need to protect against downgrade attacks ({{downgrade}}), relying parties will need the configurations that are per-domain or per-FQDN. Such mixed environments will likely be the long tail.
+
 # Composite certificates
 
 A composite certificate contains a composite public key and a composite
@@ -256,8 +261,8 @@ a composite algorithm behaves like any other registered signature algorithm.
 
 Composite deployments are also an intermediate step: once traditional
 algorithms are deprecated due to CRQCs, operators will still need to
-transition from composite to PQC-only certificates. This requires
-deploying new PQC trust anchors, issuing PQC-only certificates, and
+transition from composite to PQC certificates. This requires
+deploying new PQC trust anchors, issuing PQC certificates, and
 revoking composite certificates. While automated mechanisms such as
 ACME or CMP can streamline end-entity certificate issuance, trust anchors are
 typically distributed through OS, Browser, or device
@@ -323,9 +328,9 @@ such as the RelatedCertificate extension {{?RELATED-CERTS=RFC9763}}.
 Lack of consistent binding policies can lead to interoperability issues
 and potential downgrade risks if only one chain is validated.
 
-# PQC-Only Certificates
+# PQC Certificates
 
-PQC-only certificates represent the final stage of migration.
+PQC certificates represent the final stage of migration.
 They use exclusively post-quantum cryptographic algorithms for both
 public keys and signatures, providing no fallback to traditional
 algorithms.  Once adopted at scale, they eliminate hybrid complexity and
@@ -333,21 +338,21 @@ rely entirely on quantum-resistant primitives for authentication.
 
 ## Advantages
 
-The PQC-only model offers the simplest and most forward-looking
+The PQC model offers the simplest and most forward-looking
 architecture. It removes all dependency on classical algorithms, thus
 avoiding future deprecation or phased-out support for RSA and ECC.
 Certificate management is streamlined, as there is only one algorithm
 family to provision, monitor, and renew. Operational overhead decreases
-compared to hybrid or dual deployments, since each entity maintains a
+compared to dual deployments, since each entity maintains a
 single certificate chain and consistent cryptographic policy.
 
-PQC-only certificates also enable long-term assurance: the entire
+PQC certificates also enable long-term assurance: the entire
 certificate path is verifiable using post-quantum signatures, ensuring
 uniform resistance against quantum adversaries.
 
 ## Disadvantages
 
-The primary risk of PQC-only deployments is algorithmic fragility. If a
+The primary risk of PQC deployments is algorithmic fragility. If a
 vulnerability or cryptanalytic weakness is discovered in a deployed PQC
 scheme, there is no classical fallback for continued authentication.
 Protocols and infrastructures must therefore maintain strong
@@ -360,7 +365,7 @@ interoperability during the transition, it also introduces downgrade risk:
 an attacker could suppress PQC options and force peers to authenticate
 using the traditional certificate.
 
-PQC-only operation where traditional algorithms are completely removed
+PQC operation where traditional algorithms are completely removed
 eliminates this downgrade vector, but it is feasible only once relying
 parties enforce PQC–only authentication.
 
@@ -371,7 +376,7 @@ global deployment or require organizations operating in multiple
 regions to maintain mixed trust infrastructures until regulatory
 alignment is achieved.
 
-Finally, PQC-only deployments remain feasible only once PQC algorithms
+Finally, PQC deployments remain feasible only once PQC algorithms
 are fully standardized, broadly implemented, and supported by hardware
 security modules, operating systems, and major application ecosystems.
 
@@ -424,7 +429,7 @@ During this coexistence phase, clients generally fall into five categories:
 4. Composite-trust: trusts composite root and support composite
    algorithms, validating a single chain that integrates traditional and PQ
    signatures.
-5. PQC-only: trust only PQC roots and support only PQC algorithms.
+5. PQC: trust only PQC roots and support only PQC algorithms.
 
 The main challenge is that servers cannot easily distinguish between mixed
 clients (2) and dual-trust clients (3), since both advertise PQC algorithms,
@@ -445,7 +450,7 @@ telemetry on PQC adoption. TAI also enables PQC-capable clients to tell PQC-awar
 servers exactly which PQC trust anchors they recognize, while still supporting
 traditional roots for compatibility with legacy servers.
 
-In all cases, the long-term goal is a transition to PQC-only roots and
+In all cases, the long-term goal is a transition to PQC roots and
 certificate chains. Hybrid signature schemes help bridge
 the gap, but operators will have to plan carefully for the eventual retirement of
 traditional and composite roots once PQC adoption is widespread.
@@ -465,15 +470,8 @@ supporting:
 
 * Negotiation of standalone PQC algorithms and hybrid signature schemes.
 * Phased migration paths, including initial use of hybrid signature schemes,
-  eventual transition to PQC-only certificates, and later migration
+  eventual transition to PQC certificates, and later migration
   to new PQC algorithms as cryptanalysis or security policy guidance evolves.
-* Downgrade protection is critical throughout the migration period,
-  since relying parties may otherwise be tricked into accepting weaker
-  traditional authentication even when PQC-only or composite credentials exist.
-  For open environments (for example, the Web), one possible mitigation is
-  the X.509 Post-Quantum/Composite Hosting Continuity (PQCHC) extension {{!PQCHC=I-D.reddy-lamps-x509-pq-commit-latest}}, which enables a certificate subject to
-  convey an intent to continue presenting PQC or composite credentials
-  for a configured continuity period beyond the certificate’s notAfter date.
 
 ## Support from Hardware Security Modules (HSMs)
 
@@ -509,7 +507,7 @@ resource-constrained devices.
 Migration to post-quantum authentication will proceed gradually across
 protocols, products, and organizations. During this period, endpoints
 may support multiple authentication models (traditional, composite,
-dual, or PQC-only) depending on their stage of deployment. The
+dual, or PQC) depending on their stage of deployment. The
 transition requires careful coordination of certificate management,
 protocol negotiation, and policy enforcement to maintain security and
 interoperability throughout the migration.
@@ -523,7 +521,7 @@ reliance on traditional algorithms will become increasingly risky.
 During the transition, dual certificates enable interoperability between
 PQC-capable and legacy systems, while composite certificates provide
 hybrid authentication within upgraded ecosystems. These approaches serve
-as intermediate steps toward PQC-only deployments. Post-quantum security
+as intermediate steps toward PQC deployments. Post-quantum security
 is achieved only when relying parties stop accepting traditional-only
 authentication. At that point, authenticated parties can also stop
 issuing or presenting traditional-only certificates.
@@ -541,18 +539,18 @@ no common algorithm is found.
 In hybrid or PQC-capable deployments, there is no security benefit if
 authentication using only traditional algorithms continues to be
 accepted, since an attacker can always downgrade to that option.
-The specific choice between PQC-only and hybrid mechanisms may be influenced
+The specific choice between PQC and hybrid mechanisms may be influenced
 by regulatory guidance, national cryptography policies, or the organization's
 appetite for defense-in-depth during early adoption.
 
 Negotiation mechanisms must also include downgrade protection so
 that an adversary cannot suppress PQC or hybrid options and force a
-fallback to traditional signatures. TLS already provide such
+fallback to traditional signatures (see {{downgrade}}). TLS already provide such
 protection through transcript binding of the handshake messages that
 carry the algorithm negotiation results, but new or proprietary protocols
 have to ensure similar safeguards.
 
-A deployment will typically adopt one of three models, PQC-only certificates,
+A deployment will typically adopt one of three models, PQC certificates,
 dual certificates, or composite certificates.
 
 The choice depends on several factors, including:
@@ -587,7 +585,7 @@ of the security impact in security protocols, such as TLS and IKEv2,
 versus artifact-signing use cases, see {{suf}}.
 
 To complete the transition to a fully quantum-resistant authentication model,
-operators will need a PQC CA root and CA intermediates, resulting in PQC-only
+operators will need a PQC CA root and CA intermediates, resulting in PQC
 end-entity certificates.
 
 Protocol configurations will likewise need to be updated to negotiate only
@@ -603,7 +601,7 @@ must stop accepting or requesting traditional certificate chains and
 validate only PQC-based chains. Authenticated parties will automatically
 cease using traditional chains once relying parties no longer request
 them. Dual-certificate deployments therefore defer, but
-do not avoid, the eventual migration to a PQC-only environment.
+do not avoid, the eventual migration to a PQC environment.
 
 ## Loss of Strong Unforgeability in Composite and Dual Certificates {#suf}
 
@@ -645,7 +643,7 @@ function for a limited time after a CRQC is realized, since they still provide
 impersonation resistance as long as one component algorithm remains secure.
 This situation does not constitute a zero-day vulnerability requiring an
 immediate upgrade. However, operators will have to plan an orderly migration
-to PQC-only certificates in order to restore SUF-CMA security guarantees.
+to PQC certificates in order to restore SUF-CMA security guarantees.
 
 # Migration Guidance
 
@@ -666,7 +664,7 @@ to PQC-only certificates in order to restore SUF-CMA security guarantees.
   {{?I-D.hu-ipsecme-pqt-hybrid-auth}} for IPsec/IKEv2, and
   {{?I-D.prabel-jose-pq-composite-sigs}} for JOSE/COSE.
 
-* Long-to-medium term to adopt and deploy: PQC-only certificates are the final goal, once PQ
+* Long-to-medium term to adopt and deploy: PQC certificates are the final goal, once PQ
   algorithms are well-established, trust anchors have been updated,
   HSMs and devices support PQC operations, and traditional
   algorithms are fully retired. Work to enable PQC signatures is already
@@ -684,7 +682,7 @@ schemes. SLH-DSA would remain unaffected by such attacks due to its distinct
 mathematical foundations, helping to ensure the ongoing security of systems and
 protocols that rely on it for digital signatures. Unlike ML-DSA, SLH-DSA is not
 defined for use in composite certificates and is intended to be deployed directly
-in PQC-only certificate hierarchies.
+in PQC certificate hierarchies.
 
 SLH-DSA may be used for both end-entity and CA certificates. It provides strong
 post-quantum security but produces larger signatures than ML-DSA or traditional
@@ -728,7 +726,29 @@ suppress PQC or hybrid schemes and force reliance solely on traditional
 algorithms. This is especially important in scenarios where a CRQC is
 available but not publicly disclosed. Without downgrade protection, a MitM
 attacker could impersonate servers by presenting only traditional
-certificates even when PQC certificates are supported.
+certificates even when PQC or hybrid certificates are supported by both peers.
+
+Downgrade protection is critical throughout the migration period,
+since relying parties may otherwise be tricked into accepting weaker
+traditional authentication even when PQC or hybrid credentials exist.
+
+In open environments (for example, the Web), there will likely be no single
+“flag day” for post-quantum authentication. One possible mitigation is
+the X.509 Post-Quantum/Composite Hosting Continuity (PQCHC) extension {{!PQCHC=I-D.reddy-lamps-x509-pq-commit-latest}}, which allows a certificate subject to
+to signal its intent to continue presenting PQC or composite credentials
+for a configured continuity period beyond the certificate’s "notAfter" date.
+Relying parties can use this information to detect downgrade attempts and
+enforce continuity by rejecting traditional-only certificates during that period.
+
+Other mechanisms may complement this approach.  For example, browser vendors
+or operating system platforms could maintain and distribute curated lists of
+domains known to use PQC-capable authentication, similar to mechanisms used by
+Safe Browsing. Such mechanisms could automatically enforce downgrade
+resistance for public domains.
+
+Together, these mechanisms help ensure that PQC-aware relying parties maintain
+strong downgrade resistance where possible, while still allowing interoperability
+with traditional-only authenticating parties during the transition.
 
 ## Strong Unforgeability versus Existential Unforgeability
 
@@ -743,12 +763,16 @@ have be eventually retired once traditional algorithms are no longer secure.
 
 ## Operational Risks
 
-Managing multiple certificate paths (composite, dual, and PQC-only) increases
-the risk of misconfiguration and operational errors. For example, a server
-might continue using a hybrid signature scheme after the traditional algorithm
-is broken, fail to revoke traditional certificates that are no longer secure,
-or select the wrong chain for a given client, resulting in clients receiving a
-certificate path they cannot validate.
+Managing multiple certificate paths (composite, dual, and PQC) increases
+the risk of misconfiguration and operational errors. For example, relying
+parties might continue to accept traditional-only certificates after the
+traditional algorithms are broken, fail to enforce PQC validation policies,
+or select an incorrect chain when multiple options are available, resulting in
+validation of weaker authentication than intended. Effective downgrade
+protection (see {{downgrade}}) requires relying parties to reject traditional-only
+certificate paths once post-quantum alternatives are available, regardless of
+whether authenticating parties continue to support traditional credentials for
+legacy interoperability.
 
 Clear operational guidance and automated monitoring are essential to minimize
 these risks. Operators need best practices for certificate lifecycle and
