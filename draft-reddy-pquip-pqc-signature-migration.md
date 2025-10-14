@@ -83,9 +83,10 @@ attacks, and off-path attacks such as software-artifact forgery, and client
 impersonation in mutual TLS when a client private key is compromised. In addition,
 on-path adversaries can attempt active downgrade techniques (for example,
 suppressing PQC-only or hybrid signature schemes during negotiation) to force reliance on
-broken traditional algorithms. These risks highlight the need to transition
-certificate-based authentication toward post-quantum security, using hybrid
-signature schemes as an intermediate step before PQC-only adoption.
+broken traditional algorithms. PQC-only or Hybrid certificates do not by themselves
+prevent downgrade attack when relying parties continue to accept traditional-only
+certificates. These risks motivate a transition of certificate-based authentication
+toward post-quantum security.
 
 The IETF has defined two hybrid transition models for use in TLS, IKEv2/IPsec,
 JOSE/COSE, and PKIX:
@@ -132,6 +133,14 @@ and PQC algorithms into one object.
 The terms hybrid signature scheme and hybrid signature are used as
 defined in {{!HYBRID-SPECTRUMS=I-D.ietf-pquip-hybrid-signature-spectrums}}.
 
+Relying Party:  An endpoint which validates the certificate of a remote peer.  
+With classic HTTPS authentication, this is the HTTPS client.  With mutual TLS 
+authentication, this is both TLS endpoints.
+
+Authenticated Party: An endpoint which provides its certificate for a 
+remote peer to validate.  With classic HTTPS authentication, this is the HTTPS 
+server.  With mutual TLS authentication, this is both TLS endpoints.
+
 # Motivation for PQC Signatures
 
 Unlike "Harvest Now, Decrypt Later" attacks (see {{Section 7 of ?PQC-ENGINEERS=I-D.ietf-pquip-pqc-engineers}})
@@ -162,6 +171,26 @@ post-quantum (PQC) signatures.  Doing so entails ecosystem-wide upgrades across:
 Because these transitions require years of planning, coordination, and
 investment, preparations must begin well before a CRQC is publicly known.
 
+PQC-only or hybrid certificates provide post-quantum security only when relying parties
+reject traditional-only certificates (see {{downgrade}}). The implications of this requirement differ
+across deployment environments:
+
+- Open environments (e.g., the Web):
+  Enforcing rejection of traditional-only certificates would cause substantial disruption
+  because of the diversity of clients and servers.
+  In such ecosystems, it is unlikely that relying parties will stop accepting traditional
+  certificates until PQC-only or hybrid certificate deployment becomes significantly high
+  or there is credible evidence that CRQCs exist.
+
+- Closed or enterprise-managed environments:
+  In deployments where both the authenticated party and the relying party
+  are managed by the same organization, enforcing PQC-only or hybrid authentication
+  policies is operationally feasible. Organizations can coordinate certificate issuance
+  and validation policies centrally, enabling earlier transition to PQC-only or hybrid
+  models without affecting interoperability.
+- mixed environments
+
+In environments where a relying party visits authenticated parties that have a mix of quantum-safe and classic authentication, and administrators or users need to protect against downgrade attacks ({{downgrade}}), relying parties will need the configurations that are per-domain or per-FQDN. Such mixed environments will likely be the long tail.
 # Composite certificates
 
 A composite certificate contains a composite public key and a composite
@@ -324,11 +353,16 @@ scheme, there is no classical fallback for continued authentication.
 Protocols and infrastructures must therefore maintain strong
 crypto-agility and be prepared to replace algorithms rapidly if needed.
 
-Interoperability with legacy systems becomes impossible once classical
-algorithms are fully removed. PQC-only certificates can only be used in
-ecosystems where all endpoints, Certification Authorities, and
-trust anchors already support post-quantum algorithms and corresponding
-signature verification.
+Backward compatibility can be maintained if the authenticating party also
+holds a traditional certificate and presents it to relying parties
+that have not yet deployed PQC support. While this approach preserves
+interoperability during the transition, it also introduces downgrade risk:
+an attacker could suppress PQC options and force peers to authenticate
+using the traditional certificate.
+
+PQC-only operation where traditional algorithms are completely removed
+eliminates this downgrade vector, but it is feasible only once relying
+parties enforce PQC–only authentication.
 
 Adoption may also be uneven across jurisdictions. Regulatory frameworks
 and certification programs may not recognize the same PQC
@@ -433,7 +467,13 @@ supporting:
 * Phased migration paths, including initial use of hybrid signature schemes,
   eventual transition to PQC-only certificates, and later migration
   to new PQC algorithms as cryptanalysis or security policy guidance evolves.
-* Protection against downgrade attacks across all transition phases.
+* Downgrade protection is critical throughout the migration period,
+  since relying parties may otherwise be tricked into accepting weaker
+  traditional authentication even when PQC-only or composite credentials exist.
+  For open environments (for example, the Web), one possible mitigation is
+  the X.509 Post-Quantum/Composite Hosting Continuity (PQCHC) extension {{!PQCHC=I-D.reddy-lamps-x509-pq-commit-latest}}, which enables a certificate subject to
+  convey an intent to continue presenting PQC or composite credentials
+  for a configured continuity period beyond the certificate’s notAfter date.
 
 ## Support from Hardware Security Modules (HSMs)
 
@@ -681,7 +721,7 @@ Hybrid signature schemes are designed to provide defense in depth during the mig
 Their goal is to ensure that authentication remains secure as long as at least one of the algorithms
 in use remains unbroken. However, several important security considerations arise.
 
-## Downgrade Attacks
+## Downgrade Attacks {#downgrade}
 
 Implementations must ensure downgrade protection so that an adversary cannot
 suppress PQC or hybrid schemes and force reliance solely on traditional
