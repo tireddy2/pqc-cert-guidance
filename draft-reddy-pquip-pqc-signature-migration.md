@@ -183,7 +183,7 @@ across deployment environments:
   or there is credible evidence that CRQCs exist.
 
 - Closed or enterprise-managed environments:
-  In deployments where both the authenticating party and the relying party
+  In deployments where both the authenticated party and the relying party
   are managed by the same organization, enforcing PQC-only or hybrid authentication
   policies is operationally feasible. Organizations can coordinate certificate issuance
   and validation policies centrally, enabling earlier transition to PQC-only or hybrid
