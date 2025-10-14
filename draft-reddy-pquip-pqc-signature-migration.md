@@ -172,7 +172,7 @@ Because these transitions require years of planning, coordination, and
 investment, preparations must begin well before a CRQC is publicly known.
 
 PQC-only or hybrid certificates provide post-quantum security only when relying parties
-reject traditional-only certificates. The implications of this requirement differ
+reject traditional-only certificates (see {{downgrade}}). The implications of this requirement differ
 across deployment environments:
 
 - Open environments (e.g., the Web):
