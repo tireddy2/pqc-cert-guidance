@@ -841,7 +841,9 @@ Table of Contents
    parties could maintain and distribute curated lists of domains known
    to use PQC-capable authentication, similar to mechanisms used by Safe
    Browsing.  Such mechanisms could automatically enforce downgrade
-   resistance for public domains.
+   resistance for well-known, public domains.  For other domains, the
+   relying party might simply cache that a server previously used a PQ
+   certificate.
 
    Together, these mechanisms help ensure that PQC-aware relying parties
    maintain strong downgrade resistance where possible, while still
