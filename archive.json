@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-14T01:44:06.588152+00:00",
+  "timestamp": "2025-10-16T01:45:44.068985+00:00",
   "repo": "tireddy2/pqc-cert-guidance",
   "labels": [
     {
@@ -1035,25 +1035,35 @@
       "id": "PR_kwDOPwC-uc6tY3ZC",
       "title": "Address pending comments from Ekr",
       "url": "https://github.com/tireddy2/pqc-cert-guidance/pull/27",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "tireddy2",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-10-13T06:23:54Z",
-      "updatedAt": "2025-10-13T17:08:24Z",
+      "updatedAt": "2025-10-14T06:02:44Z",
       "baseRepository": "tireddy2/pqc-cert-guidance",
       "baseRefName": "main",
       "baseRefOid": "49ab72febca961d2f909a3c0ac3dfcc5ea6d452d",
       "headRepository": "tireddy2/pqc-cert-guidance",
       "headRefName": "tireddy2-patch-17",
-      "headRefOid": "b94aa618afd2c09a8e700908d88811b717f4317e",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
-      "comments": [],
+      "headRefOid": "b890a0cd4b7e58deb651a61e93531f4f42dd3b38",
+      "closedAt": "2025-10-14T05:55:48Z",
+      "mergedAt": "2025-10-14T05:55:48Z",
+      "mergedBy": "tireddy2",
+      "mergeCommit": {
+        "oid": "d66726bdc955d0fdd0c2969860f1a928804ab9c5"
+      },
+      "comments": [
+        {
+          "author": "tireddy2",
+          "authorAssociation": "OWNER",
+          "body": "> a few comments and suggestions.\r\n> \r\n> Do a pull first, as I also did a few commits on top of your commit -- which I think are non-controversial but who knows! Check them over. Commit were:\r\n> \r\n>     * add anchor to Downgrade Attack section.\r\n> \r\n>     * add 'relying party' and 'authenticated party' to terminology.\r\n> \r\n> \r\n> I don't know if 'authenticating party' should be in terminology, or if that differs from 'relying party' or not.\r\n\r\nThe definitions you added for 'authenticated party' and 'relying party' look good to me. Thanks. ",
+          "createdAt": "2025-10-14T04:52:56Z",
+          "updatedAt": "2025-10-14T06:02:44Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOPwC-uc7Gnp6-",
@@ -1104,6 +1114,188 @@
               "updatedAt": "2025-10-13T17:08:24Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOPwC-uc7Gt2WC",
+          "commit": {
+            "abbreviatedOid": "7b91e61"
+          },
+          "author": "tireddy2",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-14T05:02:48Z",
+          "updatedAt": "2025-10-14T05:02:48Z",
+          "comments": [
+            {
+              "originalPosition": 48,
+              "body": "No, both are different. ",
+              "createdAt": "2025-10-14T05:02:48Z",
+              "updatedAt": "2025-10-14T05:02:48Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPwC-uc7Gt8iA",
+          "commit": {
+            "abbreviatedOid": "7b91e61"
+          },
+          "author": "danwing",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-14T05:17:37Z",
+          "updatedAt": "2025-10-14T05:17:37Z",
+          "comments": [
+            {
+              "originalPosition": 48,
+              "body": "alright. Please add 'authenticating party' to Terminology, including simple explanation (similar to how I did for 'with normal HTTPS'), or compare/contrast with 'relying party', or however it makes sense to define the term.",
+              "createdAt": "2025-10-14T05:17:37Z",
+              "updatedAt": "2025-10-14T05:17:38Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPwC-uc7GuMol",
+          "commit": {
+            "abbreviatedOid": "7b91e61"
+          },
+          "author": "tireddy2",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-14T05:55:04Z",
+          "updatedAt": "2025-10-14T05:55:05Z",
+          "comments": [
+            {
+              "originalPosition": 72,
+              "body": "Agreed, I will fix it another PR. ",
+              "createdAt": "2025-10-14T05:55:05Z",
+              "updatedAt": "2025-10-14T05:55:05Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPwC-uc7GuM5w",
+          "commit": {
+            "abbreviatedOid": "7b91e61"
+          },
+          "author": "tireddy2",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-14T05:55:33Z",
+          "updatedAt": "2025-10-14T05:55:33Z",
+          "comments": [
+            {
+              "originalPosition": 27,
+              "body": "Good point, will raise a different PR. ",
+              "createdAt": "2025-10-14T05:55:33Z",
+              "updatedAt": "2025-10-14T05:55:33Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 28,
+      "id": "PR_kwDOPwC-uc6tl1mr",
+      "title": "Address comments from Dan",
+      "url": "https://github.com/tireddy2/pqc-cert-guidance/pull/28",
+      "state": "MERGED",
+      "author": "tireddy2",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-10-14T05:59:48Z",
+      "updatedAt": "2025-10-14T08:19:22Z",
+      "baseRepository": "tireddy2/pqc-cert-guidance",
+      "baseRefName": "main",
+      "baseRefOid": "d66726bdc955d0fdd0c2969860f1a928804ab9c5",
+      "headRepository": "tireddy2/pqc-cert-guidance",
+      "headRefName": "tireddy2-patch-18",
+      "headRefOid": "522e90171fe40ab594123d538fd837a603628a49",
+      "closedAt": "2025-10-14T08:19:22Z",
+      "mergedAt": "2025-10-14T08:19:22Z",
+      "mergedBy": "tireddy2",
+      "mergeCommit": {
+        "oid": "59b3df6f77e9774094b718834d2631427778c16d"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOPwC-uc7GupL2",
+          "commit": {
+            "abbreviatedOid": "8d000a8"
+          },
+          "author": "danwing",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-14T06:42:56Z",
+          "updatedAt": "2025-10-14T06:42:56Z",
+          "comments": [
+            {
+              "originalPosition": 318,
+              "body": "```suggestion\n\"flag day\" for post-quantum authentication. One possible mitigation is\n```\n\n(I removed smart quotes)",
+              "createdAt": "2025-10-14T06:42:56Z",
+              "updatedAt": "2025-10-14T06:42:56Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPwC-uc7Gup5T",
+          "commit": {
+            "abbreviatedOid": "8d000a8"
+          },
+          "author": "danwing",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-14T06:44:02Z",
+          "updatedAt": "2025-10-14T06:44:02Z",
+          "comments": [
+            {
+              "originalPosition": 326,
+              "body": "```suggestion\nOther mechanisms may complement this approach.  For example, relying parties could maintain and distribute curated lists of\n```",
+              "createdAt": "2025-10-14T06:44:02Z",
+              "updatedAt": "2025-10-14T06:44:02Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPwC-uc7GuqF-",
+          "commit": {
+            "abbreviatedOid": "8d000a8"
+          },
+          "author": "danwing",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-14T06:44:22Z",
+          "updatedAt": "2025-10-14T06:44:22Z",
+          "comments": [
+            {
+              "originalPosition": 329,
+              "body": "```suggestion\nresistance for well-known, public domains.  For other domains, the relying party might simply cache that a server previously used a PQ certificate.\n```",
+              "createdAt": "2025-10-14T06:44:22Z",
+              "updatedAt": "2025-10-14T06:45:42Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPwC-uc7Gurg_",
+          "commit": {
+            "abbreviatedOid": "8d000a8"
+          },
+          "author": "danwing",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "just a few small changes.\n\nAlso, does 'authenticated party' need to be added to Terminology?",
+          "createdAt": "2025-10-14T06:46:36Z",
+          "updatedAt": "2025-10-14T06:46:36Z",
+          "comments": []
         }
       ]
     }
