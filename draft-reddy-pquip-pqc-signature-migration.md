@@ -624,20 +624,29 @@ In dual certificate deployments where the client requires both a
 traditional and a PQC chain, the SUF-CMA property is likewise not achieved once
 the traditional algorithm is broken.
 
-In protocols such as TLS and IKEv2, a composite signature remains
+In protocols such as TLS and IKEv2, a composite or dual signature remains
 secure against impersonation as long as at least one component algorithm
 remains unbroken, because verification succeeds only if every
 component signature validates over the same canonical message defined
-by the authentication procedure. However, in artifact signing
-use cases, the break of a single component does not enable forgery of a
-composite signature but does enable "repudiation": multiple distinct
-composite signatures can exist for the same artifact, undermining the
-"one signature, one artifact" guarantee. This creates ambiguity about
-which composite signature is authentic, complicating long-term
-non-repudiation guarantees.
+by the authentication procedure.
 
-Hybrid signature schemes should not be used for artifact signing (such as software packages),
-since the loss of SUF-CMA makes them unsuitable for long-term non-repudiation.
+In contrast, for artifact-signing use cases, the compromise of a single component
+does not enable forgery of a composite or dual signature but does enable repudiation:
+multiple distinct valid signatures can exist for the same artifact,
+undermining the “one-signature-per-artifact” property and
+complicating long-term non-repudiation.
+
+This issue is particularly relevant for supply-chain transparency ecosystems such
+as those described in {{?I-D.ietf-scitt-architecture}}. SCITT defines
+an architecture where issuers create signed statements registered with
+a transparency service that maintains a linear and irrevocable history
+of those statements. The architecture ensures their authenticity,
+integrity, traceability, provenance, accountability, and non-repudiation
+over time. If a composite or a dual signature allows multiple valid encodings
+for the same statement, it introduces ambiguity about which version is authentic,
+thereby weakening the non-repudiation and audit properties that such transparency
+services are intended to provide.
+
 In security protocols, hybrid signature schemes may continue to
 function for a limited time after a CRQC is realized, since they still provide
 impersonation resistance as long as one component algorithm remains secure.
