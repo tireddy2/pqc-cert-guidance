@@ -5,10 +5,10 @@
 PQUIP                                                           T. Reddy
 Internet-Draft                                                     Nokia
 Intended status: Informational                                   D. Wing
-Expires: 17 April 2026                                            Citrix
+Expires: 22 April 2026                                            Citrix
                                                             Y. Rosomakho
                                                                  Zscaler
-                                                         14 October 2025
+                                                         19 October 2025
 
 
     Guidance for Migration to Composite, Dual, or PQC Authentication
@@ -52,7 +52,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 17 April 2026.
+   This Internet-Draft will expire on 22 April 2026.
 
 Copyright Notice
 
@@ -711,28 +711,38 @@ Table of Contents
    traditional and a PQC chain, the SUF-CMA property is likewise not
    achieved once the traditional algorithm is broken.
 
-   In protocols such as TLS and IKEv2, a composite signature remains
-   secure against impersonation as long as at least one component
-   algorithm remains unbroken, because verification succeeds only if
-   every component signature validates over the same canonical message
-   defined by the authentication procedure.  However, in artifact
-   signing use cases, the break of a single component does not enable
-   forgery of a composite signature but does enable "repudiation":
-   multiple distinct composite signatures can exist for the same
-   artifact, undermining the "one signature, one artifact" guarantee.
-   This creates ambiguity about which composite signature is authentic,
-   complicating long-term non-repudiation guarantees.
+   In protocols such as TLS and IKEv2, a composite or dual signature
+   remains secure against impersonation as long as at least one
+   component algorithm remains unbroken, because verification succeeds
+   only if every component signature validates over the same canonical
+   message defined by the authentication procedure.
 
-   Hybrid signature schemes should not be used for artifact signing
-   (such as software packages), since the loss of SUF-CMA makes them
-   unsuitable for long-term non-repudiation.  In security protocols,
-   hybrid signature schemes may continue to function for a limited time
-   after a CRQC is realized, since they still provide impersonation
-   resistance as long as one component algorithm remains secure.  This
-   situation does not constitute a zero-day vulnerability requiring an
-   immediate upgrade.  However, operators will have to plan an orderly
-   migration to PQC certificates in order to restore SUF-CMA security
-   guarantees.
+   In contrast, for artifact-signing use cases, the compromise of a
+   single component does not enable forgery of a composite or dual
+   signature but does enable repudiation: multiple distinct valid
+   signatures can exist for the same artifact, undermining the “one-
+   signature-per-artifact” property and complicating long-term non-
+   repudiation.
+
+   This issue is particularly relevant for supply-chain transparency
+   ecosystems such as those described in [I-D.ietf-scitt-architecture].
+   SCITT defines an architecture where issuers create signed statements
+   registered with a transparency service that maintains a linear and
+   irrevocable history of those statements.  The architecture ensures
+   their authenticity, integrity, traceability, provenance,
+   accountability, and non-repudiation over time.  If a composite or a
+   dual signature allows multiple valid encodings for the same
+   statement, it introduces ambiguity about which version is authentic,
+   thereby weakening the non-repudiation and audit properties that such
+   transparency services are intended to provide.
+
+   In security protocols, hybrid signature schemes may continue to
+   function for a limited time after a CRQC is realized, since they
+   still provide impersonation resistance as long as one component
+   algorithm remains secure.  This situation does not constitute a zero-
+   day vulnerability requiring an immediate upgrade.  However, operators
+   will have to plan an orderly migration to PQC certificates in order
+   to restore SUF-CMA security guarantees.
 
 9.  Migration Guidance
 
@@ -914,17 +924,17 @@ Table of Contents
    [I-D.ietf-cose-dilithium]
               Prorock, M. and O. Steele, "ML-DSA for JOSE and COSE",
               Work in Progress, Internet-Draft, draft-ietf-cose-
-              dilithium-09, 12 September 2025,
+              dilithium-10, 14 October 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-cose-
-              dilithium-09>.
+              dilithium-10>.
 
    [I-D.ietf-ipsecme-ikev2-pqc-auth]
               Reddy.K, T., Smyslov, V., and S. Fluhrer, "Signature
               Authentication in the Internet Key Exchange Version 2
               (IKEv2) using PQC", Work in Progress, Internet-Draft,
-              draft-ietf-ipsecme-ikev2-pqc-auth-04, 5 October 2025,
+              draft-ietf-ipsecme-ikev2-pqc-auth-05, 16 October 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-ipsecme-
-              ikev2-pqc-auth-04>.
+              ikev2-pqc-auth-05>.
 
    [I-D.ietf-lamps-pq-composite-sigs]
               Ounsworth, M., Gray, J., Pala, M., Klaußner, J., and S.
@@ -938,9 +948,9 @@ Table of Contents
               Reddy.K, T., Wing, D., S, B., and K. Kwiatkowski,
               "Adapting Constrained Devices for Post-Quantum
               Cryptography", Work in Progress, Internet-Draft, draft-
-              ietf-pquip-pqc-hsm-constrained-01, 4 July 2025,
+              ietf-pquip-pqc-hsm-constrained-02, 18 October 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-pquip-
-              pqc-hsm-constrained-01>.
+              pqc-hsm-constrained-02>.
 
    [I-D.ietf-tls-mldsa]
               Hollebeek, T., Schmieg, S., and B. Westerbaan, "Use of ML-
@@ -1014,9 +1024,9 @@ Table of Contents
               Bonnell, C., Gray, J., Hook, D., Okubo, T., and M.
               Ounsworth, "A Mechanism for Encoding Differences in Paired
               Certificates", Work in Progress, Internet-Draft, draft-
-              bonnell-lamps-chameleon-certs-06, 16 April 2025,
+              bonnell-lamps-chameleon-certs-07, 18 October 2025,
               <https://datatracker.ietf.org/doc/html/draft-bonnell-
-              lamps-chameleon-certs-06>.
+              lamps-chameleon-certs-07>.
 
    [I-D.hu-ipsecme-pqt-hybrid-auth]
               Hu, J., Morioka, Y., and G. WANG, "Post-Quantum
@@ -1034,6 +1044,14 @@ Table of Contents
               pquip-pqc-engineers-14, 25 August 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-pquip-
               pqc-engineers-14>.
+
+   [I-D.ietf-scitt-architecture]
+              Birkholz, H., Delignat-Lavaud, A., Fournet, C., Deshpande,
+              Y., and S. Lasker, "An Architecture for Trustworthy and
+              Transparent Digital Supply Chains", Work in Progress,
+              Internet-Draft, draft-ietf-scitt-architecture-22, 10
+              October 2025, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-scitt-architecture-22>.
 
    [I-D.ietf-tls-cert-abridge]
               Jackson, D., "Abridged Compression for WebPKI

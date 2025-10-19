@@ -19,22 +19,21 @@ PKI/key management infrastructure select an approach that balances
 interoperability, security, and operational efficiency during the
 transition to post-quantum authentication. 
     " name="description">
-<meta content="xml2rfc 3.30.2" name="generator">
+<meta content="xml2rfc 3.31.0" name="generator">
 <meta content="Internet-Draft" name="keyword">
 <meta content="draft-reddy-pquip-pqc-signature-migration-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.30.2
-    Python 3.12.11
+  xml2rfc 3.31.0
+    Python 3.12.12
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
     intervaltree 3.1.0
     Jinja2 3.1.6
     lxml 5.3.1
-    platformdirs 4.4.0
+    platformdirs 4.5.0
     pycountry 24.6.1
     PyYAML 6.0.2
     requests 2.32.5
-    setuptools 80.9.0
     wcwidth 0.2.14
 -->
 <link href="draft-reddy-pquip-pqc-signature-migration.xml" rel="alternate" type="application/rfc+xml">
@@ -1058,7 +1057,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Reddy, et al.</td>
-<td class="center">Expires 17 April 2026</td>
+<td class="center">Expires 22 April 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1071,12 +1070,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-reddy-pquip-pqc-signature-migration-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-10-14" class="published">14 October 2025</time>
+<time datetime="2025-10-19" class="published">19 October 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-04-17">17 April 2026</time></dd>
+<dd class="expires"><time datetime="2026-04-22">22 April 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1137,7 +1136,7 @@ transition to post-quantum authentication.<a href="#section-abstract-1" class="p
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 17 April 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 22 April 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1970,25 +1969,32 @@ thereby violating SUF-CMA.<a href="#section-8.5-2" class="pilcrow">¶</a></p>
 <p id="section-8.5-3">In dual certificate deployments where the client requires both a
 traditional and a PQC chain, the SUF-CMA property is likewise not achieved once
 the traditional algorithm is broken.<a href="#section-8.5-3" class="pilcrow">¶</a></p>
-<p id="section-8.5-4">In protocols such as TLS and IKEv2, a composite signature remains
+<p id="section-8.5-4">In protocols such as TLS and IKEv2, a composite or dual signature remains
 secure against impersonation as long as at least one component algorithm
 remains unbroken, because verification succeeds only if every
 component signature validates over the same canonical message defined
-by the authentication procedure. However, in artifact signing
-use cases, the break of a single component does not enable forgery of a
-composite signature but does enable "repudiation": multiple distinct
-composite signatures can exist for the same artifact, undermining the
-"one signature, one artifact" guarantee. This creates ambiguity about
-which composite signature is authentic, complicating long-term
-non-repudiation guarantees.<a href="#section-8.5-4" class="pilcrow">¶</a></p>
-<p id="section-8.5-5">Hybrid signature schemes should not be used for artifact signing (such as software packages),
-since the loss of SUF-CMA makes them unsuitable for long-term non-repudiation.
-In security protocols, hybrid signature schemes may continue to
+by the authentication procedure.<a href="#section-8.5-4" class="pilcrow">¶</a></p>
+<p id="section-8.5-5">In contrast, for artifact-signing use cases, the compromise of a single component
+does not enable forgery of a composite or dual signature but does enable repudiation:
+multiple distinct valid signatures can exist for the same artifact,
+undermining the “one-signature-per-artifact” property and
+complicating long-term non-repudiation.<a href="#section-8.5-5" class="pilcrow">¶</a></p>
+<p id="section-8.5-6">This issue is particularly relevant for supply-chain transparency ecosystems such
+as those described in <span>[<a href="#I-D.ietf-scitt-architecture" class="cite xref">I-D.ietf-scitt-architecture</a>]</span>. SCITT defines
+an architecture where issuers create signed statements registered with
+a transparency service that maintains a linear and irrevocable history
+of those statements. The architecture ensures their authenticity,
+integrity, traceability, provenance, accountability, and non-repudiation
+over time. If a composite or a dual signature allows multiple valid encodings
+for the same statement, it introduces ambiguity about which version is authentic,
+thereby weakening the non-repudiation and audit properties that such transparency
+services are intended to provide.<a href="#section-8.5-6" class="pilcrow">¶</a></p>
+<p id="section-8.5-7">In security protocols, hybrid signature schemes may continue to
 function for a limited time after a CRQC is realized, since they still provide
 impersonation resistance as long as one component algorithm remains secure.
 This situation does not constitute a zero-day vulnerability requiring an
 immediate upgrade. However, operators will have to plan an orderly migration
-to PQC certificates in order to restore SUF-CMA security guarantees.<a href="#section-8.5-5" class="pilcrow">¶</a></p>
+to PQC certificates in order to restore SUF-CMA security guarantees.<a href="#section-8.5-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2189,11 +2195,11 @@ present, valid, and not replaced by weaker alternatives.<a href="#section-11.3-2
 <dd class="break"></dd>
 <dt id="I-D.ietf-cose-dilithium">[I-D.ietf-cose-dilithium]</dt>
         <dd>
-<span class="refAuthor">Prorock, M.</span> and <span class="refAuthor">O. Steele</span>, <span class="refTitle">"ML-DSA for JOSE and COSE"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-cose-dilithium-09</span>, <time datetime="2025-09-12" class="refDate">12 September 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-cose-dilithium-09">https://datatracker.ietf.org/doc/html/draft-ietf-cose-dilithium-09</a>&gt;</span>. </dd>
+<span class="refAuthor">Prorock, M.</span> and <span class="refAuthor">O. Steele</span>, <span class="refTitle">"ML-DSA for JOSE and COSE"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-cose-dilithium-10</span>, <time datetime="2025-10-14" class="refDate">14 October 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-cose-dilithium-10">https://datatracker.ietf.org/doc/html/draft-ietf-cose-dilithium-10</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-ipsecme-ikev2-pqc-auth">[I-D.ietf-ipsecme-ikev2-pqc-auth]</dt>
         <dd>
-<span class="refAuthor">Reddy.K, T.</span>, <span class="refAuthor">Smyslov, V.</span>, and <span class="refAuthor">S. Fluhrer</span>, <span class="refTitle">"Signature Authentication in the Internet Key Exchange Version 2 (IKEv2) using PQC"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-ipsecme-ikev2-pqc-auth-04</span>, <time datetime="2025-10-05" class="refDate">5 October 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-ipsecme-ikev2-pqc-auth-04">https://datatracker.ietf.org/doc/html/draft-ietf-ipsecme-ikev2-pqc-auth-04</a>&gt;</span>. </dd>
+<span class="refAuthor">Reddy.K, T.</span>, <span class="refAuthor">Smyslov, V.</span>, and <span class="refAuthor">S. Fluhrer</span>, <span class="refTitle">"Signature Authentication in the Internet Key Exchange Version 2 (IKEv2) using PQC"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-ipsecme-ikev2-pqc-auth-05</span>, <time datetime="2025-10-16" class="refDate">16 October 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-ipsecme-ikev2-pqc-auth-05">https://datatracker.ietf.org/doc/html/draft-ietf-ipsecme-ikev2-pqc-auth-05</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-lamps-pq-composite-sigs">[I-D.ietf-lamps-pq-composite-sigs]</dt>
         <dd>
@@ -2201,7 +2207,7 @@ present, valid, and not replaced by weaker alternatives.<a href="#section-11.3-2
 <dd class="break"></dd>
 <dt id="I-D.ietf-pquip-pqc-hsm-constrained">[I-D.ietf-pquip-pqc-hsm-constrained]</dt>
         <dd>
-<span class="refAuthor">Reddy.K, T.</span>, <span class="refAuthor">Wing, D.</span>, <span class="refAuthor">S, B.</span>, and <span class="refAuthor">K. Kwiatkowski</span>, <span class="refTitle">"Adapting Constrained Devices for Post-Quantum Cryptography"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-pquip-pqc-hsm-constrained-01</span>, <time datetime="2025-07-04" class="refDate">4 July 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-pquip-pqc-hsm-constrained-01">https://datatracker.ietf.org/doc/html/draft-ietf-pquip-pqc-hsm-constrained-01</a>&gt;</span>. </dd>
+<span class="refAuthor">Reddy.K, T.</span>, <span class="refAuthor">Wing, D.</span>, <span class="refAuthor">S, B.</span>, and <span class="refAuthor">K. Kwiatkowski</span>, <span class="refTitle">"Adapting Constrained Devices for Post-Quantum Cryptography"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-pquip-pqc-hsm-constrained-02</span>, <time datetime="2025-10-18" class="refDate">18 October 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-pquip-pqc-hsm-constrained-02">https://datatracker.ietf.org/doc/html/draft-ietf-pquip-pqc-hsm-constrained-02</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-tls-mldsa">[I-D.ietf-tls-mldsa]</dt>
         <dd>
@@ -2258,7 +2264,7 @@ present, valid, and not replaced by weaker alternatives.<a href="#section-11.3-2
 <dd class="break"></dd>
 <dt id="I-D.bonnell-lamps-chameleon-certs">[I-D.bonnell-lamps-chameleon-certs]</dt>
         <dd>
-<span class="refAuthor">Bonnell, C.</span>, <span class="refAuthor">Gray, J.</span>, <span class="refAuthor">Hook, D.</span>, <span class="refAuthor">Okubo, T.</span>, and <span class="refAuthor">M. Ounsworth</span>, <span class="refTitle">"A Mechanism for Encoding Differences in Paired Certificates"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-bonnell-lamps-chameleon-certs-06</span>, <time datetime="2025-04-16" class="refDate">16 April 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-bonnell-lamps-chameleon-certs-06">https://datatracker.ietf.org/doc/html/draft-bonnell-lamps-chameleon-certs-06</a>&gt;</span>. </dd>
+<span class="refAuthor">Bonnell, C.</span>, <span class="refAuthor">Gray, J.</span>, <span class="refAuthor">Hook, D.</span>, <span class="refAuthor">Okubo, T.</span>, and <span class="refAuthor">M. Ounsworth</span>, <span class="refTitle">"A Mechanism for Encoding Differences in Paired Certificates"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-bonnell-lamps-chameleon-certs-07</span>, <time datetime="2025-10-18" class="refDate">18 October 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-bonnell-lamps-chameleon-certs-07">https://datatracker.ietf.org/doc/html/draft-bonnell-lamps-chameleon-certs-07</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.hu-ipsecme-pqt-hybrid-auth">[I-D.hu-ipsecme-pqt-hybrid-auth]</dt>
         <dd>
@@ -2267,6 +2273,10 @@ present, valid, and not replaced by weaker alternatives.<a href="#section-11.3-2
 <dt id="I-D.ietf-pquip-pqc-engineers">[I-D.ietf-pquip-pqc-engineers]</dt>
         <dd>
 <span class="refAuthor">Banerjee, A.</span>, <span class="refAuthor">Reddy.K, T.</span>, <span class="refAuthor">Schoinianakis, D.</span>, <span class="refAuthor">Hollebeek, T.</span>, and <span class="refAuthor">M. Ounsworth</span>, <span class="refTitle">"Post-Quantum Cryptography for Engineers"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-pquip-pqc-engineers-14</span>, <time datetime="2025-08-25" class="refDate">25 August 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-pquip-pqc-engineers-14">https://datatracker.ietf.org/doc/html/draft-ietf-pquip-pqc-engineers-14</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.ietf-scitt-architecture">[I-D.ietf-scitt-architecture]</dt>
+        <dd>
+<span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Delignat-Lavaud, A.</span>, <span class="refAuthor">Fournet, C.</span>, <span class="refAuthor">Deshpande, Y.</span>, and <span class="refAuthor">S. Lasker</span>, <span class="refTitle">"An Architecture for Trustworthy and Transparent Digital Supply Chains"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-scitt-architecture-22</span>, <time datetime="2025-10-10" class="refDate">10 October 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-scitt-architecture-22">https://datatracker.ietf.org/doc/html/draft-ietf-scitt-architecture-22</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-tls-cert-abridge">[I-D.ietf-tls-cert-abridge]</dt>
         <dd>
