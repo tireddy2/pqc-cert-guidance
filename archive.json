@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-16T01:45:44.068985+00:00",
+  "timestamp": "2025-10-19T01:56:11.797021+00:00",
   "repo": "tireddy2/pqc-cert-guidance",
   "labels": [
     {
@@ -49,7 +49,40 @@
       "color": "ffffff"
     }
   ],
-  "issues": [],
+  "issues": [
+    {
+      "number": 29,
+      "id": "I_kwDOPwC-uc7SKWGP",
+      "title": "Non-repudiation for Software Signing",
+      "url": "https://github.com/tireddy2/pqc-cert-guidance/issues/29",
+      "state": "OPEN",
+      "author": "yaronf",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Sec. 9.3 makes a lot of the SUF-CMA property. But I'm not aware of any real-life use case where non-repudiation is an important property for signed software packages. I would appreciate more clarity, because in most cases dual/composite is likely to be the right approach for many years, and we should not confuse practitioners.\n\n@tireddy2: \n\n> I don't see any deployment that has proposed using dual or composite signatures for artifact signing. Current and planned ecosystems (e.g., software-package and firmware signing) are instead adopting pure PQ algorithms or stateful hash-based schemes (XMSS/LMS).\n\nEven given this is the situation, the document should explain why the non-repudiation issue causes it.",
+      "createdAt": "2025-10-17T12:16:52Z",
+      "updatedAt": "2025-10-17T12:16:52Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 30,
+      "id": "I_kwDOPwC-uc7SKX4G",
+      "title": "Policy Considerations",
+      "url": "https://github.com/tireddy2/pqc-cert-guidance/issues/30",
+      "state": "OPEN",
+      "author": "yaronf",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "I'm afraid that some people will move directly to pure PQC and some to a hybrid model, as a result of policy decisions by government bodies.\n\nHowever the IETF may still be able to avoid the dual/composite bifurcation which would also result in much wasted energy and cost. Avoiding this fork would require action by the IETF Security Area, possibly in conjunction with other SDOs. I think the document should make this point clearly instead of taking an approach of \"all options are on the table and we'll just roll with them.\"\n\n@tireddy2: Yes, that's a topic for discussion in the PQUIP WG.",
+      "createdAt": "2025-10-17T12:18:44Z",
+      "updatedAt": "2025-10-17T12:18:44Z",
+      "closedAt": null,
+      "comments": []
+    }
+  ],
   "pulls": [
     {
       "number": 1,
@@ -1295,6 +1328,46 @@
           "body": "just a few small changes.\n\nAlso, does 'authenticated party' need to be added to Terminology?",
           "createdAt": "2025-10-14T06:46:36Z",
           "updatedAt": "2025-10-14T06:46:36Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 31,
+      "id": "PR_kwDOPwC-uc6ubAjn",
+      "title": "Address comments from Yaron",
+      "url": "https://github.com/tireddy2/pqc-cert-guidance/pull/31",
+      "state": "OPEN",
+      "author": "tireddy2",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "https://github.com/tireddy2/pqc-cert-guidance/issues/29",
+      "createdAt": "2025-10-18T07:33:26Z",
+      "updatedAt": "2025-10-18T16:48:14Z",
+      "baseRepository": "tireddy2/pqc-cert-guidance",
+      "baseRefName": "main",
+      "baseRefOid": "44424c481f4f99020038aab4af6a56d84d4f431c",
+      "headRepository": "tireddy2/pqc-cert-guidance",
+      "headRefName": "tireddy2-patch-19",
+      "headRefOid": "fb50d08e34ee5e0bc34d20660eb1dcc4bccd77b5",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOPwC-uc7H5LjW",
+          "commit": {
+            "abbreviatedOid": "fb50d08"
+          },
+          "author": "danwing",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-10-18T16:48:14Z",
+          "updatedAt": "2025-10-18T16:48:14Z",
           "comments": []
         }
       ]
