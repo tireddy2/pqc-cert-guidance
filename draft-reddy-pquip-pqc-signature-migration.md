@@ -320,6 +320,15 @@ binding. Operators must also obtain and renew two certificates from
 Certification Authorities, which can be significant in large-scale
 deployments.
 
+Most cryptographic libraries, device provisioning interfaces, and
+certificate management systems are designed around a single single
+asymmetric key pair and a single certificate chain.  Supporting two
+parallel certificate chains (traditional and PQC) therefore
+requires changes to provisioning and management processes.  Endpoints
+need to be provisioned with two credentials, which increases deployment
+complexity in various ecosystems such as EAP-TLS clients or other
+certificate-based authentication protocols.
+
 Finally, while dual certificates avoid the need for a fixed algorithm
 pairing, they require explicit binding and coordination between the
 two chains. Each relying party must verify that the traditional and PQC
@@ -327,6 +336,16 @@ certificates correspond to the same entity, typically using mechanisms
 such as the RelatedCertificate extension {{?RELATED-CERTS=RFC9763}}.
 Lack of consistent binding policies can lead to interoperability issues
 and potential downgrade risks if only one chain is validated.
+
+The pairing of algorithms that can be combined presents an
+additional challenge.  In the composite model, this can be
+mitigated by defining an explicit list of “known-good” algorithm
+combinations.  However, in the dual certificate model, such
+explicit pairings cannot be standardized because the association
+between the traditional and PQC certificates is established at
+runtime and depends on deployment details.  It is therefore
+the responsibility of the of the operator to ensure that only
+appropriate (traditional, PQC) pairs are used.
 
 # PQC Certificates
 
@@ -793,5 +812,5 @@ This document has no IANA actions.
 
 # Acknowledgments
 
-Thanks to Martin McGrath, Suresh P. Nair, Eric Rescorla, and German Peinado for the detailed review.
+Thanks to Martin McGrath, Suresh P. Nair, Eric Rescorla, Alicja Kario, and German Peinado for the detailed review.
 
