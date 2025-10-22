@@ -5,10 +5,10 @@
 PQUIP                                                           T. Reddy
 Internet-Draft                                                     Nokia
 Intended status: Informational                                   D. Wing
-Expires: 24 April 2026                                            Citrix
+Expires: 25 April 2026                                            Citrix
                                                             Y. Rosomakho
                                                                  Zscaler
-                                                         21 October 2025
+                                                         22 October 2025
 
 
     Guidance for Migration to Composite, Dual, or PQC Authentication
@@ -52,7 +52,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 24 April 2026.
+   This Internet-Draft will expire on 25 April 2026.
 
 Copyright Notice
 
@@ -389,7 +389,7 @@ Table of Contents
    significant in large-scale deployments.
 
    Most cryptographic libraries, device provisioning interfaces, and
-   certificate management systems are designed around a single single
+   certificate management systems are designed around a single
    asymmetric key pair and a single certificate chain.  Supporting two
    parallel certificate chains (traditional and PQC) therefore requires
    changes to provisioning and management processes.  Endpoints need to
