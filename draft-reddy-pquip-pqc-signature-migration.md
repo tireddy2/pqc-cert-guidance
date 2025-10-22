@@ -793,5 +793,5 @@ This document has no IANA actions.
 
 # Acknowledgments
 
-Thanks to Martin McGrath, Suresh P. Nair, Eric Rescorla, and German Peinado for the detailed review.
+Thanks to Martin McGrath, Suresh P.&nbsp;Nair, Eric Rescorla, and German Peinado for the detailed review.
 
