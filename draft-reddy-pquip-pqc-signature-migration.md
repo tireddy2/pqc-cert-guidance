@@ -321,7 +321,7 @@ Certification Authorities, which can be significant in large-scale
 deployments.
 
 Most cryptographic libraries, device provisioning interfaces, and
-certificate management systems are designed around a single single
+certificate management systems are designed around a single
 asymmetric key pair and a single certificate chain.  Supporting two
 parallel certificate chains (traditional and PQC) therefore
 requires changes to provisioning and management processes.  Endpoints
