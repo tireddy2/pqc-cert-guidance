@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-21T01:47:35.519387+00:00",
+  "timestamp": "2025-10-23T01:46:34.727636+00:00",
   "repo": "tireddy2/pqc-cert-guidance",
   "labels": [
     {
@@ -55,15 +55,15 @@
       "id": "I_kwDOPwC-uc7SKWGP",
       "title": "Non-repudiation for Software Signing",
       "url": "https://github.com/tireddy2/pqc-cert-guidance/issues/29",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "yaronf",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "Sec. 9.3 makes a lot of the SUF-CMA property. But I'm not aware of any real-life use case where non-repudiation is an important property for signed software packages. I would appreciate more clarity, because in most cases dual/composite is likely to be the right approach for many years, and we should not confuse practitioners.\n\n@tireddy2: \n\n> I don't see any deployment that has proposed using dual or composite signatures for artifact signing. Current and planned ecosystems (e.g., software-package and firmware signing) are instead adopting pure PQ algorithms or stateful hash-based schemes (XMSS/LMS).\n\nEven given this is the situation, the document should explain why the non-repudiation issue causes it.",
       "createdAt": "2025-10-17T12:16:52Z",
-      "updatedAt": "2025-10-17T12:16:52Z",
-      "closedAt": null,
+      "updatedAt": "2025-10-21T07:02:43Z",
+      "closedAt": "2025-10-21T07:02:43Z",
       "comments": []
     },
     {
@@ -1373,6 +1373,94 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 32,
+      "id": "PR_kwDOPwC-uc6uxjAf",
+      "title": "Address comments from  Alicja",
+      "url": "https://github.com/tireddy2/pqc-cert-guidance/pull/32",
+      "state": "OPEN",
+      "author": "tireddy2",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-10-21T07:02:16Z",
+      "updatedAt": "2025-10-22T09:29:51Z",
+      "baseRepository": "tireddy2/pqc-cert-guidance",
+      "baseRefName": "main",
+      "baseRefOid": "b5b0639313a4d7ffd3ebfb88fb2cc16e428fb923",
+      "headRepository": "tireddy2/pqc-cert-guidance",
+      "headRefName": "tireddy2-patch-20",
+      "headRefOid": "5db53476b5382155c6dd7da6a9e2b75df986f970",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOPwC-uc7IZxHg",
+          "commit": {
+            "abbreviatedOid": "4923110"
+          },
+          "author": "danwing",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-10-21T18:39:25Z",
+          "updatedAt": "2025-10-21T18:40:44Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\ncertificate management systems are designed around a single\n```",
+              "createdAt": "2025-10-21T18:39:25Z",
+              "updatedAt": "2025-10-21T18:40:44Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOPwC-uc7IjIXM",
+          "commit": {
+            "abbreviatedOid": "5db5347"
+          },
+          "author": "tomato42",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-10-22T09:29:51Z",
+          "updatedAt": "2025-10-22T09:29:51Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 33,
+      "id": "PR_kwDOPwC-uc6u6E1U",
+      "title": "single space after 'P.' of Suresh P. Nair's name in Ack section",
+      "url": "https://github.com/tireddy2/pqc-cert-guidance/pull/33",
+      "state": "MERGED",
+      "author": "danwing",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-10-21T18:43:54Z",
+      "updatedAt": "2025-10-22T01:43:14Z",
+      "baseRepository": "tireddy2/pqc-cert-guidance",
+      "baseRefName": "main",
+      "baseRefOid": "61c7a3cb079990670d1ce2141927264063ccbdf2",
+      "headRepository": "tireddy2/pqc-cert-guidance",
+      "headRefName": "adjust_ack",
+      "headRefOid": "44d4a85b19b1634820a851b0173e196c8cf74c74",
+      "closedAt": "2025-10-22T01:43:14Z",
+      "mergedAt": "2025-10-22T01:43:14Z",
+      "mergedBy": "tireddy2",
+      "mergeCommit": {
+        "oid": "b5b0639313a4d7ffd3ebfb88fb2cc16e428fb923"
+      },
+      "comments": [],
+      "reviews": []
     }
   ]
 }
